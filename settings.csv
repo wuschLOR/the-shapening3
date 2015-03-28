@@ -1,0 +1,4 @@
+blockPosFix,blockNumber,blockName,instructionFolder,instructionFile,ratingFolder,ratingFile,ratingCovering,crossFolder,crossType,stimFolder,stimType,zeitFixcross,zeitPrepause,zeitStimuli,zeitAfterpause,zeitRating,zeitBetweenpause
+fix,0,übung,instructions,inst1.png,rating,RATlinks-rechts.png,100,cue,png,stimulusP,png,80,80,160,80,3000,500
+rand,1,rund_eckig,instructions,inst1.png,rating,RATlinks-rechts.png,100,cue,png,stimulus,png,80,80,160,80,3000,500
+rand,2,links_rechts,instructions,inst1.png,rating,RATlinks-rechts.png,100,cue,png,stimulus,png,80,80,160,80,3000,500
