@@ -1,3 +1,3 @@
-blockPosFix,blockNumber,blockName,instructionFolder,instructionFile,ratingFolder,ratingFile,ratingCovering,crossFolder,crossFile,cueFolder,cueType,stimFolder,stimType,zeitFixcross,zeitPrepause,zeitStimuli,zeitAfterpause,zeitRating,zeitBetweenpause
-fix,0,übung,instructions,inst1.png,rating,RATlinks-rechts.png,100,cross,crossUBUNTU100_100.png,cue,png,stimulusP,png,80,80,160,80,3000,500
-rand,1,localisation,instructions,inst1.png,rating,RATlinks-rechts.png,100,cross,crossUBUNTU100_100.png,cue,png,stimulus,png,80,80,160,80,3000,500
+blockPosFix,blockNumber,blockName,instructionFolder,instructionFile,ratingFolder,ratingFile,ratingCovering,crossFolder,crossFile,cueFolder,cueType,stimFolder,stimType,zeitBetweenpause,zeitFixcrossCue,zeitCue,zeitFixcross,zeitPrepause,zeitStimuli,zeitAfterpause,zeitRating
+fix,0,übung,instructions,inst1.png,rating,RATlinks-rechts.png,100,cross,crossUBUNTU100_100.png,cue,png,stimulusP,png,500,80,300,100,80,160,80,3000
+rand,1,localisation,instructions,inst1.png,rating,RATlinks-rechts.png,100,cross,crossUBUNTU100_100.png,cue,png,stimulus,png,500,80,300,100,80,160,80,3000
