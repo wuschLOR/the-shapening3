@@ -551,44 +551,94 @@ endif
       ++superIndex;
       
       # PAUSE BETWEEN
-        #flip
-        [empty, empty , lastFLIP ] =Screen('Flip', windowPtr);           #flip
-        nextFlip = lastFLIP + def(WHATBLOCK).zeitBetweenpause;  # next flip
-       
-        timeStamp.flipBetween = lastFLIP;
+      if def(WHATBLOCK).zeitBetweenpause > 0
+	  #flip
+	  [empty, empty , lastFLIP ] =Screen('Flip', windowPtr);           #flip
+	  nextFlip = lastFLIP + def(WHATBLOCK).zeitBetweenpause;  # next flip
+	
+	  timeStamp.flipBetween = lastFLIP;
+	else
+	  #timeStamp.flipBetween = NA;       # auf NA setzen
+	  timeStamp.flipBetween = lastFLIP;  # auf den wertdes letzten flips setzen ist sinnvoller da am ende die dauer werte berechnet werden, die sich mit dem gleichenw ert auf 0 setzen - die NA variante ist auskommentiert da die auch hübsch ist aber nicht sinnvoll
+      endif
+        
+      # FIXCROSSCUE
+      if def(WHATBLOCK).zeitFixcrossCue > 0
+	  drawFixCross (windowPtr , [18 18 18] , x.center , y.center , 80 , 2 );
+	  #flip
+	  [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
+	  nextFlip = lastFLIP + def(WHATBLOCK).zeitFixcrossCue;
+	  
+	  timeStamp.flipFixCue = lastFLIP; 
+        else
+          #timeStamp.flipFixCue = NA; 
+          timeStamp.flipFixCue = lastFLIP; 
+      endif
+        
+      # CUE
+      if def(WHATBLOCK).zeitCue > 0
+	  drawFixCross (windowPtr , [18 18 18] , x.center , y.center , 80 , 2 );
+	  #flip
+	  [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
+	  nextFlip = lastFLIP + def(WHATBLOCK).zeitCue;
+	  
+	  timeStamp.flipCue = lastFLIP; 
+	else
+	  #timeStamp.flipCue = NA; 
+	  timeStamp.flipCue = lastFLIP;
+       endif
+        
       
       # FIXCROSS
-        drawFixCross (windowPtr , [18 18 18] , x.center , y.center , 80 , 2 );
-        Screen('DrawTexture', windowPtr, def(WHATBLOCK).RstimInfo(INBLOCK).texture , [] , def(WHATBLOCK).finRect(INBLOCK,1){} );
-        #flip
-        [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFLIP + def(WHATBLOCK).zeitFixcross;
-        
-        timeStamp.flipFix = lastFLIP;
-
+      if def(WHATBLOCK).zeitFixcross > 0
+	  drawFixCross (windowPtr , [18 18 18] , x.center , y.center , 80 , 2 );
+	  #flip
+	  [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
+	  nextFlip = lastFLIP + def(WHATBLOCK).zeitFixcross;
+	  
+	  timeStamp.flipFix = lastFLIP;
+        else
+          #timeStamp.flipFix = NA;
+          timeStamp.flipFix = lastFLIP;
+      endif
 
       # PAUSE PRE
-      #flip
-        [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFLIP + def(WHATBLOCK).zeitPrepause ;
-        
-        timeStamp.flipPre = lastFLIP;
+      if def(WHATBLOCK).zeitPrepause > 0
+	  #flip
+	  [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
+	  nextFlip = lastFLIP + def(WHATBLOCK).zeitPrepause ;
+	  
+	  timeStamp.flipPre = lastFLIP;
+	else
+	  #timeStamp.flipPre = NA;
+	  timeStamp.flipPre = lastFLIP;
+      endif
       
       # STIMULUS
-        Screen('DrawTexture', windowPtr, def(WHATBLOCK).RstimInfo(INBLOCK).texture , [] , def(WHATBLOCK).finRect(INBLOCK,1){} );
-        #flip
-        [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFLIP + def(WHATBLOCK).zeitStimuli;
+      if def(WHATBLOCK).zeitStimuli > 0
+	  Screen('DrawTexture', windowPtr, def(WHATBLOCK).RstimInfo(INBLOCK).texture , [] , def(WHATBLOCK).finRect(INBLOCK,1){} );
+	  #flip
+	  [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
+	  nextFlip = lastFLIP + def(WHATBLOCK).zeitStimuli;
 
-        timeStamp.flipStim = lastFLIP;
+	  timeStamp.flipStim = lastFLIP;
+        else
+	  #timeStamp.flipStim = NA;
+	  timeStamp.flipStim = lastFLIP;
+      endif
  
       # PAUSE AFTER
-        #flip
-        [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFLIP + def(WHATBLOCK).zeitAfterpause;
+      if def(WHATBLOCK).zeitAfterpause > 0
+	  #flip
+	  [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
+	  nextFlip = lastFLIP + def(WHATBLOCK).zeitAfterpause;
 
-        timeStamp.flipAfter = lastFLIP;
-
+	  timeStamp.flipAfter = lastFLIP;
+	else
+	  #timeStamp.flipAfter = NA;
+	  timeStamp.flipAfter = lastFLIP;
+      endif
+      
       # RATING
         if INBLOCK< def(WHATBLOCK).ratingVanish
           Screen( 'DrawTexture' , windowPtr , def(WHATBLOCK).ratingInfo.texture , [] , def(WHATBLOCK).finRectRating{} ,[], [], [], [255 255 255 0]);
@@ -616,7 +666,10 @@ endif
 
 
       # dauer der einzelnen vorgänge berechnen
-      dauer.betweenpause        = timeStamp.flipFix    - timeStamp.flipBetween ;
+      # dauer. irgendwas        =  stamp punktdannach  - stamp punkt anfang
+      dauer.betweenpause        = timeStamp.flipFixCue - timeStamp.flipBetween ;
+      dauer.fixcrosscue         = timeStamp.flipCue    - timeStamp.flipFixCue  ;
+      dauer.cue                 = timeStamp.flipFix    - timeStamp.flipCue     ;
       dauer.fixcross            = timeStamp.flipPre    - timeStamp.flipFix     ;
       dauer.prepause            = timeStamp.flipStim   - timeStamp.flipPre     ;
       dauer.stimulus            = timeStamp.flipAfter  - timeStamp.flipStim    ;
@@ -633,12 +686,15 @@ endif
         'index'              , ...
         'blockIndex'         , ...
         'blockBeschreibung'  , ...
+        'cue'		     , ...
         'stimulus'           , ...
         'keyString'          , ...
         'keyValue'           , ...
         'reactionStimON'     , ...
         'reactionStimOFF'    , ...
         'dauerBetween'       , ...
+        'dauerFixCue'        , ...
+        'dauerCue'           , ...
         'dauerFix'           , ...
         'dauerPre'           , ...
         'dauerStim'          , ...
@@ -651,12 +707,15 @@ endif
         num2str(superIndex)                        , ...
         num2str(INBLOCK)                           , ...
         def(WHATBLOCK).blockName                   , ...
-        def(WHATBLOCK).RstimInfo(INBLOCK).name  , ...
+        'cue'                                      , ...
+        def(WHATBLOCK).RstimInfo(INBLOCK).name     , ...
         pressedButtonStr                           , ...
         pressedButtonValue                         , ...
         dauer.reactionTimeStimON                   , ...
         dauer.reactionTimeStimOFF                  , ...
         dauer.betweenpause                         , ...
+        dauer.fixcrosscue                          , ...
+        dauer.cue                                  , ...
         dauer.fixcross                             , ...
         dauer.prepause                             , ...
         dauer.stimulus                             , ...
