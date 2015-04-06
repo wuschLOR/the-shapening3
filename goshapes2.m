@@ -279,7 +279,9 @@ endif
 #     blockNumber
 #     blockPosFix
 #     crossFolder
-#     crossType
+#     crossFile
+#     cueFolder
+#     cueType
 #     instructionFile
 #     instructionFolder
 #     ratingCovering
@@ -305,14 +307,16 @@ endif
     def(BQA).zeitStimuli      = def(BQA).zeitStimuli       /1000;
     # loding Info about pictures
     def(BQA).stimInfo         = getFilesInFolderInfo (def(BQA).stimFolder        , def(BQA).stimType       ); #  stimulus Info holen
-    def(BQA).crossInfo        = getFilesInFolderInfo (def(BQA).crossFolder       , def(BQA).crossType      ); #  cross Info holen
+    def(BQA).cueInfo          = getFilesInFolderInfo (def(BQA).cueFolder         , def(BQA).cueType        ); #  cue Info holen
     def(BQA).ratingInfo       = getFileInfo          (def(BQA).ratingFolder      , def(BQA).ratingFile     ); #  rating Infos holen
     def(BQA).instructionInfo  = getFileInfo          (def(BQA).instructionFolder , def(BQA).instructionFile); #  instuctions info holen
+    def(BQA).crossInfo        = getFileInfo  	     (def(BQA).crossFolder       , def(BQA).crossFile      ); #  cross info
     # make the textures
     def(BQA).stimInfo          = makeTexFromInfo (windowPtr , def(BQA).stimInfo       );
-    def(BQA).crossInfo         = makeTexFromInfo (windowPtr , def(BQA).crossInfo      );
+    def(BQA).cueInfo           = makeTexFromInfo (windowPtr , def(BQA).cueInfo        );
     def(BQA).ratingInfo        = makeTexFromInfo (windowPtr , def(BQA).ratingInfo     );
     def(BQA).instructionInfo   = makeTexFromInfo (windowPtr , def(BQA).instructionInfo);
+    def(BQA).crossInfo 	       = makeTexFromInfo (windowPtr , def(BQA).crossInfo      );
         
 
 # version a und b generieren
