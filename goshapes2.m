@@ -318,6 +318,9 @@ endif
     def(BQA).instructionInfo   = makeTexFromInfo (windowPtr , def(BQA).instructionInfo);
     def(BQA).crossInfo 	       = makeTexFromInfo (windowPtr , def(BQA).crossInfo      );
         
+################################################################################
+# Randomisierung ALT (auskommentieren sobald nicht mehr gebraucht)
+################################################################################
 
 # version a und b generieren
 #initialisiert eine Spalte von nullen die normal auf 1 gesetzt wird und in der scatter variante je nach den angegeben alternativpositionen hochaddiert bis alle einen wert von 2-5 haben die dann später durch den positonArray dekodiert werden
@@ -348,6 +351,42 @@ endif
   endfor
 
 
+################################################################################
+## Randomisierung NEU
+################################################################################
+
+
+
+################################################################################
+## Positionen für 16 :9 Auflösung 
+################################################################################
+#                3          3          3          3
+#        3      ###################################   # = border / free space
+#               ## ###1L## ## ###1M## ## ###1R## ##   # = actual face
+#               ## ####### ## ####### ## ####### ##
+#        3      ###################################
+#               ## ###2L## ## ###2M## ## ###2R## ##
+#               ## ####### ## ####### ## ####### ##   + = fixcross cross
+#        3      ###################################
+#               ## ###3L## ## ###3M## ## ###3R## ##
+#               ## ####### ## ####### ## ####### ##
+#        3      ###################################
+#
+#  die präsentationsfelder müssen alle gleich groß sein 
+# x values for all locations
+
+
+
+
+
+
+
+
+
+
+
+  
+  
 #  --------------------------------------------------------------------------  #
 ## Positionen für 16 :9 Auflösung (300 px felder für )
 #
@@ -687,7 +726,9 @@ endif
         'blockIndex'         , ...
         'blockBeschreibung'  , ...
         'cue'		     , ...
+        'cuegroesse'         , ...
         'stimulus'           , ...
+        'stimgroesse'        , ...
         'keyString'          , ...
         'keyValue'           , ...
         'reactionStimON'     , ...
@@ -708,7 +749,9 @@ endif
         num2str(INBLOCK)                           , ...
         def(WHATBLOCK).blockName                   , ...
         'cue'                                      , ...
+        'cuegroesse'                               , ...
         def(WHATBLOCK).RstimInfo(INBLOCK).name     , ...
+        'stimgroesse'                              , ...
         pressedButtonStr                           , ...
         pressedButtonValue                         , ...
         dauer.reactionTimeStimON                   , ...
