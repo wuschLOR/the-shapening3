@@ -61,7 +61,7 @@ endif
 ################################################################################
 
 
-#  --------------------------------------------------------------------------  #
+################################################################################
 ##  openGL
 #  This script calls Psychtoolbox commands available only in OpenGL-based
 #  versions of the Psychtoolbox. The Psychtoolbox command AssertPsychOpenGL will
@@ -69,16 +69,16 @@ endif
 #  without an OpenGL Psychtoolbox
    AssertOpenGL;
    
-#  --------------------------------------------------------------------------  #   
+################################################################################   
 ## disable  -- less -- (f)orward, (b)ack, (q)uit 
 # http://octave.1599824.n4.nabble.com/Ending-a-script-without-restarting-Octave-td4661395.html
   more off
 
-#  --------------------------------------------------------------------------  #   
+################################################################################   
 ## long format output 
   format long
   
-#  --------------------------------------------------------------------------  #
+################################################################################
 ## change error levels of the PTB
 
   switch debugEnabled
@@ -133,7 +133,7 @@ endif
   startImg = ['.' filesep 'results' filesep startscreen.png]
   endImg   = ['.' filesep 'results' filesep endscreen.png  ]
 
-#  --------------------------------------------------------------------------  #
+################################################################################
 ##  disable random input to the console
 
 #    ListenChar(2)
@@ -148,7 +148,7 @@ endif
 #  ListenChar(0). See 'help ListenChar' for more info.
 
 
-#  --------------------------------------------------------------------------  #
+################################################################################
 ## Tasten festlegen 
 # glaub das kann raus
 
@@ -157,7 +157,7 @@ endif
   keyEscape  = KbName('escape');
   keyConfirm = KbName ('Return');
 
-#  --------------------------------------------------------------------------  #
+################################################################################
 ##  init screen
 
   screenNumbers=Screen('Screens');
@@ -194,7 +194,7 @@ endif
 
   HideCursor(screenID)
 
-#  --------------------------------------------------------------------------  #
+################################################################################
 ##  init buttonbox
 
   if buttonBoxON == true
@@ -202,14 +202,14 @@ endif
     buttonBoxON = BBworking # change the state of buttonBoxON to true or false depending on if the initiation was successful
   endif
 
-#  --------------------------------------------------------------------------  #
+################################################################################
 ##  play around with the flip interval
 # 
 #   flipSlack =Screen('GetFlipInterval', windowPtr)
 #   #  flipSlack =0
 #   flipSlack = flipSlack/2 # das verhindert das das ganze kürzer wird hier noch etwas rumspielen - da es so manchmal zu kurze anzeigezeiten kommen kann
 
-#  --------------------------------------------------------------------------  #
+################################################################################
 ##  textstyles
 
   newTextFont = 'Courier New';
@@ -219,9 +219,16 @@ endif
   oldTextFont  = Screen('TextFont'  , windowPtr , newTextFont );
   oldTextSize  = Screen('TextSize'  , windowPtr , newTextSize );
   oldTextColor = Screen('TextColor' , windowPtr , newTextColor);
-
   
-#  --------------------------------------------------------------------------  #
+  
+## Pixelgröße berechnen  
+display =Screen('Resolution', screenID);
+[display.widthmm, display.heightmm]=Screen('DisplaySize', screenID);
+display
+pxmm.x=display.widthmm /display.width
+pxmm.y=display.heightmm/display.height
+  
+################################################################################
 ##  settings einlesen
   rawSettingsCell = csv2cell( 'settings.csv' , ',');
 
@@ -243,7 +250,7 @@ endif
     endif
   endfor
 
-#  --------------------------------------------------------------------------  #
+################################################################################
 ##  Blöcke randomisieren.
   RND=0
 
@@ -296,27 +303,27 @@ endif
 #     zeitRating
 #     zeitStimuli
 
-##  Settings verarbeiten
-  for BQA=1:length(def) #  BQA == blockquantity
+##  Settings verarbeiten und Bildmaterial einlesen
+  for BLOCKnumb=1:length(def) #  BLOCKnumb == blocknunber
     # convert times to real ms
-    def(BQA).zeitAfterpause   = def(BQA).zeitAfterpause    /1000;
-    def(BQA).zeitBetweenpause = def(BQA).zeitBetweenpause  /1000;
-    def(BQA).zeitFixcross     = def(BQA).zeitFixcross      /1000;
-    def(BQA).zeitPrepause     = def(BQA).zeitPrepause      /1000;
-    def(BQA).zeitRating       = def(BQA).zeitRating        /1000;
-    def(BQA).zeitStimuli      = def(BQA).zeitStimuli       /1000;
+    def(BLOCKnumb).zeitAfterpause   = def(BLOCKnumb).zeitAfterpause    /1000;
+    def(BLOCKnumb).zeitBetweenpause = def(BLOCKnumb).zeitBetweenpause  /1000;
+    def(BLOCKnumb).zeitFixcross     = def(BLOCKnumb).zeitFixcross      /1000;
+    def(BLOCKnumb).zeitPrepause     = def(BLOCKnumb).zeitPrepause      /1000;
+    def(BLOCKnumb).zeitRating       = def(BLOCKnumb).zeitRating        /1000;
+    def(BLOCKnumb).zeitStimuli      = def(BLOCKnumb).zeitStimuli       /1000;
     # loding Info about pictures
-    def(BQA).stimInfo         = getFilesInFolderInfo (def(BQA).stimFolder        , def(BQA).stimType       ); #  stimulus Info holen
-    def(BQA).cueInfo          = getFilesInFolderInfo (def(BQA).cueFolder         , def(BQA).cueType        ); #  cue Info holen
-    def(BQA).ratingInfo       = getFileInfo          (def(BQA).ratingFolder      , def(BQA).ratingFile     ); #  rating Infos holen
-    def(BQA).instructionInfo  = getFileInfo          (def(BQA).instructionFolder , def(BQA).instructionFile); #  instuctions info holen
-    def(BQA).crossInfo        = getFileInfo  	     (def(BQA).crossFolder       , def(BQA).crossFile      ); #  cross info
+    def(BLOCKnumb).stimInfo         = getFilesInFolderInfo (def(BLOCKnumb).stimFolder        , def(BLOCKnumb).stimType       ); #  stimulus Info holen
+    def(BLOCKnumb).cueInfo          = getFilesInFolderInfo (def(BLOCKnumb).cueFolder         , def(BLOCKnumb).cueType        ); #  cue Info holen
+    def(BLOCKnumb).ratingInfo       = getFileInfo          (def(BLOCKnumb).ratingFolder      , def(BLOCKnumb).ratingFile     ); #  rating Infos holen
+    def(BLOCKnumb).instructionInfo  = getFileInfo          (def(BLOCKnumb).instructionFolder , def(BLOCKnumb).instructionFile); #  instuctions info holen
+    def(BLOCKnumb).crossInfo        = getFileInfo  	   (def(BLOCKnumb).crossFolder       , def(BLOCKnumb).crossFile      ); #  cross info
     # make the textures
-    def(BQA).stimInfo          = makeTexFromInfo (windowPtr , def(BQA).stimInfo       );
-    def(BQA).cueInfo           = makeTexFromInfo (windowPtr , def(BQA).cueInfo        );
-    def(BQA).ratingInfo        = makeTexFromInfo (windowPtr , def(BQA).ratingInfo     );
-    def(BQA).instructionInfo   = makeTexFromInfo (windowPtr , def(BQA).instructionInfo);
-    def(BQA).crossInfo 	       = makeTexFromInfo (windowPtr , def(BQA).crossInfo      );
+    def(BLOCKnumb).stimInfo          = makeTexFromInfo (windowPtr , def(BLOCKnumb).stimInfo       );
+    def(BLOCKnumb).cueInfo           = makeTexFromInfo (windowPtr , def(BLOCKnumb).cueInfo        );
+    def(BLOCKnumb).ratingInfo        = makeTexFromInfo (windowPtr , def(BLOCKnumb).ratingInfo     );
+    def(BLOCKnumb).instructionInfo   = makeTexFromInfo (windowPtr , def(BLOCKnumb).instructionInfo);
+    def(BLOCKnumb).crossInfo 	     = makeTexFromInfo (windowPtr , def(BLOCKnumb).crossInfo      );
         
 ################################################################################
 # Randomisierung ALT (auskommentieren sobald nicht mehr gebraucht)
@@ -324,7 +331,7 @@ endif
 
 # version a und b generieren
 #initialisiert eine Spalte von nullen die normal auf 1 gesetzt wird und in der scatter variante je nach den angegeben alternativpositionen hochaddiert bis alle einen wert von 2-5 haben die dann später durch den positonArray dekodiert werden
-    STIMQA= length(def(BQA).stimInfo); # wie viele Spalten hat stimInfo (so viele wie es stimulus im ordner gibt)
+    STIMQA= length(def(BLOCKnumb).stimInfo); # wie viele Spalten hat stimInfo (so viele wie es stimulus im ordner gibt)
     helpNORMAL  =  zeros (STIMQA , 1)+1;
     helpSCATTER =  zeros (STIMQA , 1)+2;
 
@@ -340,14 +347,14 @@ endif
 
     hartCol = [textureCol positionCol];
     [tempCol , nextSeed ] = randomizeCol( hartCol , nextSeed , 1 );
-    def(BQA).randColTex = tempCol(:,1);
-    def(BQA).randColPos = tempCol(:,2);
+    def(BLOCKnumb).randColTex = tempCol(:,1);
+    def(BLOCKnumb).randColPos = tempCol(:,2);
     
     # neuen stimInfo generieren der die "richtige" Reihenfolge hat
-    for TTT=1:length(def(BQA).randColTex)
-      def(BQA).RstimInfo(TTT) = def(BQA).stimInfo( def(BQA).randColTex(TTT,:) );
+    for TTT=1:length(def(BLOCKnumb).randColTex)
+      def(BLOCKnumb).RstimInfo(TTT) = def(BLOCKnumb).stimInfo( def(BLOCKnumb).randColTex(TTT,:) );
     endfor
-    def(BQA).ratingVanish      = length(def(BQA).stimInfo) / 100 * def(BQA).ratingCovering ;
+    def(BLOCKnumb).ratingVanish      = length(def(BLOCKnumb).stimInfo) / 100 * def(BLOCKnumb).ratingCovering ;
   endfor
 
 
@@ -387,7 +394,7 @@ endif
 
   
   
-#  --------------------------------------------------------------------------  #
+################################################################################
 ## Positionen für 16 :9 Auflösung (300 px felder für )
 #
 #                3          3          3          3
@@ -485,7 +492,7 @@ endif
   rect.rating       =  [ x.imgLeftStart  y.imgBotStart  x.imgRightEnd y.imgBotEnd ];
   rect.cross        =  [ x.imgMidStart   y.imgMidStart  x.imgMidEnd   y.imgMidEnd ];
 
-#  --------------------------------------------------------------------------  #
+################################################################################
 ## render testscreens
   switch debugEnabled
     case true
@@ -522,7 +529,7 @@ endif
   endswitch
 
 
-#  --------------------------------------------------------------------------  #
+################################################################################
 ## berechnen der skalierten Bilder + Lokalisation
 
   for j=1:BLOCKS # für alle definierten Blöcke
@@ -553,9 +560,9 @@ endif
   endfor
   [empty, empty , startFLIP ] =Screen('Flip', windowPtr);
 
-#  --------------------------------------------------------------------------  #
+################################################################################
 # MAINPART: THE MIGHTY EXPERIMENT
-#  --------------------------------------------------------------------------  #
+################################################################################
 
   superIndex = 0; # index über alle Durchläufe hinweg
   
@@ -773,12 +780,12 @@ endif
     endfor
   endfor
 
-#  --------------------------------------------------------------------------  #
+################################################################################
 # MAINPART: THE MIGHTY EXPERIMENT IS OVER HOPE YOU DID GREAT
-#  --------------------------------------------------------------------------  #
+################################################################################
 
 
-#  --------------------------------------------------------------------------  #
+################################################################################
 ##  Data saving
 
 
@@ -795,7 +802,7 @@ endif
 
   diary off
   infotainment(windowPtr , 'saving your data')
-#  --------------------------------------------------------------------------  #
+################################################################################
 ##  end all processes
   infotainment(windowPtr , 'target aquired for termination')
 

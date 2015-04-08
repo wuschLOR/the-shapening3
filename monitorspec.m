@@ -1,4 +1,6 @@
-function [xmm , ymm] = monitorspec (override=true)
+function [xmm, ymm] = monitorspec (override=true)
+
+# output size of 1 px in mm
 
   # erst mal das spec file laden
   #http://rosettacode.org/wiki/Check_that_file_exists#MATLAB_.2F_Octave
@@ -10,7 +12,14 @@ function [xmm , ymm] = monitorspec (override=true)
 
     specs = cell2struct (specBody , specHead , 2);
   else
-    # create csv 
+    # create struct 
+    specs = struct( macaddress, [] , model, [])
+    specs(1).macaddress = NA
+    specs(1).model      = NA
+    specs(1).xmm        = NA
+    specs(1).ymm        = NA
+#     specs(1).xpx        = NA
+#     specs(1).ypx        = NA
   endif
   
   #sysinfo holen
@@ -27,14 +36,26 @@ function [xmm , ymm] = monitorspec (override=true)
   
   # wenn eintrag nicht da dann neuen schreiben
   if entry==false
-    rightentry=length(specs)+1
-    specs(length(specs)+1).macaddress = sysinfo.MACAddress
-    specs(length(specs)+1).model      = moninfo.
-    specs(length(specs)+1).xmm        = moninfo.
-    specs(length(specs)+1).ymm        = moninfo.
+  
+    rightentry=length(specs)+1 # neuer eintrag
+    specs(rightentry).macaddress = sysinfo.MACAddress
+#     disp (sysinfo.MACAddress)
+    specs(rightentry).model      = input ('Screen name: ' , 's')
+    specs(rightentry).xmm        = input ('Screen size lenght in mm aka x: ')
+    specs(rightentry).ymm        = input ('Screen size height in mm aka y: ')
+#     specs(rightentry).xpx        = moninfo.
+#     specs(rightentry).ypx        = moninfo.
     
+    #neue zeile im cell erstellen
+    newCellline =                { ...
+    specs(rightentry).macaddress , ...
+    specs(rightentry).model      , ...
+    specs(rightentry).xmm        , ...
+    specs(rightentry).ymm        , ...
+                                 }
     #speichern
-    cell2csv('monitorspec.csv' , specs , ',' )
+    specCELL = [rawCell ; newCellline ];
+    cell2csv('monitorspec.csv' , specCELL , ',' )
   endif
   
   # output
