@@ -285,13 +285,13 @@ pxmm.y=display.heightmm/display.height
 
 # def =
 # 
-#   3x1 struct array containing the fields:
+#   2x1 struct array containing the fields:
 # 
 #     blockName
 #     blockNumber
 #     blockPosFix
-#     crossFolder
 #     crossFile
+#     crossFolder
 #     cueFolder
 #     cueType
 #     instructionFile
@@ -303,10 +303,13 @@ pxmm.y=display.heightmm/display.height
 #     stimType
 #     zeitAfterpause
 #     zeitBetweenpause
+#     zeitCue
 #     zeitFixcross
+#     zeitFixcrossCue
 #     zeitPrepause
 #     zeitRating
 #     zeitStimuli
+
 
 ##  Settings verarbeiten und Bildmaterial einlesen
   for BLOCKnumb=1:length(def) #  BLOCKnumb == blocknunber
@@ -366,9 +369,53 @@ pxmm.y=display.heightmm/display.height
 ################################################################################
 ## Randomisierung NEU
 ################################################################################
+# jeder Stim muss ja 2 mal präsentiert werden für jeden cue 
 
+    QUAcue = length(def(BLOCKnumb).cueInfo); # wie viele cues gibst
+    QUAstim= length(def(BLOCKnumb).stimInfo); # wie viele stimuli sind in stimInfo
+    
+    # insgesammt wird es am ende cue * 2 * stimulus tails geben
+    # cue * 2 da bei spatial cueing jeder stimulus sowohl rechts als auch links angezeigt wird (detection task)
 
+    QUAcue=3
+    QUAstim=5
+    
+    C= 1:QUAcue
+    S= 1:QUAstim
+    
+    
+    CC = C
+    SS = S
+    
+    # cue stack
+    for i= 1:QUAstim-1
+      CC= [CC C]
+    endfor
+    
+    #stim stack
+    for i= 1:QUAcue-1
+      SS= [SS S]
+    endfor
+    
+    length(CC)
+    length(SS)
+    
+    [CC', SS']
+    [sort(CC'), SS']
+    [CC', sort(SS')]
+    
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 ################################################################################
 ## Positionen für 16 :9 Auflösung 
 ################################################################################
