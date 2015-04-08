@@ -116,8 +116,13 @@ endif
 
   endswitch
 
+  
+## Folders 
+  folder.in  = [ 'input'  filesep ]
+  folder.out = [ 'output' filesep]
+  
 ## Generating the outputpaths
-  resultsFolder    = ['.' filesep 'results' filesep]
+  resultsFolder    = ['.' filesep folder.out  'rawdata' filesep]
   resultsFolderStr = [resultsFolder vpNummerStr '_' outputFileStr]
 
   fileNameDiary           = [resultsFolderStr '_diary.mat']
@@ -130,8 +135,8 @@ endif
   nextSeed = vpNummer # nextSeed wird für für alle random funktionen benutzt
 
 ## startup and end screens
-  startImg = ['.' filesep 'results' filesep startscreen.png]
-  endImg   = ['.' filesep 'results' filesep endscreen.png  ]
+  startImg = ['.' filesep folder.in 'startup' filesep 'startscreen.png']
+  endImg   = ['.' filesep folder.in 'startup' filesep 'endscreen.png'  ]
 
 ################################################################################
 ##  disable random input to the console
@@ -313,11 +318,11 @@ pxmm.y=display.heightmm/display.height
     def(BLOCKnumb).zeitRating       = def(BLOCKnumb).zeitRating        /1000;
     def(BLOCKnumb).zeitStimuli      = def(BLOCKnumb).zeitStimuli       /1000;
     # loding Info about pictures
-    def(BLOCKnumb).stimInfo         = getFilesInFolderInfo (def(BLOCKnumb).stimFolder        , def(BLOCKnumb).stimType       ); #  stimulus Info holen
-    def(BLOCKnumb).cueInfo          = getFilesInFolderInfo (def(BLOCKnumb).cueFolder         , def(BLOCKnumb).cueType        ); #  cue Info holen
-    def(BLOCKnumb).ratingInfo       = getFileInfo          (def(BLOCKnumb).ratingFolder      , def(BLOCKnumb).ratingFile     ); #  rating Infos holen
-    def(BLOCKnumb).instructionInfo  = getFileInfo          (def(BLOCKnumb).instructionFolder , def(BLOCKnumb).instructionFile); #  instuctions info holen
-    def(BLOCKnumb).crossInfo        = getFileInfo  	   (def(BLOCKnumb).crossFolder       , def(BLOCKnumb).crossFile      ); #  cross info
+    def(BLOCKnumb).stimInfo         = getFilesInFolderInfo ([folder.in def(BLOCKnumb).stimFolder       ] , def(BLOCKnumb).stimType       ); #  stimulus Info holen
+    def(BLOCKnumb).cueInfo          = getFilesInFolderInfo ([folder.in def(BLOCKnumb).cueFolder        ] , def(BLOCKnumb).cueType        ); #  cue Info holen
+    def(BLOCKnumb).ratingInfo       = getFileInfo          ([folder.in def(BLOCKnumb).ratingFolder     ] , def(BLOCKnumb).ratingFile     ); #  rating Infos holen
+    def(BLOCKnumb).instructionInfo  = getFileInfo          ([folder.in def(BLOCKnumb).instructionFolder] , def(BLOCKnumb).instructionFile); #  instuctions info holen
+    def(BLOCKnumb).crossInfo        = getFileInfo  	   ([folder.in def(BLOCKnumb).crossFolder      ] , def(BLOCKnumb).crossFile      ); #  cross info
     # make the textures
     def(BLOCKnumb).stimInfo          = makeTexFromInfo (windowPtr , def(BLOCKnumb).stimInfo       );
     def(BLOCKnumb).cueInfo           = makeTexFromInfo (windowPtr , def(BLOCKnumb).cueInfo        );
