@@ -1,21 +1,6 @@
  function [ finalMsg ] = goshapes ( vpNummer , outputFileStr , buttonBoxON , debugEnabled , screendist )
 
-if nargin <5
-  if ~exist('vpNummer'      , 'var') ;  vpNummer      = []; endif
-  if ~exist('outputFileStr' , 'var') ;  outputFileStr = []; endif
-  if ~exist('buttonBoxON'   , 'var') ;  buttonBoxON   = []; endif
-  if ~exist('debugEnabled'  , 'var') ;  debugEnabled  = []; endif
-  if ~exist('screendist'    , 'var') ;  screendist    = [], endif
-endif
-
- if isempty(vpNummer)      ;  vpNummer      = 001    ; endif
- if isempty(outputFileStr) ;  outputFileStr = 'xkcd' ; endif
- if isempty(buttonBoxON)   ;  buttonBoxON   = true   ; endif
- if isempty(debugEnabled)  ;  debugEnabled  = true   ; endif
- if isempty(screendist)    ;  screendist    = 80     ; endif
-
-
-## [ finalMsg ] = goShapes ( vpNummer , outputFileStr , buttonBoxON, debugEnabled )
+## [ finalMsg ] = goShapes ( vpNummer , outputFileStr , buttonBoxON, debugEnabled , screendist )
 ################################################################################
 #  Input:
 #
@@ -61,6 +46,56 @@ endif
 #
 ################################################################################
 
+################################################################################
+## defaults
+
+
+  # wenn weniger als 5 agrumente gegeben wurden als die funktion gestartet ist dann mal alles was nicht initialisiert wurde zumindest nenn empty value geben
+  if nargin <5
+    if ~exist('vpNummer'      , 'var') ;  vpNummer      = []; endif
+    if ~exist('outputFileStr' , 'var') ;  outputFileStr = []; endif
+    if ~exist('buttonBoxON'   , 'var') ;  buttonBoxON   = []; endif
+    if ~exist('debugEnabled'  , 'var') ;  debugEnabled  = []; endif
+    if ~exist('screendist'    , 'var') ;  screendist    = [], endif
+  endif
+
+  # default array
+  def.vpNummer      = 001   ;
+  def.outputFileStr ='xkcd' ;
+  def.buttonBoxON   = true  ;
+  def.debugEnabled  = true  ;
+  def.screendist    = 80    ;
+  
+  # old check and set default
+  if isempty(vpNummer)      ;  def.vpNummer      ; endif
+#   if isempty(outputFileStr) ;  def.outputFileStr ; endif
+  if isempty(buttonBoxON)   ;  def.buttonBoxON   ; endif
+  if isempty(debugEnabled)  ;  def.debugEnabled  ; endif
+  if isempty(screendist)    ;  def.screendist    ; endif
+
+  
+  #new check and set default 
+  # alles was string sein soll
+  if isempty(outputFileStr) # is es leer (weil beim start nix angegeben wurde?)
+    inputtext = 'VP-Code oder so: '
+    inputargument = input (inputtext , 's') # nachfragen wie er sein soll
+    if isempty(inputargument) # wenn einfach nur enter gedrückt wurde dann default nehmen
+      outputFileStr = def.outputFileStr; 
+    else
+      outputFileStr= inputargument;
+    endif
+  endif
+  
+  # alles was bool sein soll
+  if isempty(buttonBoxON) # is es leer (weil beim start nix angegeben wurde?)
+    inputtext     = 'buttonbox is via default on; do you wish to keep it that way (ENTER). Otherwise true or false'
+    inputargument = input (inputtext , 's') # nachfragen wie er sein soll
+    if isempty(inputargument) # wenn einfach nur enter gedrückt wurde dann default nehmen
+      buttonBoxON = def.buttonBoxON; 
+    endif
+    if
+  endif  
+  
 
 ################################################################################
 ##  openGL
@@ -382,32 +417,38 @@ endif
     QUAcue = length(def(BLOCKnumb).cueInfo); # wie viele cues gibst
     QUAstim= length(def(BLOCKnumb).stimInfo); # wie viele stimuli sind in stimInfo
     
+#     QUAcue = 5
+#     QUAstim= 2
+    
     # insgesammt wird es am ende cue * 2 * stimulus tails geben
     # cue * 2 da bei spatial cueing jeder stimulus sowohl rechts als auch links angezeigt wird (detection task)
     
-    C= 1:QUAcue # array erstellen der 
-    S= 1:QUAstim
+    C= 1:QUAcue; # array erstellen der 
+    S= 1:QUAstim;
     
     
-    CC = C
-    SS = S
+    CC = C;
+    SS = S;
     
     # cue stack
     for i= 1:QUAstim-1
-      CC= [CC C]
+      CC= [CC C];
     endfor
     
     #stim stack
     for i= 1:QUAcue-1
-      SS= [SS S]
+      SS= [SS S];
     endfor
     
     
-    CC=CC' # row to col
-    SS=SS' # row to col
+    CC=CC'; # row to col
+    SS=SS'; # row to col
     
-    [sort(CC) SS]
-    
+    CS= [sort(CC) SS]
+    for i=1:length(CS)
+    CS(i,1)
+    CS(i,2)
+    endfor
 
     
     
