@@ -1,4 +1,4 @@
-# the-shapening2
+# the-shapening 2
 
 Code to the second experiment of my diploma thesis.
 
@@ -31,7 +31,8 @@ Code to the second experiment of my diploma thesis.
 * The Code is licensed under [GPL v.3](./LICENSE) unless marked otherwise. 
 * The Images are licensed under ???no idea just ask me for now.
 
-## bibtech
+----------------------------------------------------------------------------
+## Biblatex
 
 ```
 @software{groh_shapening_2015,
