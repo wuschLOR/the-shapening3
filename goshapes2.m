@@ -1,6 +1,6 @@
- function [ finalMsg ] = goshapes ( vpNummer , outputFileStr , buttonBoxON , debugEnabled , screendist )
+ function [ finalMsg ] = goshapes2 ( vpNummer , outputFileStr , buttonBoxON , debugEnabled , screendist )
 
-## [ finalMsg ] = goShapes ( vpNummer , outputFileStr , buttonBoxON, debugEnabled , screendist )
+## [ finalMsg ] = goShapes2 ( vpNummer , outputFileStr , buttonBoxON, debugEnabled , screendist )
 ################################################################################
 #  Input:
 #
@@ -56,7 +56,7 @@
     if ~exist('outputFileStr' , 'var') ;  outputFileStr = []; endif
     if ~exist('buttonBoxON'   , 'var') ;  buttonBoxON   = []; endif
     if ~exist('debugEnabled'  , 'var') ;  debugEnabled  = []; endif
-    if ~exist('screendist'    , 'var') ;  screendist    = [], endif
+    if ~exist('screendist'    , 'var') ;  screendist    = []; endif
   endif
 
   # default array
@@ -67,18 +67,33 @@
   def.screendist    = 80    ;
   
   # old check and set default
-  if isempty(vpNummer)      ;  def.vpNummer      ; endif
+#   if isempty(vpNummer)      ;  def.vpNummer      ; endif
 #   if isempty(outputFileStr) ;  def.outputFileStr ; endif
-  if isempty(buttonBoxON)   ;  def.buttonBoxON   ; endif
-  if isempty(debugEnabled)  ;  def.debugEnabled  ; endif
-  if isempty(screendist)    ;  def.screendist    ; endif
+#   if isempty(buttonBoxON)   ;  def.buttonBoxON   ; endif
+#   if isempty(debugEnabled)  ;  def.debugEnabled  ; endif
+#   if isempty(screendist)    ;  def.screendist    ; endif
 
   
   #new check and set default 
+  
+  # alles was numbers sein sollen
+  if isempty(vpNummer) # is es leer (weil beim start nix angegeben wurde?)
+    valid = false;
+    do
+      inputtext     = 'VP Nummer default 001 (ENTER). Otherwise type number: ';
+      inputargument = input (inputtext , 's'); # nachfragen wie er sein soll;
+      if isempty(inputargument) # wenn einfach nur enter gedrückt wurde dann default nehmen
+        vpNummer = def.vpNummer; 
+        valid= true;
+      endif
+      if  finite (str2double (inputargument )) ; vpNummer = str2double (inputargument)  ; valid= true;  endif
+    until valid == true
+  endif  
+  
   # alles was string sein soll
   if isempty(outputFileStr) # is es leer (weil beim start nix angegeben wurde?)
     inputtext = 'VP-Code oder so: '
-    inputargument = input (inputtext , 's') # nachfragen wie er sein soll
+    inputargument = input (inputtext , 's'); # nachfragen wie er sein soll
     if isempty(inputargument) # wenn einfach nur enter gedrückt wurde dann default nehmen
       outputFileStr = def.outputFileStr; 
     else
@@ -88,14 +103,47 @@
   
   # alles was bool sein soll
   if isempty(buttonBoxON) # is es leer (weil beim start nix angegeben wurde?)
-    inputtext     = 'buttonbox is via default on; do you wish to keep it that way (ENTER). Otherwise true or false'
-    inputargument = input (inputtext , 's') # nachfragen wie er sein soll
-    if isempty(inputargument) # wenn einfach nur enter gedrückt wurde dann default nehmen
-      buttonBoxON = def.buttonBoxON; 
-    endif
-    if
+    valid = false;
+    do
+      inputtext     = 'buttonbox is via default ON; do you wish to keep it that way (ENTER). Otherwise true or false: ';
+      inputargument = input (inputtext , 's'); # nachfragen wie er sein soll;
+      if isempty(inputargument) # wenn einfach nur enter gedrückt wurde dann default nehmen
+        buttonBoxON = def.buttonBoxON; 
+        valid= true;
+      endif
+      if strcmp( 'true'  ,inputargument ) || strcmp( 't' ,inputargument ); buttonBoxON = true  ; valid= true;  endif
+      if strcmp( 'false' ,inputargument ) || strcmp( 'f' ,inputargument ); buttonBoxON = false ; valid= true;  endif
+    until valid == true
   endif  
   
+  if isempty(debugEnabled) # is es leer (weil beim start nix angegeben wurde?)
+    valid = false;
+    do
+      inputtext     = 'debugEnabled is via default OFF; do you wish to keep it that way (ENTER). Otherwise true or false: ';
+      inputargument = input (inputtext , 's'); # nachfragen wie er sein soll;
+      if isempty(inputargument) # wenn einfach nur enter gedrückt wurde dann default nehmen
+        debugEnabled = def.debugEnabled; 
+        valid= true;
+      endif
+      if strcmp( 'true'  ,inputargument ) || strcmp( 't' ,inputargument ); debugEnabled = true  ; valid= true;  endif
+      if strcmp( 'false' ,inputargument ) || strcmp( 'f' ,inputargument ); debugEnabled = false ; valid= true;  endif
+    until valid == true
+  endif  
+  
+  
+  # alles was numbers sein sollen
+  if isempty(screendist) # is es leer (weil beim start nix angegeben wurde?)
+    valid = false;
+    do
+      inputtext     = 'Distance to the screen, default = 80 (ENTER). Otherwise type number: ';
+      inputargument = input (inputtext , 's'); # nachfragen wie er sein soll;
+      if isempty(inputargument) # wenn einfach nur enter gedrückt wurde dann default nehmen
+        screendist = def.screendist; 
+        valid= true;
+      endif
+      if  finite (str2double (inputargument )) ; screendist = str2double (inputargument)  ; valid= true;  endif
+    until valid == true
+  endif  
 
 ################################################################################
 ##  openGL
@@ -592,7 +640,7 @@
     case true
       infotainment(windowPtr , '1-10°')
 	for i=1:10
-	  Screen('FrameOval', windowPtr , [255 20 147] baserect*i);
+# 	  Screen('FrameOval', windowPtr , [255 20 147] baserect*i);
 	endfor
 
       infotainment(windowPtr , 'testscreen upcomming')
