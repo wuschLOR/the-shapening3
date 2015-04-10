@@ -31,6 +31,16 @@ Code to the second experiment of my diploma thesis.
 * The Code is licensed under [GPL v.3](./LICENSE) unless marked otherwise. 
 * The Images are licensed under ???no idea just ask me for now.
 
+## bibtech
 
+```
+@software{groh_shapening_2015,
+        title = {the shapening 2},
+        rights = {{GPL}3},
+        url = {https://github.com/wuschLOR/the-shapening2},
+        author = {Groh, Michael},
+        date = {2015}
+}
+```
 
 ----------------------------------------------------------------------------
