@@ -1,20 +1,22 @@
- function [ finalMsg ] = goshapes ( vpNummer , outputFileStr , buttonBoxON, debugEnabled )
+ function [ finalMsg ] = goshapes ( vpNummer , outputFileStr , buttonBoxON , debugEnabled , screendist )
 
-if nargin <4
+if nargin <5
   if ~exist('vpNummer'      , 'var') ;  vpNummer      = []; endif
   if ~exist('outputFileStr' , 'var') ;  outputFileStr = []; endif
   if ~exist('buttonBoxON'   , 'var') ;  buttonBoxON   = []; endif
   if ~exist('debugEnabled'  , 'var') ;  debugEnabled  = []; endif
+  if ~exist('screendist'    , 'var') ;  screendist    = [], endif
 endif
 
  if isempty(vpNummer)      ;  vpNummer      = 001    ; endif
  if isempty(outputFileStr) ;  outputFileStr = 'xkcd' ; endif
  if isempty(buttonBoxON)   ;  buttonBoxON   = true   ; endif
  if isempty(debugEnabled)  ;  debugEnabled  = true   ; endif
+ if isempty(screendist)    ;  screendist    = 80     ; endif
 
 
 ## [ finalMsg ] = goShapes ( vpNummer , outputFileStr , buttonBoxON, debugEnabled )
-#  ----------------------------------------------------------------------------
+################################################################################
 #  Input:
 #
 #    vpNummer      = 001 (default)
@@ -35,28 +37,27 @@ endif
 #        true  == error messages are popping up and the paths for the output is
 #                 changed to hold the time stamp for maximum output ;)
 #
-#  ----------------------------------------------------------------------------
+#    screendist  = 80 cm
+# 	 distance participant Screen in cm. Used for processing the degrees of 
+#        eccentricity
+#
+################################################################################
 #  Output:
 #
 #    finalMsg = custom message with no purpose but it will be nice.   I promise!
 #
-# ----------------------------------------------------------------------------
+################################################################################
 #  Functionality
 #
 #
-#  ----------------------------------------------------------------------------
+################################################################################
 #  Requirements
 #    Psychtoolbox-3  https://psychtoolbox-3.github.io/overview/
 #    awesomeStuff    https://github.com/wuschLOR/awesomeStuff
 #
-#  ----------------------------------------------------------------------------
+################################################################################
 #  History
-#  2014-11-25 mg  changed the workspace saving routine from default ascii to 
-#                 -binary to solve the loading problems with structures
-#  2014-11-23 mg  written
-#  ----------------------------------------------------------------------------
-#  TODO
-#  [ ] add check if awesomeStuff is poperly installed 
+#  2015-04-XX mg  written
 #
 ################################################################################
 
@@ -67,7 +68,7 @@ endif
 #  versions of the Psychtoolbox. The Psychtoolbox command AssertPsychOpenGL will
 #  issue an error message if someone tries to execute this script on a computer
 #  without an OpenGL Psychtoolbox
-   AssertOpenGL;
+  AssertOpenGL;
    
 ################################################################################   
 ## disable  -- less -- (f)orward, (b)ack, (q)uit 
@@ -116,7 +117,12 @@ endif
 
   endswitch
 
-  
+################################################################################
+## Hardcoded stuff 
+################################################################################
+# der nich initialisiert wurde und nicht über die settings.csv eingelesen wird,
+# in der hoffnung irgendwann das ganze mal hübsch zu machen 
+
 ## Folders 
   folder.in  = [ 'input'  filesep ]
   folder.out = [ 'output' filesep]
@@ -137,6 +143,9 @@ endif
 ## startup and end screens
   startImg = ['.' filesep folder.in 'startup' filesep 'startscreen.png']
   endImg   = ['.' filesep folder.in 'startup' filesep 'endscreen.png'  ]
+
+  
+  
 
 ################################################################################
 ##  disable random input to the console
@@ -181,7 +190,7 @@ endif
 #  Normal sreens
 #   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [0 0 1279  800]);  #  16:10 wu Laptop
 #   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [0 0 1679 1050]);  #  16:10 wu pc
-#   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [0 0 1919 1080]);  #  16:9  testrechner
+#   [windowPtr,rect.root] = uuScreen('OpenWindow', screenID ,[], [0 0 1919 1080]);  #  16:9  testrechner
 
 #  Windowed
 #   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 620 620]); # 1:1
@@ -195,8 +204,6 @@ endif
       [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 600 337]) # 16:9
   endswitch
 
-
-
   HideCursor(screenID)
 
 ################################################################################
@@ -206,13 +213,6 @@ endif
     [handle , BBworking ] = cedrusInitUSBLinux
     buttonBoxON = BBworking # change the state of buttonBoxON to true or false depending on if the initiation was successful
   endif
-
-################################################################################
-##  play around with the flip interval
-# 
-#   flipSlack =Screen('GetFlipInterval', windowPtr)
-#   #  flipSlack =0
-#   flipSlack = flipSlack/2 # das verhindert das das ganze kürzer wird hier noch etwas rumspielen - da es so manchmal zu kurze anzeigezeiten kommen kann
 
 ################################################################################
 ##  textstyles
@@ -225,14 +225,22 @@ endif
   oldTextSize  = Screen('TextSize'  , windowPtr , newTextSize );
   oldTextColor = Screen('TextColor' , windowPtr , newTextColor);
   
-  
+###############################################################################
 ## Pixelgröße berechnen  
-display =Screen('Resolution', screenID);
-[display.widthmm, display.heightmm]=Screen('DisplaySize', screenID);
-display
-pxmm.x=display.widthmm /display.width
-pxmm.y=display.heightmm/display.height
-  
+  display =Screen('Resolution', screenID);
+  [display.widthmm, display.heightmm]=Screen('DisplaySize', screenID);
+  display
+  pxmm.x=display.widthmm /display.width
+  pxmm.y=display.heightmm/display.height
+    
+    
+# berechenn der Größe von 1 grad Mittenabweichung auf dem bildschirm
+# abstand ist per default mit 80cm angegeben  
+  onedeg.mm=tand(1)*screendist*10 # tand benutzt normale grad zahlen 
+  onedeg.px= onedeg.mm/pxmm.x
+
+
+
 ################################################################################
 ##  settings einlesen
   rawSettingsCell = csv2cell( 'settings.csv' , ',');
@@ -376,11 +384,8 @@ pxmm.y=display.heightmm/display.height
     
     # insgesammt wird es am ende cue * 2 * stimulus tails geben
     # cue * 2 da bei spatial cueing jeder stimulus sowohl rechts als auch links angezeigt wird (detection task)
-
-    QUAcue=3
-    QUAstim=5
     
-    C= 1:QUAcue
+    C= 1:QUAcue # array erstellen der 
     S= 1:QUAstim
     
     
@@ -397,12 +402,11 @@ pxmm.y=display.heightmm/display.height
       SS= [SS S]
     endfor
     
-    length(CC)
-    length(SS)
     
-    [CC', SS']
-    [sort(CC'), SS']
-    [CC', sort(SS')]
+    CC=CC' # row to col
+    SS=SS' # row to col
+    
+    [sort(CC) SS]
     
 
     
@@ -433,9 +437,6 @@ pxmm.y=display.heightmm/display.height
 #
 #  die präsentationsfelder müssen alle gleich groß sein 
 # x values for all locations
-
-
-
 
 
 
@@ -548,8 +549,12 @@ pxmm.y=display.heightmm/display.height
 ## render testscreens
   switch debugEnabled
     case true
+      infotainment(windowPtr , '1-10°')
+	for i=1:10
+	  Screen('FrameOval', windowPtr , [255 20 147] baserect*i);
+	endfor
 
-     infotainment(windowPtr , 'testscreen upcomming')
+      infotainment(windowPtr , 'testscreen upcomming')
         Screen('FillRect', windowPtr , [255 20 147] , rect.L1  );
         Screen('FillRect', windowPtr , [255 20 147] , rect.L2  );
         Screen('FillRect', windowPtr , [255 20 147] , rect.L3  );
