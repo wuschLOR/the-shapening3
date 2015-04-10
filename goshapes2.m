@@ -1,4 +1,4 @@
- function [ finalMsg ] = goshapes2 ( vpNummer , outputFileStr , buttonBoxON , debugEnabled , screendist )
+#  function [ finalMsg ] = goshapes2 ( vpNummer , outputFileStr , buttonBoxON , debugEnabled , screendist )
 
 ## [ finalMsg ] = goShapes2 ( vpNummer , outputFileStr , buttonBoxON, debugEnabled , screendist )
 ################################################################################
@@ -30,10 +30,6 @@
 #  Output:
 #
 #    finalMsg = custom message with no purpose but it will be nice.   I promise!
-#
-################################################################################
-#  Functionality
-#
 #
 ################################################################################
 #  Requirements
@@ -92,7 +88,7 @@
   
   # alles was string sein soll
   if isempty(outputFileStr) # is es leer (weil beim start nix angegeben wurde?)
-    inputtext = 'VP-Code oder so: '
+    inputtext = 'VP-Code oder so: ';
     inputargument = input (inputtext , 's'); # nachfragen wie er sein soll
     if isempty(inputargument) # wenn einfach nur enter gedrückt wurde dann default nehmen
       outputFileStr = def.outputFileStr; 
@@ -472,11 +468,13 @@
     # cue * 2 da bei spatial cueing jeder stimulus sowohl rechts als auch links angezeigt wird (detection task)
     
     C= 1:QUAcue; # array erstellen der 
-    S= 1:QUAstim;
+    S= 1:QUAstim; 
+    P= 1:2 # zwei possitionen l u R
     
     
     CC = C;
     SS = S;
+    PP = P;
     
     # cue stack
     for i= 1:QUAstim-1
@@ -486,18 +484,27 @@
     #stim stack
     for i= 1:QUAcue-1
       SS= [SS S];
-    endfor
+    endfor 
     
+    # L R stack
+    for i=1:QUAstim * QUAcue -1
+      PP= [PP P] 
+    endfor
     
     CC=CC'; # row to col
     SS=SS'; # row to col
+    PP=PP' 
     
     CS= [sort(CC) SS]
     for i=1:length(CS)
     CS(i,1)
     CS(i,2)
     endfor
-
+    
+    CSP= [sort(CC) SS PP]
+    for i=1:length(CSP)
+    [CSP(i,1) CSP(i,2)  CSP(i,3)]
+    endfor
     
     
     
@@ -961,5 +968,5 @@
 
   finalMsg = 'geschafft'
 
-endfunction
+# endfunction
 
