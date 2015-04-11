@@ -309,14 +309,18 @@
   display =Screen('Resolution', screenID);
   [display.widthmm, display.heightmm]=Screen('DisplaySize', screenID);
   display
-  pxmm.x=display.widthmm /display.width
-  pxmm.y=display.heightmm/display.height
-    
+  onePXinMM.x=display.widthmm /display.width;
+  onePXinMM.y=display.heightmm/display.height;
+  onePXinMM.mean= (onePXinMM.x+onePXinMM.y)/2;
+  
+  
+  # math
+  # 1 px * onePXinMM = size in milimeters
     
 # berechenn der Größe von 1 grad Mittenabweichung auf dem bildschirm
 # abstand ist per default mit 80cm angegeben  
-  onedeg.mm=tand(1)*screendist*10 # tand benutzt normale grad zahlen 
-  onedeg.px= onedeg.mm/pxmm.x
+  onedeg.mm=tand(1)*screendist*10; # tand benutzt normale grad zahlen 
+  onedeg.px= onedeg.mm/onePXinMM.mean;
 
 
 
@@ -380,6 +384,7 @@
 #     crossFile
 #     crossFolder
 #     cueFolder
+#     cueSizemm
 #     cueType
 #     instructionFile
 #     instructionFolder
@@ -387,6 +392,7 @@
 #     ratingFile
 #     ratingFolder
 #     stimFolder
+#     stimSizemm
 #     stimType
 #     zeitAfterpause
 #     zeitBetweenpause
@@ -398,8 +404,16 @@
 #     zeitStimuli
 
 
+
 ##  Settings verarbeiten und Bildmaterial einlesen
   for BLOCKnumb=1:length(def) #  BLOCKnumb == blocknunber
+    # convert sizes
+    def(BLOCKnumb).crossSizepx  = def(BLOCKnumb).crossSizemm / onePXinMM.mean;
+    def(BLOCKnumb).cueSizepx    = def(BLOCKnumb).cueSizemm   / onePXinMM.mean;
+    def(BLOCKnumb).stimSizepx   = def(BLOCKnumb).stimSizemm  / onePXinMM.mean;
+    def(BLOCKnumb).crossRect    = [ 0 0 crossSizepx  crossSizepx ]
+    def(BLOCKnumb).cueRect      = [ 0 0 cueSizepx    cueSizepx   ]
+    def(BLOCKnumb).stimRect     = [ 0 0 stimSizepx   stimSizepx  ]
     # convert times to real ms
     def(BLOCKnumb).zeitAfterpause   = def(BLOCKnumb).zeitAfterpause    /1000;
     def(BLOCKnumb).zeitBetweenpause = def(BLOCKnumb).zeitBetweenpause  /1000;
@@ -447,7 +461,7 @@
 #     
 #     # neuen stimInfo generieren der die "richtige" Reihenfolge hat
 #     for TTT=1:length(def(BLOCKnumb).randColTex)
-#       def(BLOCKnumb).RstimInfo(TTT) = def(BLOCKnumb).stimInfo( def(BLOCKnumb).randColTex(TTT,:) );
+#       def(BLOCKnumb).EXstimInfo(TTT) = def(BLOCKnumb).stimInfo( def(BLOCKnumb).randColTex(TTT,:) );
 #     endfor
 #     def(BLOCKnumb).ratingVanish      = length(def(BLOCKnumb).stimInfo) / 100 * def(BLOCKnumb).ratingCovering ;
 #   endfor
@@ -501,23 +515,23 @@
 #     CS(i,2)
 #     endfor
     
-    CSP= [sort(CC) SS PP]
+    CSP= [sort(CC) SS PP];
     for i=1:length(CSP)
-    [CSP(i,1) CSP(i,2)  CSP(i,3)]
+    [CSP(i,1) CSP(i,2)  CSP(i,3)];
     endfor
     
     [CSPr , nextSeed ] = randomizeCol( CSP , nextSeed , 1 );
     
-#     def(BLOCKnumb).randColCue  = CSPr(:,1);
-#     def(BLOCKnumb).randColStim = CSPr(:,2);
-#     def(BLOCKnumb).randColPos  = CSPr(:,3);
     def(BLOCKnumb).randMatrix  = CSPr;
+    def(BLOCKnumb).randColCue  = CSPr(:,1);
+    def(BLOCKnumb).randColStim = CSPr(:,2);
+    def(BLOCKnumb).randColPos  = CSPr(:,3);
     
     for i=1:length(def(BLOCKnumb).randMatrix)
-      def(BLOCKnumb).EXstimInfo(i) = def(BLOCKnumb).stimInfo( CSPr(i,1) );
+      def(BLOCKnumb).EXcueInfo(i)  = def(BLOCKnumb).cueInfo ( CSPr(i,1) ); # infos zu den ex infos in der richtigen reihenfolge zusammenkopieren
       def(BLOCKnumb).EXstimInfo(i) = def(BLOCKnumb).stimInfo( CSPr(i,2) );
-      def(BLOCKnumb).EXstimInfo(i) = def(BLOCKnumb).stimInfo( CSPr(i,3) );
     endfor
+    def(BLOCKnumb).ratingVanish      = length(def(BLOCKnumb).stimInfo) / 100 * def(BLOCKnumb).ratingCovering ; # ob das rating angezeigt werden soll ?
   endfor
     
     
@@ -540,11 +554,28 @@
 # x values for all locations
 
 
+# positionen der bilder werden über den mittelpunkt angegeben 
 
 
+point.mid.x   = rect.root(3)/2;
+point.mid.y   = rect.root(4)/2;
 
+point.left.x  = point.mid.x + onedeg.px*7;
+point.left.y  = point.mid.y + onedeg.px*7;
 
+point.right.x = point.mid.x - onedeg.px*7;
+point.right.y = point.mid.y - onedeg.px*7;
 
+rect.onedegree = [0 0 onedeg.px onedeg.px]
+rect.cdegree1  = CenterRectOnPoint( rect.onedegree ,point.mid.x , point.mid.y)
+
+rect.cross = [0 0 100 100]
+rect.cue   = [0 0 10 10]
+rect.stim  = [0 0 10 10]
+
+rect.cue   = CenterRectOnPoint(rect.cue  , point.mid.x   , point.mid.y  )
+rect.stimL = CenterRectOnPoint(rect.stim , point.left.x  , point.left.y )
+rect.stimR = CenterRectOnPoint(rect.stim , point.right.x , point.right.y)
 
   
   
@@ -650,10 +681,15 @@
 ## render testscreens
   switch debugEnabled
     case true
-      infotainment(windowPtr , '1-10°')
-	for i=1:10
-# 	  Screen('FrameOval', windowPtr , [255 20 147] baserect*i);
+      infotainment(windowPtr , '1-20°')
+	for i=1:20
+	  drawme= CenterRectOnPoint( rect.onedegree*i ,point.mid.x , point.mid.y)
+	  Screen('FrameOval', windowPtr , [255 20 147] , drawme);
 	endfor
+      
+      Screen('Flip', windowPtr)
+        KbPressWait;
+      Screen('Flip', windowPtr)
 
       infotainment(windowPtr , 'testscreen upcomming')
         Screen('FillRect', windowPtr , [255 20 147] , rect.L1  );
@@ -692,11 +728,11 @@
 
   for j=1:BLOCKS # für alle definierten Blöcke
 
-    m = length(def(j).RstimInfo);
-    for i = 1:m # für alle vorhandenen Elemente im RstimInfo
+    m = length(def(j).EXstimInfo);
+    for i = 1:m # für alle vorhandenen Elemente im EXstimInfo
 
       #  herrausfinden wie groß die textur ist - anhand des tex pointers
-      texRect      = Screen('Rect' , def(j).RstimInfo(i).texture );
+      texRect      = Screen('Rect' , def(j).EXstimInfo(i).texture );
       # verkleinern erstellen eines recht in das die textur gemalt wird ohne sich zu verzerren
       finRect  = putRectInRect( positonArray( def(j).randColPos(i) ){}  , texRect  );
       # abspeichern
@@ -746,7 +782,7 @@
       endswitch
       
     endfor
-    m = length(def(WHATBLOCK).RstimInfo);
+    m = length(def(WHATBLOCK).EXstimInfo);
     [empty, empty , timeBlockBegin ]=Screen('Flip', windowPtr);
 
     nextFlip = 0;
@@ -820,7 +856,7 @@
       
       # STIMULUS
       if def(WHATBLOCK).zeitStimuli > 0
-	  Screen('DrawTexture', windowPtr, def(WHATBLOCK).RstimInfo(INBLOCK).texture , [] , def(WHATBLOCK).finRect(INBLOCK,1){} );
+	  Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXstimInfo(INBLOCK).texture , [] , def(WHATBLOCK).finRect(INBLOCK,1){} );
 	  #flip
 	  [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
 	  nextFlip = lastFLIP + def(WHATBLOCK).zeitStimuli;
@@ -915,7 +951,7 @@
         def(WHATBLOCK).blockName                   , ...
         'cue'                                      , ...
         'cuegroesse'                               , ...
-        def(WHATBLOCK).RstimInfo(INBLOCK).name     , ...
+        def(WHATBLOCK).EXstimInfo(INBLOCK).name     , ...
         'stimgroesse'                              , ...
         pressedButtonStr                           , ...
         pressedButtonValue                         , ...
