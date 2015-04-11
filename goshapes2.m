@@ -56,18 +56,18 @@
   endif
 
   # default array
-  def.vpNummer      = 001   ;
-  def.outputFileStr ='xkcd' ;
-  def.buttonBoxON   = true  ;
-  def.debugEnabled  = true  ;
-  def.screendist    = 80    ;
+  default.vpNummer      = 001   ;
+  default.outputFileStr ='xkcd' ;
+  default.buttonBoxON   = true  ;
+  default.debugEnabled  = true  ;
+  default.screendist    = 80    ;
   
   # old check and set default
-#   if isempty(vpNummer)      ;  def.vpNummer      ; endif
-#   if isempty(outputFileStr) ;  def.outputFileStr ; endif
-#   if isempty(buttonBoxON)   ;  def.buttonBoxON   ; endif
-#   if isempty(debugEnabled)  ;  def.debugEnabled  ; endif
-#   if isempty(screendist)    ;  def.screendist    ; endif
+#   if isempty(vpNummer)      ;  default.vpNummer      ; endif
+#   if isempty(outputFileStr) ;  default.outputFileStr ; endif
+#   if isempty(buttonBoxON)   ;  default.buttonBoxON   ; endif
+#   if isempty(debugEnabled)  ;  default.debugEnabled  ; endif
+#   if isempty(screendist)    ;  default.screendist    ; endif
 
   
   #new check and set default 
@@ -79,7 +79,7 @@
       inputtext     = 'VP Nummer default 001 (ENTER). Otherwise type number: ';
       inputargument = input (inputtext , 's'); # nachfragen wie er sein soll;
       if isempty(inputargument) # wenn einfach nur enter gedrückt wurde dann default nehmen
-        vpNummer = def.vpNummer; 
+        vpNummer = default.vpNummer; 
         valid= true;
       endif
       if  finite (str2double (inputargument )) ; vpNummer = str2double (inputargument)  ; valid= true;  endif
@@ -91,7 +91,7 @@
     inputtext = 'VP-Code oder so: ';
     inputargument = input (inputtext , 's'); # nachfragen wie er sein soll
     if isempty(inputargument) # wenn einfach nur enter gedrückt wurde dann default nehmen
-      outputFileStr = def.outputFileStr; 
+      outputFileStr = default.outputFileStr; 
     else
       outputFileStr= inputargument;
     endif
@@ -104,7 +104,7 @@
       inputtext     = 'buttonbox is via default ON; do you wish to keep it that way (ENTER). Otherwise true or false: ';
       inputargument = input (inputtext , 's'); # nachfragen wie er sein soll;
       if isempty(inputargument) # wenn einfach nur enter gedrückt wurde dann default nehmen
-        buttonBoxON = def.buttonBoxON; 
+        buttonBoxON = default.buttonBoxON; 
         valid= true;
       endif
       if strcmp( 'true'  ,inputargument ) || strcmp( 't' ,inputargument ); buttonBoxON = true  ; valid= true;  endif
@@ -118,7 +118,7 @@
       inputtext     = 'debugEnabled is via default OFF; do you wish to keep it that way (ENTER). Otherwise true or false: ';
       inputargument = input (inputtext , 's'); # nachfragen wie er sein soll;
       if isempty(inputargument) # wenn einfach nur enter gedrückt wurde dann default nehmen
-        debugEnabled = def.debugEnabled; 
+        debugEnabled = default.debugEnabled; 
         valid= true;
       endif
       if strcmp( 'true'  ,inputargument ) || strcmp( 't' ,inputargument ); debugEnabled = true  ; valid= true;  endif
@@ -134,7 +134,7 @@
       inputtext     = 'Distance to the screen, default = 80 (ENTER). Otherwise type number: ';
       inputargument = input (inputtext , 's'); # nachfragen wie er sein soll;
       if isempty(inputargument) # wenn einfach nur enter gedrückt wurde dann default nehmen
-        screendist = def.screendist; 
+        screendist = default.screendist; 
         valid= true;
       endif
       if  finite (str2double (inputargument )) ; screendist = str2double (inputargument)  ; valid= true;  endif
@@ -426,31 +426,31 @@
 
 # version a und b generieren
 #initialisiert eine Spalte von nullen die normal auf 1 gesetzt wird und in der scatter variante je nach den angegeben alternativpositionen hochaddiert bis alle einen wert von 2-5 haben die dann später durch den positonArray dekodiert werden
-    STIMQA= length(def(BLOCKnumb).stimInfo); # wie viele Spalten hat stimInfo (so viele wie es stimulus im ordner gibt)
-    helpNORMAL  =  zeros (STIMQA , 1)+1;
-    helpSCATTER =  zeros (STIMQA , 1)+2;
-
-    schinkenfix = floor(STIMQA/4);
-    schinken = schinkenfix;
-    do
-      helpSCATTER(1:schinken)  = helpSCATTER(1:schinken)+1;
-      schinken = schinken + schinkenfix;
-    until schinken >= schinkenfix*4
-
-    positionCol  = [helpNORMAL ; helpSCATTER];
-    textureCol = [ (1:STIMQA)' ; (1:STIMQA)' ];
-
-    hartCol = [textureCol positionCol];
-    [tempCol , nextSeed ] = randomizeCol( hartCol , nextSeed , 1 );
-    def(BLOCKnumb).randColTex = tempCol(:,1);
-    def(BLOCKnumb).randColPos = tempCol(:,2);
-    
-    # neuen stimInfo generieren der die "richtige" Reihenfolge hat
-    for TTT=1:length(def(BLOCKnumb).randColTex)
-      def(BLOCKnumb).RstimInfo(TTT) = def(BLOCKnumb).stimInfo( def(BLOCKnumb).randColTex(TTT,:) );
-    endfor
-    def(BLOCKnumb).ratingVanish      = length(def(BLOCKnumb).stimInfo) / 100 * def(BLOCKnumb).ratingCovering ;
-  endfor
+#     STIMQA= length(def(BLOCKnumb).stimInfo); # wie viele Spalten hat stimInfo (so viele wie es stimulus im ordner gibt)
+#     helpNORMAL  =  zeros (STIMQA , 1)+1;
+#     helpSCATTER =  zeros (STIMQA , 1)+2;
+# 
+#     schinkenfix = floor(STIMQA/4);
+#     schinken = schinkenfix;
+#     do
+#       helpSCATTER(1:schinken)  = helpSCATTER(1:schinken)+1;
+#       schinken = schinken + schinkenfix;
+#     until schinken >= schinkenfix*4
+# 
+#     positionCol  = [helpNORMAL ; helpSCATTER];
+#     textureCol = [ (1:STIMQA)' ; (1:STIMQA)' ];
+# 
+#     hartCol = [textureCol positionCol];
+#     [tempCol , nextSeed ] = randomizeCol( hartCol , nextSeed , 1 );
+#     def(BLOCKnumb).randColTex = tempCol(:,1);
+#     def(BLOCKnumb).randColPos = tempCol(:,2);
+#     
+#     # neuen stimInfo generieren der die "richtige" Reihenfolge hat
+#     for TTT=1:length(def(BLOCKnumb).randColTex)
+#       def(BLOCKnumb).RstimInfo(TTT) = def(BLOCKnumb).stimInfo( def(BLOCKnumb).randColTex(TTT,:) );
+#     endfor
+#     def(BLOCKnumb).ratingVanish      = length(def(BLOCKnumb).stimInfo) / 100 * def(BLOCKnumb).ratingCovering ;
+#   endfor
 
 
 ################################################################################
@@ -460,7 +460,7 @@
 
     QUAcue = length(def(BLOCKnumb).cueInfo); # wie viele cues gibst
     QUAstim= length(def(BLOCKnumb).stimInfo); # wie viele stimuli sind in stimInfo
-    
+    QUApos = 2
 #     QUAcue = 5
 #     QUAstim= 2
     
@@ -469,7 +469,7 @@
     
     C= 1:QUAcue; # array erstellen der 
     S= 1:QUAstim; 
-    P= 1:2 # zwei possitionen l u R
+    P= 1:QUApos # zwei possitionen l u R
     
     
     CC = C;
@@ -477,17 +477,17 @@
     PP = P;
     
     # cue stack
-    for i= 1:QUAstim-1
+    for i=1:(QUAstim * QUApos)-1
       CC= [CC C];
     endfor
     
     #stim stack
-    for i= 1:QUAcue-1
+    for i=1:(QUAcue  * QUApos)-1
       SS= [SS S];
     endfor 
     
     # L R stack
-    for i=1:QUAstim * QUAcue -1
+    for i=1:(QUAstim * QUAcue)-1
       PP= [PP P] 
     endfor
     
@@ -495,25 +495,30 @@
     SS=SS'; # row to col
     PP=PP' 
     
-    CS= [sort(CC) SS]
-    for i=1:length(CS)
-    CS(i,1)
-    CS(i,2)
-    endfor
+#     CS= [sort(CC) SS]
+#     for i=1:length(CS)
+#     CS(i,1)
+#     CS(i,2)
+#     endfor
     
     CSP= [sort(CC) SS PP]
     for i=1:length(CSP)
     [CSP(i,1) CSP(i,2)  CSP(i,3)]
     endfor
     
+    [CSPr , nextSeed ] = randomizeCol( CSP , nextSeed , 1 );
     
+#     def(BLOCKnumb).randColCue  = CSPr(:,1);
+#     def(BLOCKnumb).randColStim = CSPr(:,2);
+#     def(BLOCKnumb).randColPos  = CSPr(:,3);
+    def(BLOCKnumb).randMatrix  = CSPr;
     
-    
-    
-    
-    
-    
-    
+    for i=1:length(def(BLOCKnumb).randMatrix)
+      def(BLOCKnumb).EXstimInfo(i) = def(BLOCKnumb).stimInfo( CSPr(i,1) );
+      def(BLOCKnumb).EXstimInfo(i) = def(BLOCKnumb).stimInfo( CSPr(i,2) );
+      def(BLOCKnumb).EXstimInfo(i) = def(BLOCKnumb).stimInfo( CSPr(i,3) );
+    endfor
+  endfor
     
     
 ################################################################################
