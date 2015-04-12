@@ -426,14 +426,35 @@
     def(BNr).cueInfo          = getFilesInFolderInfo ([folder.in def(BNr).cueFolder        ] , def(BNr).cueType        ); #  cue Info holen
     def(BNr).ratingInfo       = getFileInfo          ([folder.in def(BNr).ratingFolder     ] , def(BNr).ratingFile     ); #  rating Infos holen
     def(BNr).instructionInfo  = getFileInfo          ([folder.in def(BNr).instructionFolder] , def(BNr).instructionFile); #  instuctions info holen
-    def(BNr).crossInfo        = getFileInfo  	   ([folder.in def(BNr).crossFolder      ] , def(BNr).crossFile      ); #  cross info
+    def(BNr).crossInfo        = getFileInfo  	     ([folder.in def(BNr).crossFolder      ] , def(BNr).crossFile      ); #  cross info
+    
     # make the textures
     def(BNr).stimInfo          = makeTexFromInfo (windowPtr , def(BNr).stimInfo       );
     def(BNr).cueInfo           = makeTexFromInfo (windowPtr , def(BNr).cueInfo        );
     def(BNr).ratingInfo        = makeTexFromInfo (windowPtr , def(BNr).ratingInfo     );
     def(BNr).instructionInfo   = makeTexFromInfo (windowPtr , def(BNr).instructionInfo);
-    def(BNr).crossInfo 	     = makeTexFromInfo (windowPtr , def(BNr).crossInfo      );
-        
+    def(BNr).crossInfo 	       = makeTexFromInfo (windowPtr , def(BNr).crossInfo      );
+    
+    # get texture sizes 
+    for i=1:length(def(BNr).stimInfo)
+      def(BNr).stimInfo(i).texturerect          = Screen('Rect' , def(BNr).stimInfo(i).texture        );
+    endfor
+    for i=1:length(def(BNr).cueInfo)
+      def(BNr).cueInfo(i).texturerect           = Screen('Rect' , def(BNr).cueInfo(i).texture         );
+    endfor
+    for i=1:length(def(BNr).ratingInfo)
+      def(BNr).ratingInfo(i).texturerect        = Screen('Rect' , def(BNr).ratingInfo(i).texture      );
+    endfor
+    for i=1:length(def(BNr).instructionInfo)
+      def(BNr).instructionInfo(i).texturerect   = Screen('Rect' , def(BNr).instructionInfo(i).texture );
+    endfor
+    for i=1:length(def(BNr).crossInfo)
+      def(BNr).crossInfo(i).texturerect         = Screen('Rect' , def(BNr).crossInfo(i).texture       );
+    endfor
+    
+    def(BNr).ratingVanish      = length(def(BNr).stimInfo) / 100 * def(BNr).ratingCovering ; # ob das rating angezeigt werden soll ? # altlast
+  endfor
+  
 ################################################################################
 # Randomisierung ALT (auskommentieren sobald nicht mehr gebraucht)
 ################################################################################
@@ -467,72 +488,6 @@
 #   endfor
 
 
-################################################################################
-## Randomisierung NEU
-################################################################################
-# jeder Stim muss ja 2 mal präsentiert werden für jeden cue 
-
-    QUAcue = length(def(BNr).cueInfo); # wie viele cues gibst
-    QUAstim= length(def(BNr).stimInfo); # wie viele stimuli sind in stimInfo
-    QUApos = 2
-#     QUAcue = 5
-#     QUAstim= 2
-    
-    # insgesammt wird es am ende cue * 2 * stimulus tails geben
-    # cue * 2 da bei spatial cueing jeder stimulus sowohl rechts als auch links angezeigt wird (detection task)
-    
-    C= 1:QUAcue; # array erstellen der 
-    S= 1:QUAstim; 
-    P= 1:QUApos # zwei possitionen l u R
-    
-    
-    CC = C;
-    SS = S;
-    PP = P;
-    
-    # cue stack
-    for i=1:(QUAstim * QUApos)-1
-      CC= [CC C];
-    endfor
-    
-    #stim stack
-    for i=1:(QUAcue  * QUApos)-1
-      SS= [SS S];
-    endfor 
-    
-    # L R stack
-    for i=1:(QUAstim * QUAcue)-1
-      PP= [PP P] 
-    endfor
-    
-    CC=CC'; # row to col
-    SS=SS'; # row to col
-    PP=PP' 
-    
-#     CS= [sort(CC) SS]
-#     for i=1:length(CS)
-#     CS(i,1)
-#     CS(i,2)
-#     endfor
-    
-    CSP= [sort(CC) SS PP];
-    for i=1:length(CSP)
-    [CSP(i,1) CSP(i,2)  CSP(i,3)];
-    endfor
-    
-    [CSPr , nextSeed ] = randomizeCol( CSP , nextSeed , 1 );
-    
-    def(BNr).randMatrix  = CSPr;
-    def(BNr).randColCue  = CSPr(:,1);
-    def(BNr).randColStim = CSPr(:,2);
-    def(BNr).randColPos  = CSPr(:,3);
-    
-    for i=1:length(def(BNr).randMatrix)
-      def(BNr).EXcueInfo(i)  = def(BNr).cueInfo ( CSPr(i,1) ); # infos zu den ex infos in der richtigen reihenfolge zusammenkopieren
-      def(BNr).EXstimInfo(i) = def(BNr).stimInfo( CSPr(i,2) );
-    endfor
-    def(BNr).ratingVanish      = length(def(BNr).stimInfo) / 100 * def(BNr).ratingCovering ; # ob das rating angezeigt werden soll ?
-  endfor
     
     
 ################################################################################
@@ -557,17 +512,17 @@
 # positionen der bilder werden über den mittelpunkt angegeben 
 
 
-point.mid.x   = rect.root(3)/2;
-point.mid.y   = rect.root(4)/2;
+  point.mid.x   = rect.root(3)/2;
+  point.mid.y   = rect.root(4)/2;
 
-point.left.x  = point.mid.x + onedeg.px*7;
-point.left.y  = point.mid.y # + onedeg.px*7;
+  point.left.x  = point.mid.x + onedeg.px*7;
+  point.left.y  = point.mid.y # + onedeg.px*7;
 
-point.right.x = point.mid.x - onedeg.px*7;
-point.right.y = point.mid.y # - onedeg.px*7;
+  point.right.x = point.mid.x - onedeg.px*7;
+  point.right.y = point.mid.y # - onedeg.px*7;
 
-rect.onedegree = [0 0 onedeg.px onedeg.px]
-rect.cdegree1  = CenterRectOnPoint( rect.onedegree ,point.mid.x , point.mid.y)
+  rect.onedegree = [0 0 onedeg.px onedeg.px]
+  rect.cdegree1  = CenterRectOnPoint( rect.onedegree ,point.mid.x , point.mid.y)
 
 # rect.cross = [0 0 100 100]
 # rect.cue   = [0 0 10 10]
@@ -576,17 +531,12 @@ rect.cdegree1  = CenterRectOnPoint( rect.onedegree ,point.mid.x , point.mid.y)
 # rect.cue   = CenterRectOnPoint(rect.cue  , point.mid.x   , point.mid.y  )
 # rect.stimL = CenterRectOnPoint(rect.stim , point.left.x  , point.left.y )
 # rect.stimR = CenterRectOnPoint(rect.stim , point.right.x , point.right.y)
-  for BNr=1:length(def) #  BNr == blocknunber
-    def(BNr).FINcrossRect      = CenterRectOnPoint( def(BNr).crossRect , point.mid.x   , point.mid.y   )
-    def(BNr).FINcueRect        = CenterRectOnPoint( def(BNr).cueRect   , point.mid.x   , point.mid.y   )
-    def(BNr).FINstimRectleft   = CenterRectOnPoint( def(BNr).stimRect  , point.left.x  , point.left.y  )
-    def(BNr).FINstimRectright  = CenterRectOnPoint( def(BNr).stimRect  , point.right.x , point.right.y )
-  endfor
 
   
-  
-  
 ################################################################################
+## absolute positionen
+################################################################################
+# überbleibsel aus 1 aber ganz praktisch
 ## Positionen für 16 :9 Auflösung (300 px felder für )
 #
 #                3          3          3          3
@@ -689,15 +639,14 @@ rect.cdegree1  = CenterRectOnPoint( rect.onedegree ,point.mid.x , point.mid.y)
   switch debugEnabled
     case true
       infotainment(windowPtr , '1-20°')
-	for i=1:20
-	  drawme= CenterRectOnPoint( rect.onedegree*i ,point.mid.x , point.mid.y);
-	  Screen('FrameOval', windowPtr , [255 20 147] , drawme);
-	endfor
         Screen('FillRect', windowPtr , [255 191 000] , def(1).FINcrossRect      );
         Screen('FillRect', windowPtr , [255 126 000] , def(1).FINstimRectleft   );
         Screen('FillRect', windowPtr , [255 126 000] , def(1).FINstimRectright  );
         Screen('FillRect', windowPtr , [255 191 000] , def(1).FINcueRect        );
-      
+	for i=1:20
+	  drawme= CenterRectOnPoint( rect.onedegree*i ,point.mid.x , point.mid.y);
+	  Screen('FrameOval', windowPtr , [255 20 147] , drawme);
+	endfor
       
       
       Screen('Flip', windowPtr)
@@ -736,15 +685,85 @@ rect.cdegree1  = CenterRectOnPoint( rect.onedegree ,point.mid.x , point.mid.y)
 
   endswitch
 
+################################################################################
+## Randomisierung NEU
+################################################################################
+# jeder Stim muss ja 2 mal präsentiert werden für jeden cue 
+
+  for BNr=1:length(def)
+    QUAcue = length(def(BNr).cueInfo); # wie viele cues gibst
+    QUAstim= length(def(BNr).stimInfo); # wie viele stimuli sind in stimInfo
+    QUApos = 2
+#     QUAcue = 5
+#     QUAstim= 2
+    
+    # insgesammt wird es am ende cue * 2 * stimulus tails geben
+    # cue * 2 da bei spatial cueing jeder stimulus sowohl rechts als auch links angezeigt wird (detection task)
+    
+    C= 1:QUAcue; # array erstellen der 
+    S= 1:QUAstim; 
+    P= 1:QUApos # zwei possitionen l u R
+    
+    CC = C;
+    SS = S;
+    PP = P;
+    
+    # cue stack
+    for i=1:(QUAstim * QUApos)-1
+      CC= [CC C];
+    endfor
+    
+    #stim stack
+    for i=1:(QUAcue  * QUApos)-1
+      SS= [SS S];
+    endfor 
+    
+    # L R stack
+    for i=1:(QUAstim * QUAcue)-1
+      PP= [PP P] 
+    endfor
+    
+    CC=CC'; # row to col
+    SS=SS'; # row to col
+    PP=PP' 
+    
+    CSP= [sort(CC) SS PP];
+    for i=1:length(CSP)
+    [CSP(i,1) CSP(i,2)  CSP(i,3)];
+    endfor
+    
+    [CSPr , nextSeed ] = randomizeCol( CSP , nextSeed , 1 );
+    
+    def(BNr).randMatrix  = CSPr;
+    def(BNr).randColCue  = CSPr(:,1);
+    def(BNr).randColStim = CSPr(:,2);
+    def(BNr).randColPos  = CSPr(:,3);
+    
+    for i=1:length(def(BNr).randMatrix)
+      def(BNr).EXcueInfo(i)  = def(BNr).cueInfo ( CSPr(i,1) ); # infos zu den ex infos in der richtigen reihenfolge zusammenkopieren
+      def(BNr).EXstimInfo(i) = def(BNr).stimInfo( CSPr(i,2) );
+    endfor
+    
+  endfor
 
 ################################################################################
-## berechnen der skalierten Bilder + Lokalisation
+## berechnen der skalierten Bilder + Lokalisation NEU
+################################################################################
 
-  for i=1:BLOCKS # für alle definierten Blöcke
+  # Finale positionen feststellen
+  for BNr=1:length(def) #  BNr == blocknunber
+    def(BNr).FINcrossRect      = CenterRectOnPoint( def(BNr).crossRect , point.mid.x   , point.mid.y   )
+    def(BNr).FINcueRect        = CenterRectOnPoint( def(BNr).cueRect   , point.mid.x   , point.mid.y   )
+    def(BNr).FINstimRectleft   = CenterRectOnPoint( def(BNr).stimRect  , point.left.x  , point.left.y  )
+    def(BNr).FINstimRectright  = CenterRectOnPoint( def(BNr).stimRect  , point.right.x , point.right.y )
+  endfor
+  
+  
+################################################################################
+## berechnen der skalierten Bilder + Lokalisation ALT 
 
-    m = length(def(i).EXstimInfo);
-    for j = 1:m # für alle vorhandenen Elemente im EXstimInfo
-
+  for i=1:length(def) # für alle definierten Blöcke
+    for j = 1:length(def(i).EXstimInfo) # für alle vorhandenen Elemente im EXstimInfo
       #  herrausfinden wie groß die textur ist - anhand des tex pointers
       texRect      = Screen('Rect' , def(i).EXstimInfo(j).texture );
       # verkleinern erstellen eines recht in das die textur gemalt wird ohne sich zu verzerren
@@ -752,16 +771,15 @@ rect.cdegree1  = CenterRectOnPoint( rect.onedegree ,point.mid.x , point.mid.y)
       # abspeichern
       def(i).finRect(j,1) = {finRect};
     endfor
-
   endfor
 
-  for i=1:BLOCKS
+  for i=1:length(def)
     tempTex  = Screen('Rect' , def(i).ratingInfo.texture );
     finRectRating = putRectInRect (rect.rating , tempTex);
     def(i).finRectRating = {finRectRating};
   endfor
 
-  for i=1:BLOCKS
+  for i=1:length(def)
     tempTex  = Screen('Rect' , def(i).instructionInfo.texture );
     finRectInstructions = putRectInRect (rect.instructions , tempTex);
     def(i).finRectInstructions = {finRectInstructions};
