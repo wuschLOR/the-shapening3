@@ -267,20 +267,20 @@
 #  [windowPtr,rect.root] = Screen('OpenWindow', screenID );
 
 #  Normal sreens
-#   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [0 0 1279  800]);  #  16:10 wu Laptop
-#   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [0 0 1679 1050]);  #  16:10 wu pc
-#   [windowPtr,rect.root] = uuScreen('OpenWindow', screenID ,[], [0 0 1919 1080]);  #  16:9  testrechner
+#   WINDOWSIZE = [0 0 1279  800];  #  16:10 wu Laptop
+   WINDOWSIZE = [0 0 1679 1050];  #  16:10 wu pc
+#   WINDOWSIZE = [0 0 1919 1080];  #  16:9  testrechner
 
 #  Windowed
-#   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 620 620]); # 1:1
-#   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 600 375]); # 16:10
-#   [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 600 337]); # 16:9
+#   WINDOWSIZE = [20 20 620 620]; # 1:1
+#   WINDOWSIZE = [20 20 600 375]; # 16:10
+#   WINDOWSIZE = [20 20 600 337]; # 16:9
 
   switch debugEnabled
     case false
       [windowPtr,rect.root] = Screen('OpenWindow', screenID )
     case true
-      [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], [20 20 600 337]) # 16:9
+      [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], WINDOWSIZE) # 16:9
   endswitch
 
   HideCursor(screenID)
@@ -406,33 +406,33 @@
 
 
 ##  Settings verarbeiten und Bildmaterial einlesen
-  for BLOCKnumb=1:length(def) #  BLOCKnumb == blocknunber
+  for BNr=1:length(def) #  BNr == blocknunber
     # convert sizes
-    def(BLOCKnumb).crossSizepx  = def(BLOCKnumb).crossSizemm / onePXinMM.mean;
-    def(BLOCKnumb).cueSizepx    = def(BLOCKnumb).cueSizemm   / onePXinMM.mean;
-    def(BLOCKnumb).stimSizepx   = def(BLOCKnumb).stimSizemm  / onePXinMM.mean;
-    def(BLOCKnumb).crossRect    = [ 0 0 crossSizepx  crossSizepx ]
-    def(BLOCKnumb).cueRect      = [ 0 0 cueSizepx    cueSizepx   ]
-    def(BLOCKnumb).stimRect     = [ 0 0 stimSizepx   stimSizepx  ]
+    def(BNr).crossSizepx  = def(BNr).crossSizemm / onePXinMM.mean;
+    def(BNr).cueSizepx    = def(BNr).cueSizemm   / onePXinMM.mean;
+    def(BNr).stimSizepx   = def(BNr).stimSizemm  / onePXinMM.mean;
+    def(BNr).crossRect    = [ 0 0 def(BNr).crossSizepx  def(BNr).crossSizepx ]
+    def(BNr).cueRect      = [ 0 0 def(BNr).cueSizepx    def(BNr).cueSizepx   ]
+    def(BNr).stimRect     = [ 0 0 def(BNr).stimSizepx   def(BNr).stimSizepx  ]
     # convert times to real ms
-    def(BLOCKnumb).zeitAfterpause   = def(BLOCKnumb).zeitAfterpause    /1000;
-    def(BLOCKnumb).zeitBetweenpause = def(BLOCKnumb).zeitBetweenpause  /1000;
-    def(BLOCKnumb).zeitFixcross     = def(BLOCKnumb).zeitFixcross      /1000;
-    def(BLOCKnumb).zeitPrepause     = def(BLOCKnumb).zeitPrepause      /1000;
-    def(BLOCKnumb).zeitRating       = def(BLOCKnumb).zeitRating        /1000;
-    def(BLOCKnumb).zeitStimuli      = def(BLOCKnumb).zeitStimuli       /1000;
+    def(BNr).zeitAfterpause   = def(BNr).zeitAfterpause    /1000;
+    def(BNr).zeitBetweenpause = def(BNr).zeitBetweenpause  /1000;
+    def(BNr).zeitFixcross     = def(BNr).zeitFixcross      /1000;
+    def(BNr).zeitPrepause     = def(BNr).zeitPrepause      /1000;
+    def(BNr).zeitRating       = def(BNr).zeitRating        /1000;
+    def(BNr).zeitStimuli      = def(BNr).zeitStimuli       /1000;
     # loding Info about pictures
-    def(BLOCKnumb).stimInfo         = getFilesInFolderInfo ([folder.in def(BLOCKnumb).stimFolder       ] , def(BLOCKnumb).stimType       ); #  stimulus Info holen
-    def(BLOCKnumb).cueInfo          = getFilesInFolderInfo ([folder.in def(BLOCKnumb).cueFolder        ] , def(BLOCKnumb).cueType        ); #  cue Info holen
-    def(BLOCKnumb).ratingInfo       = getFileInfo          ([folder.in def(BLOCKnumb).ratingFolder     ] , def(BLOCKnumb).ratingFile     ); #  rating Infos holen
-    def(BLOCKnumb).instructionInfo  = getFileInfo          ([folder.in def(BLOCKnumb).instructionFolder] , def(BLOCKnumb).instructionFile); #  instuctions info holen
-    def(BLOCKnumb).crossInfo        = getFileInfo  	   ([folder.in def(BLOCKnumb).crossFolder      ] , def(BLOCKnumb).crossFile      ); #  cross info
+    def(BNr).stimInfo         = getFilesInFolderInfo ([folder.in def(BNr).stimFolder       ] , def(BNr).stimType       ); #  stimulus Info holen
+    def(BNr).cueInfo          = getFilesInFolderInfo ([folder.in def(BNr).cueFolder        ] , def(BNr).cueType        ); #  cue Info holen
+    def(BNr).ratingInfo       = getFileInfo          ([folder.in def(BNr).ratingFolder     ] , def(BNr).ratingFile     ); #  rating Infos holen
+    def(BNr).instructionInfo  = getFileInfo          ([folder.in def(BNr).instructionFolder] , def(BNr).instructionFile); #  instuctions info holen
+    def(BNr).crossInfo        = getFileInfo  	   ([folder.in def(BNr).crossFolder      ] , def(BNr).crossFile      ); #  cross info
     # make the textures
-    def(BLOCKnumb).stimInfo          = makeTexFromInfo (windowPtr , def(BLOCKnumb).stimInfo       );
-    def(BLOCKnumb).cueInfo           = makeTexFromInfo (windowPtr , def(BLOCKnumb).cueInfo        );
-    def(BLOCKnumb).ratingInfo        = makeTexFromInfo (windowPtr , def(BLOCKnumb).ratingInfo     );
-    def(BLOCKnumb).instructionInfo   = makeTexFromInfo (windowPtr , def(BLOCKnumb).instructionInfo);
-    def(BLOCKnumb).crossInfo 	     = makeTexFromInfo (windowPtr , def(BLOCKnumb).crossInfo      );
+    def(BNr).stimInfo          = makeTexFromInfo (windowPtr , def(BNr).stimInfo       );
+    def(BNr).cueInfo           = makeTexFromInfo (windowPtr , def(BNr).cueInfo        );
+    def(BNr).ratingInfo        = makeTexFromInfo (windowPtr , def(BNr).ratingInfo     );
+    def(BNr).instructionInfo   = makeTexFromInfo (windowPtr , def(BNr).instructionInfo);
+    def(BNr).crossInfo 	     = makeTexFromInfo (windowPtr , def(BNr).crossInfo      );
         
 ################################################################################
 # Randomisierung ALT (auskommentieren sobald nicht mehr gebraucht)
@@ -440,7 +440,7 @@
 
 # version a und b generieren
 #initialisiert eine Spalte von nullen die normal auf 1 gesetzt wird und in der scatter variante je nach den angegeben alternativpositionen hochaddiert bis alle einen wert von 2-5 haben die dann später durch den positonArray dekodiert werden
-#     STIMQA= length(def(BLOCKnumb).stimInfo); # wie viele Spalten hat stimInfo (so viele wie es stimulus im ordner gibt)
+#     STIMQA= length(def(BNr).stimInfo); # wie viele Spalten hat stimInfo (so viele wie es stimulus im ordner gibt)
 #     helpNORMAL  =  zeros (STIMQA , 1)+1;
 #     helpSCATTER =  zeros (STIMQA , 1)+2;
 # 
@@ -456,14 +456,14 @@
 # 
 #     hartCol = [textureCol positionCol];
 #     [tempCol , nextSeed ] = randomizeCol( hartCol , nextSeed , 1 );
-#     def(BLOCKnumb).randColTex = tempCol(:,1);
-#     def(BLOCKnumb).randColPos = tempCol(:,2);
+#     def(BNr).randColTex = tempCol(:,1);
+#     def(BNr).randColPos = tempCol(:,2);
 #     
 #     # neuen stimInfo generieren der die "richtige" Reihenfolge hat
-#     for TTT=1:length(def(BLOCKnumb).randColTex)
-#       def(BLOCKnumb).EXstimInfo(TTT) = def(BLOCKnumb).stimInfo( def(BLOCKnumb).randColTex(TTT,:) );
+#     for TTT=1:length(def(BNr).randColTex)
+#       def(BNr).EXstimInfo(TTT) = def(BNr).stimInfo( def(BNr).randColTex(TTT,:) );
 #     endfor
-#     def(BLOCKnumb).ratingVanish      = length(def(BLOCKnumb).stimInfo) / 100 * def(BLOCKnumb).ratingCovering ;
+#     def(BNr).ratingVanish      = length(def(BNr).stimInfo) / 100 * def(BNr).ratingCovering ;
 #   endfor
 
 
@@ -472,8 +472,8 @@
 ################################################################################
 # jeder Stim muss ja 2 mal präsentiert werden für jeden cue 
 
-    QUAcue = length(def(BLOCKnumb).cueInfo); # wie viele cues gibst
-    QUAstim= length(def(BLOCKnumb).stimInfo); # wie viele stimuli sind in stimInfo
+    QUAcue = length(def(BNr).cueInfo); # wie viele cues gibst
+    QUAstim= length(def(BNr).stimInfo); # wie viele stimuli sind in stimInfo
     QUApos = 2
 #     QUAcue = 5
 #     QUAstim= 2
@@ -522,16 +522,16 @@
     
     [CSPr , nextSeed ] = randomizeCol( CSP , nextSeed , 1 );
     
-    def(BLOCKnumb).randMatrix  = CSPr;
-    def(BLOCKnumb).randColCue  = CSPr(:,1);
-    def(BLOCKnumb).randColStim = CSPr(:,2);
-    def(BLOCKnumb).randColPos  = CSPr(:,3);
+    def(BNr).randMatrix  = CSPr;
+    def(BNr).randColCue  = CSPr(:,1);
+    def(BNr).randColStim = CSPr(:,2);
+    def(BNr).randColPos  = CSPr(:,3);
     
-    for i=1:length(def(BLOCKnumb).randMatrix)
-      def(BLOCKnumb).EXcueInfo(i)  = def(BLOCKnumb).cueInfo ( CSPr(i,1) ); # infos zu den ex infos in der richtigen reihenfolge zusammenkopieren
-      def(BLOCKnumb).EXstimInfo(i) = def(BLOCKnumb).stimInfo( CSPr(i,2) );
+    for i=1:length(def(BNr).randMatrix)
+      def(BNr).EXcueInfo(i)  = def(BNr).cueInfo ( CSPr(i,1) ); # infos zu den ex infos in der richtigen reihenfolge zusammenkopieren
+      def(BNr).EXstimInfo(i) = def(BNr).stimInfo( CSPr(i,2) );
     endfor
-    def(BLOCKnumb).ratingVanish      = length(def(BLOCKnumb).stimInfo) / 100 * def(BLOCKnumb).ratingCovering ; # ob das rating angezeigt werden soll ?
+    def(BNr).ratingVanish      = length(def(BNr).stimInfo) / 100 * def(BNr).ratingCovering ; # ob das rating angezeigt werden soll ?
   endfor
     
     
@@ -561,22 +561,29 @@ point.mid.x   = rect.root(3)/2;
 point.mid.y   = rect.root(4)/2;
 
 point.left.x  = point.mid.x + onedeg.px*7;
-point.left.y  = point.mid.y + onedeg.px*7;
+point.left.y  = point.mid.y # + onedeg.px*7;
 
 point.right.x = point.mid.x - onedeg.px*7;
-point.right.y = point.mid.y - onedeg.px*7;
+point.right.y = point.mid.y # - onedeg.px*7;
 
 rect.onedegree = [0 0 onedeg.px onedeg.px]
 rect.cdegree1  = CenterRectOnPoint( rect.onedegree ,point.mid.x , point.mid.y)
 
-rect.cross = [0 0 100 100]
-rect.cue   = [0 0 10 10]
-rect.stim  = [0 0 10 10]
+# rect.cross = [0 0 100 100]
+# rect.cue   = [0 0 10 10]
+# rect.stim  = [0 0 10 10]
+# 
+# rect.cue   = CenterRectOnPoint(rect.cue  , point.mid.x   , point.mid.y  )
+# rect.stimL = CenterRectOnPoint(rect.stim , point.left.x  , point.left.y )
+# rect.stimR = CenterRectOnPoint(rect.stim , point.right.x , point.right.y)
+  for BNr=1:length(def) #  BNr == blocknunber
+    def(BNr).FINcrossRect      = CenterRectOnPoint( def(BNr).crossRect , point.mid.x   , point.mid.y   )
+    def(BNr).FINcueRect        = CenterRectOnPoint( def(BNr).cueRect   , point.mid.x   , point.mid.y   )
+    def(BNr).FINstimRectleft   = CenterRectOnPoint( def(BNr).stimRect  , point.left.x  , point.left.y  )
+    def(BNr).FINstimRectright  = CenterRectOnPoint( def(BNr).stimRect  , point.right.x , point.right.y )
+  endfor
 
-rect.cue   = CenterRectOnPoint(rect.cue  , point.mid.x   , point.mid.y  )
-rect.stimL = CenterRectOnPoint(rect.stim , point.left.x  , point.left.y )
-rect.stimR = CenterRectOnPoint(rect.stim , point.right.x , point.right.y)
-
+  
   
   
 ################################################################################
@@ -656,22 +663,22 @@ rect.stimR = CenterRectOnPoint(rect.stim , point.right.x , point.right.y)
 
   y.center           = rect.root(4) / 2;
 
-  #                 x                y            x                y
-  rect.L1 = [ x.imgLeftStart  y.imgTopStart  x.imgLeftEnd  y.imgTopEnd ];
-  rect.L2 = [ x.imgLeftStart  y.imgMidStart  x.imgLeftEnd  y.imgMidEnd ];
-  rect.L3 = [ x.imgLeftStart  y.imgBotStart  x.imgLeftEnd  y.imgBotEnd ];
-  rect.M1 = [ x.imgMidStart   y.imgTopStart  x.imgMidEnd   y.imgTopEnd ];
-  rect.M2 = [ x.imgMidStart   y.imgMidStart  x.imgMidEnd   y.imgMidEnd ];
-  rect.M3 = [ x.imgMidStart   y.imgBotStart  x.imgMidEnd   y.imgBotEnd ];
-  rect.R1 = [ x.imgRightStart y.imgTopStart  x.imgRightEnd y.imgTopEnd ];
-  rect.R2 = [ x.imgRightStart y.imgMidStart  x.imgRightEnd y.imgMidEnd ];
-  rect.R3 = [ x.imgRightStart y.imgBotStart  x.imgRightEnd y.imgBotEnd ];
-
-  positonArray(1) = {rect.M2};
-  positonArray(2) = {rect.L1};
-  positonArray(3) = {rect.L3};
-  positonArray(4) = {rect.R1};
-  positonArray(5) = {rect.R3};
+#   #                 x                y            x                y
+#   rect.L1 = [ x.imgLeftStart  y.imgTopStart  x.imgLeftEnd  y.imgTopEnd ];
+#   rect.L2 = [ x.imgLeftStart  y.imgMidStart  x.imgLeftEnd  y.imgMidEnd ];
+#   rect.L3 = [ x.imgLeftStart  y.imgBotStart  x.imgLeftEnd  y.imgBotEnd ];
+#   rect.M1 = [ x.imgMidStart   y.imgTopStart  x.imgMidEnd   y.imgTopEnd ];
+#   rect.M2 = [ x.imgMidStart   y.imgMidStart  x.imgMidEnd   y.imgMidEnd ];
+#   rect.M3 = [ x.imgMidStart   y.imgBotStart  x.imgMidEnd   y.imgBotEnd ];
+#   rect.R1 = [ x.imgRightStart y.imgTopStart  x.imgRightEnd y.imgTopEnd ];
+#   rect.R2 = [ x.imgRightStart y.imgMidStart  x.imgRightEnd y.imgMidEnd ];
+#   rect.R3 = [ x.imgRightStart y.imgBotStart  x.imgRightEnd y.imgBotEnd ];
+# 
+#   positonArray(1) = {rect.M2};
+#   positonArray(2) = {rect.L1};
+#   positonArray(3) = {rect.L3};
+#   positonArray(4) = {rect.R1};
+#   positonArray(5) = {rect.R3};
 
   rect.instructions =  [ x.imgLeftStart  y.imgTopStart  x.imgRightEnd y.imgMidEnd ];
   rect.rating       =  [ x.imgLeftStart  y.imgBotStart  x.imgRightEnd y.imgBotEnd ];
@@ -683,28 +690,35 @@ rect.stimR = CenterRectOnPoint(rect.stim , point.right.x , point.right.y)
     case true
       infotainment(windowPtr , '1-20°')
 	for i=1:20
-	  drawme= CenterRectOnPoint( rect.onedegree*i ,point.mid.x , point.mid.y)
+	  drawme= CenterRectOnPoint( rect.onedegree*i ,point.mid.x , point.mid.y);
 	  Screen('FrameOval', windowPtr , [255 20 147] , drawme);
 	endfor
+        Screen('FillRect', windowPtr , [255 191 000] , def(1).FINcrossRect      );
+        Screen('FillRect', windowPtr , [255 126 000] , def(1).FINstimRectleft   );
+        Screen('FillRect', windowPtr , [255 126 000] , def(1).FINstimRectright  );
+        Screen('FillRect', windowPtr , [255 191 000] , def(1).FINcueRect        );
+      
+      
       
       Screen('Flip', windowPtr)
         KbPressWait;
       Screen('Flip', windowPtr)
 
-      infotainment(windowPtr , 'testscreen upcomming')
-        Screen('FillRect', windowPtr , [255 20 147] , rect.L1  );
-        Screen('FillRect', windowPtr , [255 20 147] , rect.L2  );
-        Screen('FillRect', windowPtr , [255 20 147] , rect.L3  );
-        Screen('FillRect', windowPtr , [255 20 147] , rect.M1  );
-        Screen('FillRect', windowPtr , [255 20 147] , rect.M2  );
-        Screen('FillRect', windowPtr , [255 20 147] , rect.M3  );
-        Screen('FillRect', windowPtr , [255 20 147] , rect.R1  );
-        Screen('FillRect', windowPtr , [255 20 147] , rect.R2  );
-        Screen('FillRect', windowPtr , [255 20 147] , rect.R3  );
+#       infotainment(windowPtr , 'testscreen upcomming')
+#         Screen('FillRect', windowPtr , [255 20 147] , rect.L1  );
+#         Screen('FillRect', windowPtr , [255 20 147] , rect.L2  );
+#         Screen('FillRect', windowPtr , [255 20 147] , rect.L3  );
+#         Screen('FillRect', windowPtr , [255 20 147] , rect.M1  );
+#         Screen('FillRect', windowPtr , [255 20 147] , rect.M2  );
+#         Screen('FillRect', windowPtr , [255 20 147] , rect.M3  );
+#         Screen('FillRect', windowPtr , [255 20 147] , rect.R1  );
+#         Screen('FillRect', windowPtr , [255 20 147] , rect.R2  );
+#         Screen('FillRect', windowPtr , [255 20 147] , rect.R3  );
 
-      Screen('Flip', windowPtr)
-        KbPressWait;
-      Screen('Flip', windowPtr)
+
+#       Screen('Flip', windowPtr)
+#         KbPressWait;
+#       Screen('Flip', windowPtr)
 
       infotainment(windowPtr , 'rating testscreen')
         Screen('FillRect', windowPtr , [255 20 147] , rect.rating  );
@@ -726,31 +740,31 @@ rect.stimR = CenterRectOnPoint(rect.stim , point.right.x , point.right.y)
 ################################################################################
 ## berechnen der skalierten Bilder + Lokalisation
 
-  for j=1:BLOCKS # für alle definierten Blöcke
+  for i=1:BLOCKS # für alle definierten Blöcke
 
-    m = length(def(j).EXstimInfo);
-    for i = 1:m # für alle vorhandenen Elemente im EXstimInfo
+    m = length(def(i).EXstimInfo);
+    for j = 1:m # für alle vorhandenen Elemente im EXstimInfo
 
       #  herrausfinden wie groß die textur ist - anhand des tex pointers
-      texRect      = Screen('Rect' , def(j).EXstimInfo(i).texture );
+      texRect      = Screen('Rect' , def(i).EXstimInfo(j).texture );
       # verkleinern erstellen eines recht in das die textur gemalt wird ohne sich zu verzerren
-      finRect  = putRectInRect( positonArray( def(j).randColPos(i) ){}  , texRect  );
+      finRect  = putRectInRect( positonArray( def(i).randColPos(j) ){}  , texRect  );
       # abspeichern
-      def(j).finRect(i,1) = {finRect};
+      def(i).finRect(j,1) = {finRect};
     endfor
 
   endfor
 
-  for j=1:BLOCKS
-    tempTex  = Screen('Rect' , def(j).ratingInfo.texture );
+  for i=1:BLOCKS
+    tempTex  = Screen('Rect' , def(i).ratingInfo.texture );
     finRectRating = putRectInRect (rect.rating , tempTex);
-    def(j).finRectRating = {finRectRating};
+    def(i).finRectRating = {finRectRating};
   endfor
 
-  for j=1:BLOCKS
-    tempTex  = Screen('Rect' , def(j).instructionInfo.texture );
+  for i=1:BLOCKS
+    tempTex  = Screen('Rect' , def(i).instructionInfo.texture );
     finRectInstructions = putRectInRect (rect.instructions , tempTex);
-    def(j).finRectInstructions = {finRectInstructions};
+    def(i).finRectInstructions = {finRectInstructions};
   endfor
   [empty, empty , startFLIP ] =Screen('Flip', windowPtr);
 
