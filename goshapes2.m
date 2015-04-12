@@ -634,56 +634,6 @@
   rect.rating       =  [ x.imgLeftStart  y.imgBotStart  x.imgRightEnd y.imgBotEnd ];
   rect.cross        =  [ x.imgMidStart   y.imgMidStart  x.imgMidEnd   y.imgMidEnd ];
 
-################################################################################
-## render testscreens
-  switch debugEnabled
-    case true
-      infotainment(windowPtr , '1-20°')
-        Screen('FillRect', windowPtr , [255 191 000] , def(1).FINcrossRect      );
-        Screen('FillRect', windowPtr , [255 126 000] , def(1).FINstimRectleft   );
-        Screen('FillRect', windowPtr , [255 126 000] , def(1).FINstimRectright  );
-        Screen('FillRect', windowPtr , [255 191 000] , def(1).FINcueRect        );
-	for i=1:20
-	  drawme= CenterRectOnPoint( rect.onedegree*i ,point.mid.x , point.mid.y);
-	  Screen('FrameOval', windowPtr , [255 20 147] , drawme);
-	endfor
-      
-      
-      Screen('Flip', windowPtr)
-        KbPressWait;
-      Screen('Flip', windowPtr)
-
-#       infotainment(windowPtr , 'testscreen upcomming')
-#         Screen('FillRect', windowPtr , [255 20 147] , rect.L1  );
-#         Screen('FillRect', windowPtr , [255 20 147] , rect.L2  );
-#         Screen('FillRect', windowPtr , [255 20 147] , rect.L3  );
-#         Screen('FillRect', windowPtr , [255 20 147] , rect.M1  );
-#         Screen('FillRect', windowPtr , [255 20 147] , rect.M2  );
-#         Screen('FillRect', windowPtr , [255 20 147] , rect.M3  );
-#         Screen('FillRect', windowPtr , [255 20 147] , rect.R1  );
-#         Screen('FillRect', windowPtr , [255 20 147] , rect.R2  );
-#         Screen('FillRect', windowPtr , [255 20 147] , rect.R3  );
-
-
-#       Screen('Flip', windowPtr)
-#         KbPressWait;
-#       Screen('Flip', windowPtr)
-
-      infotainment(windowPtr , 'rating testscreen')
-        Screen('FillRect', windowPtr , [255 20 147] , rect.rating  );
-
-      Screen('Flip', windowPtr)
-        KbPressWait;
-      Screen('Flip', windowPtr)
-
-      infotainment(windowPtr , 'instructions testscreen')
-        Screen('FillRect', windowPtr , [255 20 147] , rect.instructions  );
-
-      Screen('Flip', windowPtr)
-        KbPressWait;
-      Screen('Flip', windowPtr)
-
-  endswitch
 
 ################################################################################
 ## Randomisierung NEU
@@ -751,57 +701,135 @@
 ################################################################################
 
   # Finale positionen feststellen
-  for BNr=1:length(def) #  BNr == blocknunber
-    def(BNr).FINcrossRect      = CenterRectOnPoint( def(BNr).crossRect , point.mid.x   , point.mid.y   )
-    def(BNr).FINcueRect        = CenterRectOnPoint( def(BNr).cueRect   , point.mid.x   , point.mid.y   )
-    def(BNr).FINstimRectleft   = CenterRectOnPoint( def(BNr).stimRect  , point.left.x  , point.left.y  )
-    def(BNr).FINstimRectright  = CenterRectOnPoint( def(BNr).stimRect  , point.right.x , point.right.y )
+  for i=1:length(def) #  i == blocknunber
+    def(i).FINcrossRect      = CenterRectOnPoint( def(i).crossRect , point.mid.x   , point.mid.y   )
+    def(i).FINcueRect        = CenterRectOnPoint( def(i).cueRect   , point.mid.x   , point.mid.y   )
+    def(i).FINstimRectleft   = CenterRectOnPoint( def(i).stimRect  , point.left.x  , point.left.y  )
+    def(i).FINstimRectright  = CenterRectOnPoint( def(i).stimRect  , point.right.x , point.right.y )
   endfor
   
+  #skalierung für alles singuläre
+  for i=1:length(def)
+    def(i).ratingInfo.finrect       = putRectInRect (rect.rating       , def(i).ratingInfo.texturerect);
+    def(i).instructionInfo.finrect  = putRectInRect (rect.instructions , def(i).instructionInfo.texturerect);
+    def(i).crossInfo.finrect        = putRectInRect (rect.cross        , def(i).crossInfo.texturerect);
+  endfor
   
-################################################################################
-## berechnen der skalierten Bilder + Lokalisation ALT 
-
-  for i=1:length(def) # für alle definierten Blöcke
-    for j = 1:length(def(i).EXstimInfo) # für alle vorhandenen Elemente im EXstimInfo
-      #  herrausfinden wie groß die textur ist - anhand des tex pointers
-      texRect      = Screen('Rect' , def(i).EXstimInfo(j).texture );
-      # verkleinern erstellen eines recht in das die textur gemalt wird ohne sich zu verzerren
-      finRect  = putRectInRect( positonArray( def(i).randColPos(j) ){}  , texRect  );
-      # abspeichern
-      def(i).finRect(j,1) = {finRect};
+  #skalierung für alles multible
+  for i=1:length(def)
+  
+    for j= 1:length(def(i).EXstimInfo)
+    
+      switch def(i).randColPos(j)
+        case 1
+          def(i).EXstimInfo(j).finrect = putRectInRect (def(i).FINstimRectleft  , def(i).EXstimInfo(j).texturerect);
+        case 2
+          def(i).EXstimInfo(j).finrect = putRectInRect (def(i).FINstimRectright , def(i).EXstimInfo(j).texturerect);
+      endswitch
+      
     endfor
+    
+    for j= 1:length(def(i).EXcueInfo)
+      def(i).EXcueInfo(j).finrect       = putRectInRect (def(i).FINcueRect , def(i).EXcueInfo(j).texturerect);
+    endfor
+    
   endfor
+  
+# ################################################################################
+# ## berechnen der skalierten Bilder + Lokalisation ALT 
+# 
+#   for i=1:length(def) # für alle definierten Blöcke
+#     for j = 1:length(def(i).EXstimInfo) # für alle vorhandenen Elemente im EXstimInfo
+#       #  herrausfinden wie groß die textur ist - anhand des tex pointers
+#       texRect      = Screen('Rect' , def(i).EXstimInfo(j).texture );
+#       # verkleinern erstellen eines recht in das die textur gemalt wird ohne sich zu verzerren
+#       finRect  = putRectInRect( positonArray( def(i).randColPos(j) ){}  , texRect  );
+#       # abspeichern
+#       def(i).finRect(j,1) = {finRect};
+#     endfor
+#   endfor
+# 
+#   for i=1:length(def)
+#     tempTex  = Screen('Rect' , def(i).ratingInfo.texture );
+#     ratingInfo.finrect = putRectInRect (rect.rating , tempTex);
+#     def(i).ratingInfo.finrect = {ratingInfo.finrect};
+#   endfor
+# 
+#   for i=1:length(def)
+#     tempTex  = Screen('Rect' , def(i).instructionInfo.texture );
+#     instructionInfo.finrect = putRectInRect (rect.instructions , tempTex);
+#     def(i).instructionInfo.finrect = {instructionInfo.finrect};
+#   endfor
+#   [empty, empty , startFLIP ] =Screen('Flip', windowPtr);
 
-  for i=1:length(def)
-    tempTex  = Screen('Rect' , def(i).ratingInfo.texture );
-    finRectRating = putRectInRect (rect.rating , tempTex);
-    def(i).finRectRating = {finRectRating};
-  endfor
+################################################################################
+## render testscreens
+  switch debugEnabled
+    case true
+      infotainment(windowPtr , '1-20°')
+        Screen('FillRect', windowPtr , [255 191 000] , def(1).FINcrossRect      );
+        Screen('FillRect', windowPtr , [255 126 000] , def(1).FINstimRectleft   );
+        Screen('FillRect', windowPtr , [255 126 000] , def(1).FINstimRectright  );
+        Screen('FillRect', windowPtr , [255 191 000] , def(1).FINcueRect        );
+	for i=1:20
+	  drawme= CenterRectOnPoint( rect.onedegree*i ,point.mid.x , point.mid.y);
+	  Screen('FrameOval', windowPtr , [255 20 147] , drawme);
+	endfor
+      
+      
+      Screen('Flip', windowPtr)
+        KbPressWait;
+      Screen('Flip', windowPtr)
 
-  for i=1:length(def)
-    tempTex  = Screen('Rect' , def(i).instructionInfo.texture );
-    finRectInstructions = putRectInRect (rect.instructions , tempTex);
-    def(i).finRectInstructions = {finRectInstructions};
-  endfor
-  [empty, empty , startFLIP ] =Screen('Flip', windowPtr);
+#       infotainment(windowPtr , 'testscreen upcomming')
+#         Screen('FillRect', windowPtr , [255 20 147] , rect.L1  );
+#         Screen('FillRect', windowPtr , [255 20 147] , rect.L2  );
+#         Screen('FillRect', windowPtr , [255 20 147] , rect.L3  );
+#         Screen('FillRect', windowPtr , [255 20 147] , rect.M1  );
+#         Screen('FillRect', windowPtr , [255 20 147] , rect.M2  );
+#         Screen('FillRect', windowPtr , [255 20 147] , rect.M3  );
+#         Screen('FillRect', windowPtr , [255 20 147] , rect.R1  );
+#         Screen('FillRect', windowPtr , [255 20 147] , rect.R2  );
+#         Screen('FillRect', windowPtr , [255 20 147] , rect.R3  );
 
+
+#       Screen('Flip', windowPtr)
+#         KbPressWait;
+#       Screen('Flip', windowPtr)
+
+      infotainment(windowPtr , 'rating testscreen')
+        Screen('FillRect', windowPtr , [255 20 147] , rect.rating  );
+
+      Screen('Flip', windowPtr)
+        KbPressWait;
+      Screen('Flip', windowPtr)
+
+      infotainment(windowPtr , 'instructions testscreen')
+        Screen('FillRect', windowPtr , [255 20 147] , rect.instructions  );
+
+      Screen('Flip', windowPtr)
+        KbPressWait;
+      Screen('Flip', windowPtr)
+
+  endswitch
+  
 ################################################################################
 # MAINPART: THE MIGHTY EXPERIMENT
 ################################################################################
-
+  [empty, empty , startFLIP ] =Screen('Flip', windowPtr); # get thei first flip
+  
   superIndex = 0; # index über alle Durchläufe hinweg
   
   for WHATBLOCK=1:BLOCKS  # für alle definierten Blöcke
     instruTime= GetSecs+3600; # eine stunde
-      Screen('DrawTexture' , windowPtr , def(WHATBLOCK).instructionInfo.texture , [] , def(WHATBLOCK).finRectInstructions{});
-      Screen('DrawTexture' , windowPtr , def(WHATBLOCK).ratingInfo.texture      , [] , def(WHATBLOCK).finRectRating{}      );
+      Screen('DrawTexture' , windowPtr , def(WHATBLOCK).instructionInfo.texture , [] , def(WHATBLOCK).instructionInfo.finrect);
+      Screen('DrawTexture' , windowPtr , def(WHATBLOCK).ratingInfo.texture      , [] , def(WHATBLOCK).ratingInfo.finrect      );
       Screen('Flip', windowPtr);
       WaitSecs(10)
     for i=1:2
       Screen('DrawText'    , windowPtr , int2str(i) , 50 , 50)
-      Screen('DrawTexture' , windowPtr , def(WHATBLOCK).instructionInfo.texture , [] , def(WHATBLOCK).finRectInstructions{});
-      Screen('DrawTexture' , windowPtr , def(WHATBLOCK).ratingInfo.texture      , [] , def(WHATBLOCK).finRectRating{}      );
+      Screen('DrawTexture' , windowPtr , def(WHATBLOCK).instructionInfo.texture , [] , def(WHATBLOCK).instructionInfo.finrect);
+      Screen('DrawTexture' , windowPtr , def(WHATBLOCK).ratingInfo.texture      , [] , def(WHATBLOCK).ratingInfo.finrect      );
       Screen('Flip', windowPtr);
       
       switch buttonBoxON
@@ -888,7 +916,7 @@
       
       # STIMULUS
       if def(WHATBLOCK).zeitStimuli > 0
-	  Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXstimInfo(INBLOCK).texture , [] , def(WHATBLOCK).finRect(INBLOCK,1){} );
+	  Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXstimInfo(INBLOCK).texture , [] , def(WHATBLOCK).finRect(INBLOCK,1) );
 	  #flip
 	  [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
 	  nextFlip = lastFLIP + def(WHATBLOCK).zeitStimuli;
@@ -913,7 +941,7 @@
       
       # RATING
         if INBLOCK< def(WHATBLOCK).ratingVanish
-          Screen( 'DrawTexture' , windowPtr , def(WHATBLOCK).ratingInfo.texture , [] , def(WHATBLOCK).finRectRating{} ,[], [], [], [255 255 255 0]);
+          Screen( 'DrawTexture' , windowPtr , def(WHATBLOCK).ratingInfo.texture , [] , def(WHATBLOCK).ratingInfo.finrect ,[], [], [], [255 255 255 0]);
           # hier noch mit der modulateColor rumspielen ob mann das rating nicht rausfaden lassen kann ;)
         endif
 
