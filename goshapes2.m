@@ -267,14 +267,14 @@
 #  [windowPtr,rect.root] = Screen('OpenWindow', screenID );
 
 #  Normal sreens
-#   WINDOWSIZE = [0 0 1279  800];  #  16:10 wu Laptop
-   WINDOWSIZE = [0 0 1679 1050];  #  16:10 wu pc
-#   WINDOWSIZE = [0 0 1919 1080];  #  16:9  testrechner
+#     WINDOWSIZE = [0 0 1279  800];  #  16:10 wu Laptop
+#     WINDOWSIZE = [0 0 1679 1050];  #  16:10 wu pc
+#     WINDOWSIZE = [0 0 1919 1080];  #  16:9  testrechner
 
 #  Windowed
-#   WINDOWSIZE = [20 20 620 620]; # 1:1
-#   WINDOWSIZE = [20 20 600 375]; # 16:10
-#   WINDOWSIZE = [20 20 600 337]; # 16:9
+    WINDOWSIZE = [20 20 620 620]; # 1:1
+#     WINDOWSIZE = [20 20 600 375]; # 16:10
+#     WINDOWSIZE = [20 20 600 337]; # 16:9
 
   switch debugEnabled
     case false
@@ -319,9 +319,10 @@
     
 # berechenn der Größe von 1 grad Mittenabweichung auf dem bildschirm
 # abstand ist per default mit 80cm angegeben  
-  onedeg.mm=tand(1)*screendist*10; # tand benutzt normale grad zahlen 
-  onedeg.px= onedeg.mm/onePXinMM.mean;
-
+  deg1diameter.mm=tand(1)*screendist*10; # tand benutzt normale grad zahlen 
+  deg1diameter.px= deg1diameter.mm/onePXinMM.mean;
+  deg1s.mm = deg1diameter.mm/2
+  deg1s.px = deg1diameter.px/2
 
 
 ################################################################################
@@ -515,14 +516,14 @@
   point.mid.x   = rect.root(3)/2;
   point.mid.y   = rect.root(4)/2;
 
-  point.left.x  = point.mid.x + onedeg.px*7;
-  point.left.y  = point.mid.y # + onedeg.px*7;
+  point.left.x  = point.mid.x + deg1s.px*7;
+  point.left.y  = point.mid.y # + deg1s.px*7;
 
-  point.right.x = point.mid.x - onedeg.px*7;
-  point.right.y = point.mid.y # - onedeg.px*7;
+  point.right.x = point.mid.x - deg1s.px*7;
+  point.right.y = point.mid.y # - deg1s.px*7;
 
-  rect.onedegree = [0 0 onedeg.px onedeg.px]
-  rect.cdegree1  = CenterRectOnPoint( rect.onedegree ,point.mid.x , point.mid.y)
+  rect.deg1diameter = [0 0 deg1diameter.px deg1diameter.px]
+#   rect.cdegree1  = CenterRectOnPoint( rect.deg1diameter ,point.mid.x , point.mid.y)
 
 # rect.cross = [0 0 100 100]
 # rect.cue   = [0 0 10 10]
@@ -772,7 +773,7 @@
         Screen('FillRect', windowPtr , [255 126 000] , def(1).FINstimRectright  );
         Screen('FillRect', windowPtr , [255 191 000] , def(1).FINcueRect        );
 	for i=1:20
-	  drawme= CenterRectOnPoint( rect.onedegree*i ,point.mid.x , point.mid.y);
+	  drawme= CenterRectOnPoint( rect.deg1diameter*i ,point.mid.x , point.mid.y);
 	  Screen('FrameOval', windowPtr , [255 20 147] , drawme);
 	endfor
       
