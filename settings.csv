@@ -1,3 +1,3 @@
 blockPosFix,blockNumber,blockName,instructionFolder,instructionFile,ratingFolder,ratingFile,ratingCovering,crossFolder,crossFile,crossSizemm,cueFolder,cueType,cueSizemm,stimFolder,stimType,stimSizemm,zeitBetweenpause,zeitFixcrossCue,zeitCue,zeitFixcross,zeitPrepause,zeitStimuli,zeitAfterpause,zeitRating
-fix,0,übung,instructions,inst1.png,rating,RATlinks-rechts.png,100,cross,crossUBUNTU100_100.png,10,cue,png,30,stimulus,png,30,500,80,300,100,80,160,80,3000
-rand,1,localisation,instructions,inst1.png,rating,RATlinks-rechts.png,100,cross,crossUBUNTU100_100.png,10,cue,png,30,stimulus,png,30,500,80,300,100,80,160,80,3000
+fix,0,übung,instructions,inst1.png,rating,RATlinks-rechts.png,100,cross,crossUBUNTU100_100.png,10,cue,png,30,stimulus,png,30,500,500,1000,500,80,160,80,3000
+rand,1,localisation,instructions,inst1.png,rating,RATlinks-rechts.png,100,cross,crossUBUNTU100_100.png,10,cue,png,30,stimulus,png,30,500,500,1000,500,80,160,80,3000

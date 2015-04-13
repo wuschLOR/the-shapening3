@@ -416,12 +416,14 @@
     def(BNr).cueRect      = [ 0 0 def(BNr).cueSizepx    def(BNr).cueSizepx   ]
     def(BNr).stimRect     = [ 0 0 def(BNr).stimSizepx   def(BNr).stimSizepx  ]
     # convert times to real ms
-    def(BNr).zeitAfterpause   = def(BNr).zeitAfterpause    /1000;
     def(BNr).zeitBetweenpause = def(BNr).zeitBetweenpause  /1000;
+    def(BNr).zeitFixcrossCue  = def(BNr).zeitFixcrossCue   /1000;
+    def(BNr).zeitCue          = def(BNr).zeitCue           /1000;
     def(BNr).zeitFixcross     = def(BNr).zeitFixcross      /1000;
     def(BNr).zeitPrepause     = def(BNr).zeitPrepause      /1000;
-    def(BNr).zeitRating       = def(BNr).zeitRating        /1000;
     def(BNr).zeitStimuli      = def(BNr).zeitStimuli       /1000;
+    def(BNr).zeitAfterpause   = def(BNr).zeitAfterpause    /1000;
+    def(BNr).zeitRating       = def(BNr).zeitRating        /1000;
     # loding Info about pictures
     def(BNr).stimInfo         = getFilesInFolderInfo ([folder.in def(BNr).stimFolder       ] , def(BNr).stimType       ); #  stimulus Info holen
     def(BNr).cueInfo          = getFilesInFolderInfo ([folder.in def(BNr).cueFolder        ] , def(BNr).cueType        ); #  cue Info holen
@@ -744,9 +746,9 @@
 #       #  herrausfinden wie groß die textur ist - anhand des tex pointers
 #       texRect      = Screen('Rect' , def(i).EXstimInfo(j).texture );
 #       # verkleinern erstellen eines recht in das die textur gemalt wird ohne sich zu verzerren
-#       finRect  = putRectInRect( positonArray( def(i).randColPos(j) ){}  , texRect  );
+#       finrect  = putRectInRect( positonArray( def(i).randColPos(j) ){}  , texRect  );
 #       # abspeichern
-#       def(i).finRect(j,1) = {finRect};
+#       def(i).finrect(j,1) = {finrect};
 #     endfor
 #   endfor
 # 
@@ -865,7 +867,8 @@
         
       # FIXCROSSCUE
       if def(WHATBLOCK).zeitFixcrossCue > 0
-	  drawFixCross (windowPtr , [18 18 18] , x.center , y.center , 80 , 2 );
+# 	  drawFixCross (windowPtr , [18 18 18] , x.center , y.center , 80 , 2 );
+	  Screen('DrawTexture', windowPtr, def(WHATBLOCK).crossInfo.texture , [] , def(WHATBLOCK).crossInfo.finrect );
 	  #flip
 	  [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
 	  nextFlip = lastFLIP + def(WHATBLOCK).zeitFixcrossCue;
@@ -878,7 +881,7 @@
         
       # CUE
       if def(WHATBLOCK).zeitCue > 0
-	  drawFixCross (windowPtr , [18 18 18] , x.center , y.center , 80 , 2 );
+	  Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXcueInfo(INBLOCK).texture , [] , def(WHATBLOCK).EXcueInfo(INBLOCK).finrect );
 	  #flip
 	  [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
 	  nextFlip = lastFLIP + def(WHATBLOCK).zeitCue;
@@ -917,7 +920,7 @@
       
       # STIMULUS
       if def(WHATBLOCK).zeitStimuli > 0
-	  Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXstimInfo(INBLOCK).texture , [] , def(WHATBLOCK).finRect(INBLOCK,1) );
+	  Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXstimInfo(INBLOCK).texture , [] , def(WHATBLOCK).finrect(INBLOCK,1) );
 	  #flip
 	  [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
 	  nextFlip = lastFLIP + def(WHATBLOCK).zeitStimuli;
