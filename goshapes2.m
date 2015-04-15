@@ -267,12 +267,13 @@
 #  [windowPtr,rect.root] = Screen('OpenWindow', screenID );
 
 #  Normal sreens
-#     WINDOWSIZE = [0 0 1279  800];  #  16:10 wu Laptop
+     WINDOWSIZE = [0 0 1279  800];  #  16:10 wu Laptop
 #     WINDOWSIZE = [0 0 1679 1050];  #  16:10 wu pc
 #     WINDOWSIZE = [0 0 1919 1080];  #  16:9  testrechner
+     WINDOWSIZE = WINDOWSIZE -100
 
 #  Windowed
-    WINDOWSIZE = [20 20 620 620]; # 1:1
+#     WINDOWSIZE = [20 20 620 620]; # 1:1
 #     WINDOWSIZE = [20 20 600 375]; # 16:10
 #     WINDOWSIZE = [20 20 600 337]; # 16:9
 
@@ -282,6 +283,10 @@
     case true
       [windowPtr,rect.root] = Screen('OpenWindow', screenID ,[], WINDOWSIZE) # 16:9
   endswitch
+  
+  # tranparent alpha http://old.psychtoolbox.org/OldPsychtoolbox/wikka.php?wakka=FaqImageTransparency
+  # makeTexFromInfo macht seit neusten den alpha channel dazu
+  Screen('BlendFunction', windowPtr, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
   HideCursor(screenID)
 
@@ -328,6 +333,9 @@
 ################################################################################
 ##  settings einlesen
   rawSettingsCell = csv2cell( 'settings.csv' , ',');
+  
+  #stettings rotieren damit sie im csv einfacher zu lesen sind muss einfach nur noch auskommentiert werden falls das csv wieder transponiert werden sollte 
+  rawSettingsCell =  rawSettingsCell'
 
   settingsHead     = rawSettingsCell(1     , :); #  zerlegten der Settings in den settingsHeader
   settingsBody     = rawSettingsCell(2:end , :); #  und dem inhaltlichen settingsBody
@@ -408,14 +416,15 @@
 
 ##  Settings verarbeiten und Bildmaterial einlesen
   for BNr=1:length(def) #  BNr == blocknunber
-    # convert sizes
+    # convert sizes mm -> px
     def(BNr).crossSizepx  = def(BNr).crossSizemm / onePXinMM.mean;
     def(BNr).cueSizepx    = def(BNr).cueSizemm   / onePXinMM.mean;
     def(BNr).stimSizepx   = def(BNr).stimSizemm  / onePXinMM.mean;
     def(BNr).crossRect    = [ 0 0 def(BNr).crossSizepx  def(BNr).crossSizepx ]
     def(BNr).cueRect      = [ 0 0 def(BNr).cueSizepx    def(BNr).cueSizepx   ]
     def(BNr).stimRect     = [ 0 0 def(BNr).stimSizepx   def(BNr).stimSizepx  ]
-    # convert times to real ms
+    
+    # convert times  ms -> seconds
     def(BNr).zeitBetweenpause = def(BNr).zeitBetweenpause  /1000;
     def(BNr).zeitFixcrossCue  = def(BNr).zeitFixcrossCue   /1000;
     def(BNr).zeitCue          = def(BNr).zeitCue           /1000;
@@ -424,6 +433,7 @@
     def(BNr).zeitStimuli      = def(BNr).zeitStimuli       /1000;
     def(BNr).zeitAfterpause   = def(BNr).zeitAfterpause    /1000;
     def(BNr).zeitRating       = def(BNr).zeitRating        /1000;
+    
     # loding Info about pictures
     def(BNr).stimInfo         = getFilesInFolderInfo ([folder.in def(BNr).stimFolder       ] , def(BNr).stimType       ); #  stimulus Info holen
     def(BNr).cueInfo          = getFilesInFolderInfo ([folder.in def(BNr).cueFolder        ] , def(BNr).cueType        ); #  cue Info holen
@@ -775,7 +785,7 @@
         Screen('FillRect', windowPtr , [255 191 000] , def(1).FINcrossRect      );
         Screen('FillRect', windowPtr , [255 126 000] , def(1).FINstimRectleft   );
         Screen('FillRect', windowPtr , [245 215 000] , def(1).FINstimRectright  );
-        Screen('FillRect', windowPtr , [255 191 000] , def(1).FINcueRect        );
+#         Screen('FillRect', windowPtr , [255 191 000] , def(1).FINcueRect        );
 	for i=1:20
 	  drawme= CenterRectOnPoint( rect.deg1diameter*i ,point.mid.x , point.mid.y);
 	  Screen('FrameOval', windowPtr , [255 20 147] , drawme);
