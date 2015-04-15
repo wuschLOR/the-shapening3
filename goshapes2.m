@@ -392,6 +392,7 @@
 #     blockPosFix
 #     crossFile
 #     crossFolder
+#     crossSizemm
 #     cueFolder
 #     cueSizemm
 #     cueType
@@ -411,6 +412,7 @@
 #     zeitPrepause
 #     zeitRating
 #     zeitStimuli
+
 
 
 
@@ -723,9 +725,9 @@
   
   #skalierung für alles singuläre
   for i=1:length(def)
-    def(i).ratingInfo.finrect       = putRectInRect (rect.rating       , def(i).ratingInfo.texturerect);
-    def(i).instructionInfo.finrect  = putRectInRect (rect.instructions , def(i).instructionInfo.texturerect);
-    def(i).crossInfo.finrect        = putRectInRect (rect.cross        , def(i).crossInfo.texturerect);
+    def(i).ratingInfo.finrect       = putRectInRect (rect.rating         , def(i).ratingInfo.texturerect);
+    def(i).instructionInfo.finrect  = putRectInRect (rect.instructions   , def(i).instructionInfo.texturerect);
+    def(i).crossInfo.finrect        = putRectInRect (def(i).FINcrossRect , def(i).crossInfo.texturerect);
   endfor
   
   #skalierung für alles multible

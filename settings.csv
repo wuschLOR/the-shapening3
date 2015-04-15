@@ -1,6 +1,6 @@
 blockPosFix,fix,rand
 blockNumber,0,1
-blockName,übung,localisation
+blockName,übung,localization
 instructionFolder,instructions,instructions
 instructionFile,inst1.png,inst1.png
 ratingFolder,rating,rating
