@@ -6,7 +6,15 @@ Code to the second experiment of my diploma thesis.
 ## WHAT DOES THIS THING DO ?
 
  The script is presenting the [stimulus](./input/stimulus) eihter in a central or one of the four corners of the screen. This is to invoke different reaction times because the stimulus is processed either in foveal or onvoveal vision. Also I hope to get some insight to the way persons percieve different cinds of shapes.
-
+ 
+ [Presentation](./readme/screen.png)
+ 
+ 
+ [Valid Cue](./readme/valid.png)
+ 
+ 
+ [Invalid Cue](./readme/invalid.png)
+ 
 ----------------------------------------------------------------------------
 ## REQUIREMENTS
 
