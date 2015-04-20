@@ -222,6 +222,9 @@
 ## startup and end screens
   startImg = ['.' filesep folder.in 'startup' filesep 'startscreen.png']
   endImg   = ['.' filesep folder.in 'startup' filesep 'endscreen.png'  ]
+  
+  boxcolor = [192 192 192]
+  boxpen   = 3
 
   
   
@@ -721,6 +724,10 @@
     def(i).FINcueRect        = CenterRectOnPoint( def(i).cueRect   , point.mid.x   , point.mid.y   )
     def(i).FINstimRectleft   = CenterRectOnPoint( def(i).stimRect  , point.left.x  , point.left.y  )
     def(i).FINstimRectright  = CenterRectOnPoint( def(i).stimRect  , point.right.x , point.right.y )
+    def(i).FRAMEcrossRect      = CenterRectOnPoint( def(i).crossRect *1.20 , point.mid.x   , point.mid.y   )
+    def(i).FRAMEcueRect        = CenterRectOnPoint( def(i).cueRect   *1.20 , point.mid.x   , point.mid.y   )
+    def(i).FRAMEstimRectleft   = CenterRectOnPoint( def(i).stimRect  *1.20 , point.left.x  , point.left.y  )
+    def(i).FRAMEstimRectright  = CenterRectOnPoint( def(i).stimRect  *1.20 , point.right.x , point.right.y )
   endfor
   
   #skalierung für alles singuläre
@@ -788,6 +795,9 @@
         Screen('FillRect', windowPtr , [255 126 000] , def(1).FINstimRectleft   );
         Screen('FillRect', windowPtr , [245 215 000] , def(1).FINstimRectright  );
 #         Screen('FillRect', windowPtr , [255 191 000] , def(1).FINcueRect        );
+	Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectleft  , boxpen );
+	Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectright , boxpen );
+	Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEcueRect       , boxpen );
 	for i=1:20
 	  drawme= CenterRectOnPoint( rect.deg1diameter*i ,point.mid.x , point.mid.y);
 	  Screen('FrameOval', windowPtr , [255 20 147] , drawme);
@@ -883,6 +893,9 @@
       if def(WHATBLOCK).zeitFixcrossCue > 0
 # 	  drawFixCross (windowPtr , [18 18 18] , x.center , y.center , 80 , 2 );
 	  Screen('DrawTexture', windowPtr, def(WHATBLOCK).crossInfo.texture , [] , def(WHATBLOCK).crossInfo.finrect );
+	  Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectleft  , boxpen );
+          Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectright , boxpen );
+          Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEcueRect       , boxpen );
 	  #flip
 	  [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
 	  nextFlip = lastFLIP + def(WHATBLOCK).zeitFixcrossCue;
@@ -896,6 +909,9 @@
       # CUE
       if def(WHATBLOCK).zeitCue > 0
 	  Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXcueInfo(INBLOCK).texture , [] , def(WHATBLOCK).EXcueInfo(INBLOCK).finrect );
+	  Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectleft  , boxpen );
+          Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectright , boxpen );
+          Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEcueRect       , boxpen );
 	  #flip
 	  [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
 	  nextFlip = lastFLIP + def(WHATBLOCK).zeitCue;
@@ -909,7 +925,11 @@
       
       # FIXCROSS
       if def(WHATBLOCK).zeitFixcross > 0
-	  Screen('DrawTexture', windowPtr, def(WHATBLOCK).crossInfo.texture , [] , def(WHATBLOCK).crossInfo.finrect );
+# 	  Screen('DrawTexture', windowPtr, def(WHATBLOCK).crossInfo.texture , [] , def(WHATBLOCK).crossInfo.finrect );
+	  Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXcueInfo(INBLOCK).texture , [] , def(WHATBLOCK).EXcueInfo(INBLOCK).finrect );
+	  Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectleft  , boxpen );
+          Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectright , boxpen );
+          Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEcueRect       , boxpen );
 	  #flip
 	  [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
 	  nextFlip = lastFLIP + def(WHATBLOCK).zeitFixcross;
@@ -935,6 +955,10 @@
       # STIMULUS
       if def(WHATBLOCK).zeitStimuli > 0
 	  Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXstimInfo(INBLOCK).texture , [] , def(WHATBLOCK).EXstimInfo(INBLOCK).finrect );
+	  Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXcueInfo(INBLOCK).texture , [] , def(WHATBLOCK).EXcueInfo(INBLOCK).finrect );
+	  Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectleft  , boxpen );
+          Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectright , boxpen );
+          Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEcueRect       , boxpen );
 	  #flip
 	  [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
 	  nextFlip = lastFLIP + def(WHATBLOCK).zeitStimuli;
@@ -962,7 +986,11 @@
           Screen( 'DrawTexture' , windowPtr , def(WHATBLOCK).ratingInfo.texture , [] , def(WHATBLOCK).ratingInfo.finrect ,[], [], [], [255 255 255 0]);
           # hier noch mit der modulateColor rumspielen ob mann das rating nicht rausfaden lassen kann ;)
         endif
-
+        Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXstimInfo(INBLOCK).texture , [] , def(WHATBLOCK).EXstimInfo(INBLOCK).finrect );
+	Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXcueInfo(INBLOCK).texture , [] , def(WHATBLOCK).EXcueInfo(INBLOCK).finrect );
+        Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectleft  , boxpen );
+        Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectright , boxpen );
+        Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEcueRect       , boxpen );
         #flip
         [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
         nextFlip = lastFLIP + def(WHATBLOCK).zeitRating;

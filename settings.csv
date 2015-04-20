@@ -4,7 +4,7 @@ blockName,übung,localization
 instructionFolder,instructions,instructions
 instructionFile,inst1.png,inst1.png
 ratingFolder,rating,rating
-ratingFile,RATlinks-rechts.png,RATlinks-rechts.png
+ratingFile,ratingLR.png,ratingLR.png
 ratingCovering,100,100
 crossFolder,cross,cross
 crossFile,crossUBUNTU100_100.png,crossUBUNTU100_100.png
@@ -16,10 +16,10 @@ stimFolder,stimulus,stimulus
 stimType,png,png
 stimSizemm,30,30
 zeitBetweenpause,500,500
-zeitFixcrossCue,500,500
-zeitCue,1000,1000
-zeitFixcross,500,500
-zeitPrepause,80,80
+zeitFixcrossCue,100,500
+zeitCue,300,1000
+zeitFixcross,100,500
+zeitPrepause,0,0
 zeitStimuli,160,160
-zeitAfterpause,80,80
+zeitAfterpause,0,0
 zeitRating,3000,3000
