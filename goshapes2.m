@@ -421,6 +421,7 @@
 
 ##  Settings verarbeiten und Bildmaterial einlesen
   for BNr=1:length(def) #  BNr == blocknunber
+  
     # convert sizes mm -> px
     def(BNr).crossSizepx  = def(BNr).crossSizemm / onePXinMM.mean;
     def(BNr).cueSizepx    = def(BNr).cueSizemm   / onePXinMM.mean;
@@ -429,10 +430,22 @@
     def(BNr).cueRect      = [ 0 0 def(BNr).cueSizepx    def(BNr).cueSizepx   ]
     def(BNr).stimRect     = [ 0 0 def(BNr).stimSizepx   def(BNr).stimSizepx  ]
     
+    # divide zeitCue by '_' für die cue kann wegen SOA mhrere zeiten mit '_'unterteilt angegeben werden
+    if ischar(def(BNr).zeitCues)
+      zeittemp = strsplit (def(BNr).zeitCues , '_')
+      for i=1:length(zeittemp)
+	def(BNr).zeitCuesArr(i)=str2num(zeittemp(1,i){})
+      endfor
+    else
+      def(BNr).zeitCuesArr(i)=def(BNr).zeitCues
+    endif
+    
+    
     # convert times  ms -> seconds
     def(BNr).zeitBetweenpause = def(BNr).zeitBetweenpause  /1000;
     def(BNr).zeitFixcrossCue  = def(BNr).zeitFixcrossCue   /1000;
-    def(BNr).zeitCue          = def(BNr).zeitCue           /1000;
+#     def(BNr).zeitCue          = def(BNr).zeitCue           /1000;
+    def(BNr).zeitCuesArr      = def(BNr).zeitCuesArr          /1000;
     def(BNr).zeitFixcross     = def(BNr).zeitFixcross      /1000;
     def(BNr).zeitPrepause     = def(BNr).zeitPrepause      /1000;
     def(BNr).zeitStimuli      = def(BNr).zeitStimuli       /1000;
@@ -472,59 +485,12 @@
     
     def(BNr).ratingVanish      = length(def(BNr).stimInfo) / 100 * def(BNr).ratingCovering ; # ob das rating angezeigt werden soll ? # altlast
   endfor
-  
-################################################################################
-# Randomisierung ALT (auskommentieren sobald nicht mehr gebraucht)
-################################################################################
-
-# version a und b generieren
-#initialisiert eine Spalte von nullen die normal auf 1 gesetzt wird und in der scatter variante je nach den angegeben alternativpositionen hochaddiert bis alle einen wert von 2-5 haben die dann später durch den positonArray dekodiert werden
-#     STIMQA= length(def(BNr).stimInfo); # wie viele Spalten hat stimInfo (so viele wie es stimulus im ordner gibt)
-#     helpNORMAL  =  zeros (STIMQA , 1)+1;
-#     helpSCATTER =  zeros (STIMQA , 1)+2;
-# 
-#     schinkenfix = floor(STIMQA/4);
-#     schinken = schinkenfix;
-#     do
-#       helpSCATTER(1:schinken)  = helpSCATTER(1:schinken)+1;
-#       schinken = schinken + schinkenfix;
-#     until schinken >= schinkenfix*4
-# 
-#     positionCol  = [helpNORMAL ; helpSCATTER];
-#     textureCol = [ (1:STIMQA)' ; (1:STIMQA)' ];
-# 
-#     hartCol = [textureCol positionCol];
-#     [tempCol , nextSeed ] = randomizeCol( hartCol , nextSeed , 1 );
-#     def(BNr).randColTex = tempCol(:,1);
-#     def(BNr).randColPos = tempCol(:,2);
-#     
-#     # neuen stimInfo generieren der die "richtige" Reihenfolge hat
-#     for TTT=1:length(def(BNr).randColTex)
-#       def(BNr).EXstimInfo(TTT) = def(BNr).stimInfo( def(BNr).randColTex(TTT,:) );
-#     endfor
-#     def(BNr).ratingVanish      = length(def(BNr).stimInfo) / 100 * def(BNr).ratingCovering ;
-#   endfor
-
 
     
-    
 ################################################################################
-## Positionen für 16 :9 Auflösung 
+## Positionen punkte
 ################################################################################
-#                3          3          3          3
-#        3      ###################################   # = border / free space
-#               ## ###1L## ## ###1M## ## ###1R## ##   # = actual face
-#               ## ####### ## ####### ## ####### ##
-#        3      ###################################
-#               ## ###2L## ## ###2M## ## ###2R## ##
-#               ## ####### ## ####### ## ####### ##   + = fixcross cross
-#        3      ###################################
-#               ## ###3L## ## ###3M## ## ###3R## ##
-#               ## ####### ## ####### ## ####### ##
-#        3      ###################################
-#
-#  die präsentationsfelder müssen alle gleich groß sein 
-# x values for all locations
+
 
 
 # positionen der bilder werden über den mittelpunkt angegeben 
@@ -662,54 +628,39 @@
     QUAcue = length(def(BNr).cueInfo); # wie viele cues gibst
     QUAstim= length(def(BNr).stimInfo); # wie viele stimuli sind in stimInfo
     QUApos = 2
+    QUAsoa = length(def(BNr).zeitCuesArr) #stimulus onset asynchrony
 #     QUAcue = 5
 #     QUAstim= 2
+#     QUApos = 2
+#     QUAsoa = 3
     
+
     # insgesammt wird es am ende cue * 2 * stimulus tails geben
     # cue * 2 da bei spatial cueing jeder stimulus sowohl rechts als auch links angezeigt wird (detection task)
     
     C= 1:QUAcue; # array erstellen der 
     S= 1:QUAstim; 
     P= 1:QUApos # zwei possitionen l u R
+    A= 1:QUAsoa
     
-    CC = C;
-    SS = S;
-    PP = P;
+   
+    CSPA  =  allcomb(C,S,P,A)
     
-    # cue stack
-    for i=1:(QUAstim * QUApos)-1
-      CC= [CC C];
-    endfor
+    [CSPAr , nextSeed ] = randomizeCol( CSPA , nextSeed , 1 );
     
-    #stim stack
-    for i=1:(QUAcue  * QUApos)-1
-      SS= [SS S];
-    endfor 
-    
-    # L R stack
-    for i=1:(QUAstim * QUAcue)-1
-      PP= [PP P] 
-    endfor
-    
-    CC=CC'; # row to col
-    SS=SS'; # row to col
-    PP=PP' 
-    
-    CSP= [sort(CC) SS PP];
-    for i=1:length(CSP)
-    [CSP(i,1) CSP(i,2)  CSP(i,3)];
-    endfor
-    
-    [CSPr , nextSeed ] = randomizeCol( CSP , nextSeed , 1 );
-    
-    def(BNr).randMatrix  = CSPr;
-    def(BNr).randColCue  = CSPr(:,1);
-    def(BNr).randColStim = CSPr(:,2);
-    def(BNr).randColPos  = CSPr(:,3);
+    def(BNr).randMatrix  = CSPAr;
+    def(BNr).randColCue  = CSPAr(:,1);
+    def(BNr).randColStim = CSPAr(:,2);
+    def(BNr).randColPos  = CSPAr(:,3);
+    def(BNr).randColTime = CSPAr(:,4)
     
     for i=1:length(def(BNr).randMatrix)
-      def(BNr).EXcueInfo(i)  = def(BNr).cueInfo ( CSPr(i,1) ); # infos zu den ex infos in der richtigen reihenfolge zusammenkopieren
-      def(BNr).EXstimInfo(i) = def(BNr).stimInfo( CSPr(i,2) );
+      def(BNr).EXcueInfo(i)  = def(BNr).cueInfo ( CSPAr(i,1) ); # infos zu den ex infos in der richtigen reihenfolge zusammenkopieren
+      def(BNr).EXstimInfo(i) = def(BNr).stimInfo( CSPAr(i,2) );
+    endfor
+    
+    for i=1:length(def(BNr).EXcueInfo)
+      def(BNr).EXcueInfo(i).zeit = def(BNr).zeitCuesArr (CSPAr(i,4))
     endfor
     
   endfor
@@ -907,14 +858,14 @@
       endif
         
       # CUE
-      if def(WHATBLOCK).zeitCue > 0
+      if def(WHATBLOCK).EXcueInfo(INBLOCK).zeit > 0
 	  Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXcueInfo(INBLOCK).texture , [] , def(WHATBLOCK).EXcueInfo(INBLOCK).finrect );
 	  Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectleft  , boxpen );
           Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectright , boxpen );
           Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEcueRect       , boxpen );
 	  #flip
 	  [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
-	  nextFlip = lastFLIP + def(WHATBLOCK).zeitCue;
+	  nextFlip = lastFLIP + def(WHATBLOCK).EXcueInfo(INBLOCK).zeit;
 	  
 	  timeStamp.flipCue = lastFLIP; 
 	else
@@ -955,7 +906,7 @@
       # STIMULUS
       if def(WHATBLOCK).zeitStimuli > 0
 	  Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXstimInfo(INBLOCK).texture , [] , def(WHATBLOCK).EXstimInfo(INBLOCK).finrect );
-	  Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXcueInfo(INBLOCK).texture , [] , def(WHATBLOCK).EXcueInfo(INBLOCK).finrect );
+# 	  Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXcueInfo(INBLOCK).texture , [] , def(WHATBLOCK).EXcueInfo(INBLOCK).finrect );
 	  Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectleft  , boxpen );
           Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectright , boxpen );
           Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEcueRect       , boxpen );
@@ -987,7 +938,7 @@
           # hier noch mit der modulateColor rumspielen ob mann das rating nicht rausfaden lassen kann ;)
         endif
         Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXstimInfo(INBLOCK).texture , [] , def(WHATBLOCK).EXstimInfo(INBLOCK).finrect );
-	Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXcueInfo(INBLOCK).texture , [] , def(WHATBLOCK).EXcueInfo(INBLOCK).finrect );
+# 	Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXcueInfo(INBLOCK).texture , [] , def(WHATBLOCK).EXcueInfo(INBLOCK).finrect );
         Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectleft  , boxpen );
         Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectright , boxpen );
         Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEcueRect       , boxpen );
@@ -1029,12 +980,15 @@
       OUThead        =       { ...
         'vpNummer'           , ...
         'vpCode'             , ...
-        'index'              , ...
-        'blockIndex'         , ...
+        'indexSuper'         , ...
+        'indexBlock'         , ...
+        'indexInnerBlock'    , ...
+        'blockNumber'        , ...
         'blockName'          , ...
         'blockInstruction'   , ...
         'blockRating'        , ...
         'cue'		     , ...
+        'cueDauer'           , ...  # laut settings
         'stimulus'           , ...
         'stimulusPosition'   , ...
         'ratingTaste'        , ...
@@ -1054,11 +1008,14 @@
         vpNummer                                   , ...
         outputFileStr                              , ...
         num2str(superIndex)                        , ...
+        num2str(WHATBLOCK)                         , ...
         num2str(INBLOCK)                           , ...
+        def(WHATBLOCK).blockNumber                 , ...
         def(WHATBLOCK).blockName                   , ...
         def(WHATBLOCK).instructionInfo.name        , ... 
         def(WHATBLOCK).ratingInfo.name             , ...
         def(WHATBLOCK).EXcueInfo(INBLOCK).name     , ...
+        def(WHATBLOCK).EXcueInfo(INBLOCK).zeit    , ...
         def(WHATBLOCK).EXstimInfo(INBLOCK).name    , ...
         def(WHATBLOCK).EXstimInfo(INBLOCK).position, ...
         pressedButtonStr                           , ...
