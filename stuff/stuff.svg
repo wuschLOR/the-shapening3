@@ -26,7 +26,7 @@
      inkscape:pageshadow="2"
      inkscape:zoom="0.98994949"
      inkscape:cx="420.91179"
-     inkscape:cy="259.92136"
+     inkscape:cy="179.10916"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -66,5 +66,83 @@
          x="273.96637"
          y="803.96692"
          style="font-size:210.6612854px">+</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:13.11253262px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Mono;-inkscape-font-specification:Liberation Mono"
+       x="238.85757"
+       y="1006.0885"
+       id="text2985-2"
+       sodipodi:linespacing="125%"
+       transform="scale(1.0364535,0.96482862)"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan2987-7"
+         x="238.85757"
+         y="1006.0885"
+         style="font-size:157.35038757px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:Liberation Mono;-inkscape-font-specification:Liberation Mono">T</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:144.30014038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       x="440.1604"
+       y="969.52966"
+       id="text3005"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan3007"
+         x="440.1604"
+         y="969.52966">F</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:144.30014038px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+       x="355.30759"
+       y="970.53986"
+       id="text3009"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="355.30759"
+         y="970.53986"
+         id="tspan3013">E</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:157.35038757px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Mono;-inkscape-font-specification:Liberation Mono"
+       x="243.18269"
+       y="1142.1082"
+       id="text2985-2-4"
+       sodipodi:linespacing="125%"
+       transform="scale(1.0364535,0.96482862)"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan2987-7-8"
+         x="243.18269"
+         y="1142.1082"
+         style="font-size:157.35038757px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;font-family:Liberation Mono;-inkscape-font-specification:Liberation Mono">T</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:151.81616211px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Mono;-inkscape-font-specification:Liberation Mono"
+       x="537.78375"
+       y="1100.1984"
+       id="text3005-3"
+       sodipodi:linespacing="125%"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3007-2"
+         x="537.78375"
+         y="1100.1984">F</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:151.81616211px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;font-family:Liberation Mono;-inkscape-font-specification:Liberation Mono"
+       x="411.96509"
+       y="1101.6967"
+       id="text3009-3"
+       sodipodi:linespacing="125%"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         x="411.96509"
+         y="1101.6967"
+         id="tspan3013-8">E</tspan></text>
   </g>
 </svg>
