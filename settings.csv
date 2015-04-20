@@ -2,7 +2,7 @@ blockPosFix,fix,rand
 blockNumber,0,1
 blockName,übung,localization
 instructionFolder,instructions,instructions
-instructionFile,inst1.png,inst1.png
+instructionFile,instruction_uebung.png,instruction_LR.png
 ratingFolder,rating,rating
 ratingFile,ratingLR.png,ratingLR.png
 ratingCovering,100,100
