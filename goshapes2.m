@@ -432,12 +432,12 @@
     
     # divide zeitCue by '_' für die cue kann wegen SOA mhrere zeiten mit '_'unterteilt angegeben werden
     if ischar(def(BNr).zeitCues)
-      zeittemp = strsplit (def(BNr).zeitCues , '_')
+      zeittemp = strsplit (def(BNr).zeitCues , '_');
       for i=1:length(zeittemp)
-	def(BNr).zeitCuesArr(i)=str2num(zeittemp(1,i){})
+	def(BNr).zeitCuesArr(i)=str2num(zeittemp(1,i){});
       endfor
     else
-      def(BNr).zeitCuesArr(i)=def(BNr).zeitCues
+      def(BNr).zeitCuesArr=def(BNr).zeitCues;
     endif
     
     
@@ -445,7 +445,7 @@
     def(BNr).zeitBetweenpause = def(BNr).zeitBetweenpause  /1000;
     def(BNr).zeitFixcrossCue  = def(BNr).zeitFixcrossCue   /1000;
 #     def(BNr).zeitCue          = def(BNr).zeitCue           /1000;
-    def(BNr).zeitCuesArr      = def(BNr).zeitCuesArr          /1000;
+    def(BNr).zeitCuesArr      = def(BNr).zeitCuesArr       /1000;
     def(BNr).zeitFixcross     = def(BNr).zeitFixcross      /1000;
     def(BNr).zeitPrepause     = def(BNr).zeitPrepause      /1000;
     def(BNr).zeitStimuli      = def(BNr).zeitStimuli       /1000;
@@ -640,11 +640,11 @@
     
     C= 1:QUAcue; # array erstellen der 
     S= 1:QUAstim; 
-    P= 1:QUApos # zwei possitionen l u R
-    A= 1:QUAsoa
+    P= 1:QUApos; # zwei possitionen l u R
+    A= 1:QUAsoa;
     
    
-    CSPA  =  allcomb(C,S,P,A)
+    CSPA  =  allcomb(C,S,P,A);
     
     [CSPAr , nextSeed ] = randomizeCol( CSPA , nextSeed , 1 );
     
@@ -652,7 +652,7 @@
     def(BNr).randColCue  = CSPAr(:,1);
     def(BNr).randColStim = CSPAr(:,2);
     def(BNr).randColPos  = CSPAr(:,3);
-    def(BNr).randColTime = CSPAr(:,4)
+    def(BNr).randColTime = CSPAr(:,4);
     
     for i=1:length(def(BNr).randMatrix)
       def(BNr).EXcueInfo(i)  = def(BNr).cueInfo ( CSPAr(i,1) ); # infos zu den ex infos in der richtigen reihenfolge zusammenkopieren
@@ -660,7 +660,7 @@
     endfor
     
     for i=1:length(def(BNr).EXcueInfo)
-      def(BNr).EXcueInfo(i).zeit = def(BNr).zeitCuesArr (CSPAr(i,4))
+      def(BNr).EXcueInfo(i).zeit = def(BNr).zeitCuesArr (CSPAr(i,4));
     endfor
     
   endfor
@@ -671,14 +671,14 @@
 
   # Finale positionen feststellen
   for i=1:length(def) #  i == blocknunber
-    def(i).FINcrossRect      = CenterRectOnPoint( def(i).crossRect , point.mid.x   , point.mid.y   )
-    def(i).FINcueRect        = CenterRectOnPoint( def(i).cueRect   , point.mid.x   , point.mid.y   )
-    def(i).FINstimRectleft   = CenterRectOnPoint( def(i).stimRect  , point.left.x  , point.left.y  )
-    def(i).FINstimRectright  = CenterRectOnPoint( def(i).stimRect  , point.right.x , point.right.y )
-    def(i).FRAMEcrossRect      = CenterRectOnPoint( def(i).crossRect *1.20 , point.mid.x   , point.mid.y   )
-    def(i).FRAMEcueRect        = CenterRectOnPoint( def(i).cueRect   *1.20 , point.mid.x   , point.mid.y   )
-    def(i).FRAMEstimRectleft   = CenterRectOnPoint( def(i).stimRect  *1.20 , point.left.x  , point.left.y  )
-    def(i).FRAMEstimRectright  = CenterRectOnPoint( def(i).stimRect  *1.20 , point.right.x , point.right.y )
+    def(i).FINcrossRect      = CenterRectOnPoint( def(i).crossRect , point.mid.x   , point.mid.y   );
+    def(i).FINcueRect        = CenterRectOnPoint( def(i).cueRect   , point.mid.x   , point.mid.y   );
+    def(i).FINstimRectleft   = CenterRectOnPoint( def(i).stimRect  , point.left.x  , point.left.y  );
+    def(i).FINstimRectright  = CenterRectOnPoint( def(i).stimRect  , point.right.x , point.right.y );
+    def(i).FRAMEcrossRect      = CenterRectOnPoint( def(i).crossRect *1.20 , point.mid.x   , point.mid.y   );
+    def(i).FRAMEcueRect        = CenterRectOnPoint( def(i).cueRect   *1.20 , point.mid.x   , point.mid.y   );
+    def(i).FRAMEstimRectleft   = CenterRectOnPoint( def(i).stimRect  *1.20 , point.left.x  , point.left.y  );
+    def(i).FRAMEstimRectright  = CenterRectOnPoint( def(i).stimRect  *1.20 , point.right.x , point.right.y );
   endfor
   
   #skalierung für alles singuläre
@@ -691,15 +691,15 @@
   #skalierung für alles multible
   for i=1:length(def)
   
-    for j= 1:length(def(i).EXstimInfo)
+    for j= 1:length(def(i).EXstimInfo);
     
       switch def(i).randColPos(j)
         case 1
           def(i).EXstimInfo(j).finrect = putRectInRect (def(i).FINstimRectleft  , def(i).EXstimInfo(j).texturerect);
-          def(i).EXstimInfo(j).position     = 'left'
+          def(i).EXstimInfo(j).position     = 'left';
         case 2
           def(i).EXstimInfo(j).finrect = putRectInRect (def(i).FINstimRectright , def(i).EXstimInfo(j).texturerect);
-          def(i).EXstimInfo(j).position     = 'right'
+          def(i).EXstimInfo(j).position     = 'right';
       endswitch
       
     endfor
@@ -709,33 +709,6 @@
     endfor
     
   endfor
-  
-# ################################################################################
-# ## berechnen der skalierten Bilder + Lokalisation ALT 
-# 
-#   for i=1:length(def) # für alle definierten Blöcke
-#     for j = 1:length(def(i).EXstimInfo) # für alle vorhandenen Elemente im EXstimInfo
-#       #  herrausfinden wie groß die textur ist - anhand des tex pointers
-#       texRect      = Screen('Rect' , def(i).EXstimInfo(j).texture );
-#       # verkleinern erstellen eines recht in das die textur gemalt wird ohne sich zu verzerren
-#       finrect  = putRectInRect( positonArray( def(i).randColPos(j) ){}  , texRect  );
-#       # abspeichern
-#       def(i).finrect(j,1) = {finrect};
-#     endfor
-#   endfor
-# 
-#   for i=1:length(def)
-#     tempTex  = Screen('Rect' , def(i).ratingInfo.texture );
-#     ratingInfo.finrect = putRectInRect (rect.rating , tempTex);
-#     def(i).ratingInfo.finrect = {ratingInfo.finrect};
-#   endfor
-# 
-#   for i=1:length(def)
-#     tempTex  = Screen('Rect' , def(i).instructionInfo.texture );
-#     instructionInfo.finrect = putRectInRect (rect.instructions , tempTex);
-#     def(i).instructionInfo.finrect = {instructionInfo.finrect};
-#   endfor
-#   [empty, empty , startFLIP ] =Screen('Flip', windowPtr);
 
 ################################################################################
 ## render testscreens
@@ -919,18 +892,18 @@
 	  #timeStamp.flipStim = NA;
 	  timeStamp.flipStim = lastFLIP;
       endif
- 
-      # PAUSE AFTER
-      if def(WHATBLOCK).zeitAfterpause > 0
-	  #flip
-	  [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
-	  nextFlip = lastFLIP + def(WHATBLOCK).zeitAfterpause;
 
-	  timeStamp.flipAfter = lastFLIP;
-	else
-	  #timeStamp.flipAfter = NA;
-	  timeStamp.flipAfter = lastFLIP;
-      endif
+#       # PAUSE AFTER
+#       if def(WHATBLOCK).zeitAfterpause > 0
+# 	  #flip
+# 	  [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
+# 	  nextFlip = lastFLIP + def(WHATBLOCK).zeitAfterpause;
+# 
+# 	  timeStamp.flipAfter = lastFLIP;
+# 	else
+# 	  #timeStamp.flipAfter = NA;
+# 	  timeStamp.flipAfter = lastFLIP;
+#       endif
       
       # RATING
         if INBLOCK< def(WHATBLOCK).ratingVanish
@@ -959,8 +932,7 @@
           error ('critical error - this should not happen');
       endswitch
       Screen('Flip', windowPtr);
-
-
+      
 
       # dauer der einzelnen vorgänge berechnen
       # dauer. irgendwas        =  stamp punktdannach  - stamp punkt anfang
@@ -969,11 +941,11 @@
       dauer.cue                 = timeStamp.flipFix    - timeStamp.flipCue     ;
       dauer.fixcross            = timeStamp.flipPre    - timeStamp.flipFix     ;
       dauer.prepause            = timeStamp.flipStim   - timeStamp.flipPre     ;
-      dauer.stimulus            = timeStamp.flipAfter  - timeStamp.flipStim    ;
-      dauer.afterpause          = timeStamp.flipRating - timeStamp.flipAfter   ;
+      dauer.stimulus            = timeStamp.flipRating - timeStamp.flipStim    ;
+
       dauer.rating              = pressedButtonTime    - timeStamp.flipRating  ;
       dauer.reactionTimeStimON  = pressedButtonTime    - timeStamp.flipStim    ;
-      dauer.reactionTimeStimOFF = pressedButtonTime    - timeStamp.flipAfter   ;
+      dauer.reactionTimeStimOFF = pressedButtonTime    - timeStamp.flipRating  ;
 
 
       #    dem outputfile werte zuweisen
@@ -1001,7 +973,6 @@
         'dauerFix'           , ...
         'dauerPre'           , ...
         'dauerStim'          , ...
-        'dauerAfter'         , ...
         'dauerRating'        };
 
       OUTcell(superIndex,:) =                      { ...
@@ -1028,7 +999,6 @@
         dauer.fixcross                             , ...
         dauer.prepause                             , ...
         dauer.stimulus                             , ...
-        dauer.afterpause                           , ...
         dauer.rating                               };
 
       # attatch names to the OUTcell
