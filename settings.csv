@@ -20,6 +20,6 @@ zeitFixcrossCue,80,80
 zeitCues,300,105_300_600
 zeitFixcross,0,0
 zeitPrepause,0,0
-zeitStimuli,160,160
+zeitStimuli,3000,3000
 zeitAfterpause,0,0
 zeitRating,3000,3000

@@ -765,18 +765,19 @@
   endswitch
   
 ################################################################################
-# MAINPART: THE MIGHTY EXPERIMENT
+## MAINPART: THE MIGHTY EXPERIMENT #############################################
 ################################################################################
   [empty, empty , startFLIP ] =Screen('Flip', windowPtr); # get thei first flip
   
   superIndex = 0; # index über alle Durchläufe hinweg
   
   for WHATBLOCK=1:BLOCKS  # für alle definierten Blöcke
+## Instructions ################################################################
     instruTime= GetSecs+3600; # eine stunde
       Screen('DrawTexture' , windowPtr , def(WHATBLOCK).instructionInfo.texture , [] , def(WHATBLOCK).instructionInfo.finrect);
       Screen('DrawTexture' , windowPtr , def(WHATBLOCK).ratingInfo.texture      , [] , def(WHATBLOCK).ratingInfo.finrect      );
       Screen('Flip', windowPtr);
-      WaitSecs(10)
+#       WaitSecs(10)
     for i=1:2
       Screen('DrawText'    , windowPtr , int2str(i) , 50 , 50)
       Screen('DrawTexture' , windowPtr , def(WHATBLOCK).instructionInfo.texture , [] , def(WHATBLOCK).instructionInfo.finrect);
@@ -797,7 +798,7 @@
     [empty, empty , timeBlockBegin ]=Screen('Flip', windowPtr);
 
     nextFlip = 0;
-
+## alles im block ############################################################## 
     for INBLOCK = 1:m
       ++superIndex;
       
@@ -876,8 +877,7 @@
 	  timeStamp.flipPre = lastFLIP;
       endif
       
-      # STIMULUS
-      if def(WHATBLOCK).zeitStimuli > 0
+      # STIMULUS u. RATING
 	  Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXstimInfo(INBLOCK).texture , [] , def(WHATBLOCK).EXstimInfo(INBLOCK).finrect );
 # 	  Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXcueInfo(INBLOCK).texture , [] , def(WHATBLOCK).EXcueInfo(INBLOCK).finrect );
 	  Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectleft  , boxpen );
@@ -888,38 +888,22 @@
 	  nextFlip = lastFLIP + def(WHATBLOCK).zeitStimuli;
 
 	  timeStamp.flipStim = lastFLIP;
-        else
-	  #timeStamp.flipStim = NA;
-	  timeStamp.flipStim = lastFLIP;
-      endif
-
-#       # PAUSE AFTER
-#       if def(WHATBLOCK).zeitAfterpause > 0
-# 	  #flip
-# 	  [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
-# 	  nextFlip = lastFLIP + def(WHATBLOCK).zeitAfterpause;
-# 
-# 	  timeStamp.flipAfter = lastFLIP;
-# 	else
-# 	  #timeStamp.flipAfter = NA;
-# 	  timeStamp.flipAfter = lastFLIP;
-#       endif
       
       # RATING
-        if INBLOCK< def(WHATBLOCK).ratingVanish
-          Screen( 'DrawTexture' , windowPtr , def(WHATBLOCK).ratingInfo.texture , [] , def(WHATBLOCK).ratingInfo.finrect ,[], [], [], [255 255 255 0]);
-          # hier noch mit der modulateColor rumspielen ob mann das rating nicht rausfaden lassen kann ;)
-        endif
-        Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXstimInfo(INBLOCK).texture , [] , def(WHATBLOCK).EXstimInfo(INBLOCK).finrect );
-# 	Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXcueInfo(INBLOCK).texture , [] , def(WHATBLOCK).EXcueInfo(INBLOCK).finrect );
-        Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectleft  , boxpen );
-        Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectright , boxpen );
-        Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEcueRect       , boxpen );
-        #flip
-        [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
-        nextFlip = lastFLIP + def(WHATBLOCK).zeitRating;
-
-        timeStamp.flipRating = lastFLIP;
+#         if INBLOCK< def(WHATBLOCK).ratingVanish
+#           Screen( 'DrawTexture' , windowPtr , def(WHATBLOCK).ratingInfo.texture , [] , def(WHATBLOCK).ratingInfo.finrect ,[], [], [], [255 255 255 0]);
+#           # hier noch mit der modulateColor rumspielen ob mann das rating nicht rausfaden lassen kann ;)
+#         endif
+#         Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXstimInfo(INBLOCK).texture , [] , def(WHATBLOCK).EXstimInfo(INBLOCK).finrect );
+# # 	Screen('DrawTexture', windowPtr, def(WHATBLOCK).EXcueInfo(INBLOCK).texture , [] , def(WHATBLOCK).EXcueInfo(INBLOCK).finrect );
+#         Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectleft  , boxpen );
+#         Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectright , boxpen );
+#         Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEcueRect       , boxpen );
+#         #flip
+#         [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
+#         nextFlip = lastFLIP + def(WHATBLOCK).zeitRating;
+# 
+#         timeStamp.flipRating = lastFLIP;
         
 
       # reaktionszeit abgreifen
@@ -931,10 +915,33 @@
         otherwise #wtf
           error ('critical error - this should not happen');
       endswitch
-      Screen('Flip', windowPtr);
-      
+      [empty, empty , lastFLIP ] =Screen('Flip', windowPtr); # kein nextflip weil das komanndo weiterzugehen vom auslaufenden get rating kommt
+      restzeit= def(WHATBLOCK).zeitRating - def(WHATBLOCK).zeitStimuli
+      nextFlip = lastFLIP + restzeit;
 
+      timeStamp.flipRating = lastFLIP;
+      
+      if isnan(pressedButtonValue) & restzeit>0
+        
+        if INBLOCK< def(WHATBLOCK).ratingVanish
+          Screen( 'DrawTexture' , windowPtr , def(WHATBLOCK).ratingInfo.texture , [] , def(WHATBLOCK).ratingInfo.finrect ,[], [], [], [255 255 255 0]);
+          # hier noch mit der modulateColor rumspielen ob mann das rating nicht rausfaden lassen kann ;)
+        endif
+	
+	switch buttonBoxON
+	  case false #tastatur
+	    [pressedButtonTime , pressedButtonValue , pressedButtonStr] = getRating7 (nextFlip);
+	  case true #buttonbox
+	    [pressedButtonTime , pressedButtonValue , pressedButtonStr] = cedrusGetRating (handle , nextFlip);
+	  otherwise #wtf
+	    error ('critical error - this should not happen');
+	endswitch
+      
+      endif
+      
+      Screen('Flip', windowPtr);
       # dauer der einzelnen vorgänge berechnen
+      # timestamps werden generel gemacht wenn etwas anfängt also timestamp.flipStim gibt den wert an wann der stimulus auf dem bildschirm zu sehen war
       # dauer. irgendwas        =  stamp punktdannach  - stamp punkt anfang
       dauer.betweenpause        = timeStamp.flipFixCue - timeStamp.flipBetween ;
       dauer.fixcrosscue         = timeStamp.flipCue    - timeStamp.flipFixCue  ;
@@ -942,10 +949,14 @@
       dauer.fixcross            = timeStamp.flipPre    - timeStamp.flipFix     ;
       dauer.prepause            = timeStamp.flipStim   - timeStamp.flipPre     ;
       dauer.stimulus            = timeStamp.flipRating - timeStamp.flipStim    ;
-
-      dauer.rating              = pressedButtonTime    - timeStamp.flipRating  ;
+      
+      dauer.rating              = pressedButtonTime    - timeStamp.flipStim   ; #rating startet mit dem der stimulus presentation
       dauer.reactionTimeStimON  = pressedButtonTime    - timeStamp.flipStim    ;
       dauer.reactionTimeStimOFF = pressedButtonTime    - timeStamp.flipRating  ;
+      
+#       dauer.rating              = pressedButtonTime    - timeStamp.flipRating  ;
+#       dauer.reactionTimeStimON  = pressedButtonTime    - timeStamp.flipStim    ;
+#       dauer.reactionTimeStimOFF = pressedButtonTime    - timeStamp.flipRating  ;
 
 
       #    dem outputfile werte zuweisen
