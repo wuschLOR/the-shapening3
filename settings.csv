@@ -19,7 +19,7 @@ stimFolder,stimulus,stimulus
 stimType,png,png
 stimSizemm,30,30
 zeitBetweenpause,1000,1000
-zeitFixcrossCue,80,80
+zeitFixcrossCue,160,160
 zeitCues,300,105_300_600
 zeitFixcross,0,0
 zeitPrepause,0,0
