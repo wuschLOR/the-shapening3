@@ -5,27 +5,74 @@ Code to the second experiment of my diploma thesis.
 ----------------------------------------------------------------------------
 ## WHAT DOES THIS THING DO ?
 
- The script is presenting the [stimulus](./input/stimulus) eihter in a central or one of the four corners of the screen. This is to invoke different reaction times because the stimulus is processed either in foveal or onvoveal vision. Also I hope to get some insight to the way persons percieve different cinds of shapes.
+Basically the code executes a endogenous [Posner cueing task](https://en.wikipedia.org/wiki/Posner_cueing_task). 
+  
+Flow chart
+
+![Flow chart](./readme/flow.png)
  
- Screenshot of the cue and stimulus
+This is a valid cue
  
- ![Presentation](./readme/screen.png)
+![Valid Cue](./readme/valid.png)
  
- This is a valid cue
+This is a invalid cue
  
- ![Valid Cue](./readme/valid.png)
+![Invalid Cue](./readme/invalid.png)
  
- This is a invalid cue
+Screenshot of the cue and stimulus
  
- ![Invalid Cue](./readme/invalid.png)
+![Presentation](./readme/screen.png)
  
 ----------------------------------------------------------------------------
-## REQUIREMENTS
+## REQUIREMENTS & INSTALLATION
 
+* Linux, i used [Lubuntu 14.04.2](http://lubuntu.net/)
 * [GNU Octave](https://www.gnu.org/software/octave/), I used version 3.8.2
-* [Psychtoolbox-3] ( https://psychtoolbox-3.github.io/overview/)
+* [Psychtoolbox-3]( https://psychtoolbox-3.github.io/overview/) for easy install use [neurodebian](http://neuro.debian.net/)
 * [awesomeStuff] (https://github.com/wuschLOR/awesomeStuff/) 
 * [R] (http://cran.r-project.org/) ,I used version 3.1.2
+
+### ubuntu
+
+assuming you have your Linux with Octave and Psychtoolbox up and running:
+
+1. navigate to your folder where you want to put stuff
+2. clone awesomestuff and the-shapening2
+
+```
+  git clone https://github.com/wuschLOR/the-shapening2.git
+  git clone https://github.com/wuschLOR/awesomeStuff.git
+```
+
+3. navigate to the awesomestuff folder start octave
+
+```
+  cd /awesomeStuff
+  octave
+```
+
+4. add the awesomestuff to your Octave paths
+
+```
+  pathAdd
+  exit
+```
+
+5. now lets start it up start octave again
+
+```
+  cd ..
+  cd /the-shapening2
+  octave
+```
+
+6. run the experiment
+
+```
+  goshapes2
+```
+
+7. PROFIT !!!
 
 ----------------------------------------------------------------------------
 ## LICENSE and COPPYRIGHT

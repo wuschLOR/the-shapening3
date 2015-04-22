@@ -22,7 +22,7 @@
 #        true  == error messages are popping up and the paths for the output is
 #                 changed to hold the time stamp for maximum output ;)
 #
-#    screendist  = 80 cm
+#    screendist  = 73.5 cm
 # 	 distance participant Screen in cm. Used for processing the degrees of 
 #        eccentricity
 #
@@ -60,7 +60,7 @@
   default.outputFileStr ='xkcd' ;
   default.buttonBoxON   = true  ;
   default.debugEnabled  = false  ;
-  default.screendist    = 80    ;
+  default.screendist    = 73.5    ;
   
   # old check and set default
 #   if isempty(vpNummer)      ;  default.vpNummer      ; endif
@@ -131,7 +131,7 @@
   if isempty(screendist) # is es leer (weil beim start nix angegeben wurde?)
     valid = false;
     do
-      inputtext     = 'Distance to the screen, default = 80 (ENTER). Otherwise type number: ';
+      inputtext     = 'Distance to the screen, default = 73.5 (ENTER). Otherwise type number: ';
       inputargument = input (inputtext , 's'); # nachfragen wie er sein soll;
       if isempty(inputargument) # wenn einfach nur enter gedrückt wurde dann default nehmen
         screendist = default.screendist; 
