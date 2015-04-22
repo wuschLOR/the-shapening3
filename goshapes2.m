@@ -59,7 +59,7 @@
   default.vpNummer      = 001   ;
   default.outputFileStr ='xkcd' ;
   default.buttonBoxON   = true  ;
-  default.debugEnabled  = true  ;
+  default.debugEnabled  = false  ;
   default.screendist    = 80    ;
   
   # old check and set default
@@ -331,8 +331,8 @@
 # abstand ist per default mit 80cm angegeben  
   deg1diameter.mm=tand(1)*screendist*10; # tand benutzt normale grad zahlen 
   deg1diameter.px= deg1diameter.mm/onePXinMM.mean;
-  deg1s.mm = deg1diameter.mm/2
-  deg1s.px = deg1diameter.px/2
+  deg1s.mm = deg1diameter.mm/2;
+  deg1s.px = deg1diameter.px/2;
 
 
 ################################################################################
@@ -340,7 +340,7 @@
   rawSettingsCell = csv2cell( 'settings.csv' , ',');
   
   #stettings rotieren damit sie im csv einfacher zu lesen sind muss einfach nur noch auskommentiert werden falls das csv wieder transponiert werden sollte 
-  rawSettingsCell =  rawSettingsCell'
+  rawSettingsCell =  rawSettingsCell';
 
   settingsHead     = rawSettingsCell(1     , :); #  zerlegten der Settings in den settingsHeader
   settingsBody     = rawSettingsCell(2:end , :); #  und dem inhaltlichen settingsBody
@@ -349,7 +349,7 @@
   def = cell2struct (settingsBody, settingsHead ,2); #  konvertieren zum struct
   def = orderfields(def) #  und sortieren um ihn lesbar zu machen zu machen
 
-  BLOCKS = length(def)
+  BLOCKS = length(def);
 
   # die hauteigenschaft fix oder nicht fixer block 
   for i=1:BLOCKS
@@ -366,7 +366,7 @@
 
   for i=1:BLOCKS
     if ~def(i).blockPosFix == true
-      ++RND
+      ++RND;
     endif #  wie viele nichtfixe blöcke müssen randomisiert werden
   endfor
   
@@ -376,11 +376,11 @@
   RND=0
   for i=1:BLOCKS
     if def(i).blockPosFix == true
-      newSequence(i) = i
-      ++RNDSequence
+      newSequence(i) = i;
+      ++RNDSequence;
     else
-      ++RND
-      newSequence(i) = RNDSequence(RND)
+      ++RND;
+      newSequence(i) = RNDSequence(RND);
     endif
   endfor
 
@@ -836,6 +836,9 @@
       
       # PAUSE BETWEEN
       if def(WHATBLOCK).zeitBetweenpause > 0
+      	  Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectleft  , boxpen );
+          Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectright , boxpen );
+          Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEcueRect       , boxpen );
 	  #flip
 	  [empty, empty , lastFLIP ] =Screen('Flip', windowPtr);           #flip
 	  nextFlip = lastFLIP + def(WHATBLOCK).zeitBetweenpause;  # next flip
@@ -899,6 +902,9 @@
 
       # PAUSE PRE
       if def(WHATBLOCK).zeitPrepause > 0
+      	  Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectleft  , boxpen );
+          Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEstimRectright , boxpen );
+          Screen('FrameRect', windowPtr , boxcolor , def(1).FRAMEcueRect       , boxpen );
 	  #flip
 	  [empty, empty , lastFLIP ] =Screen('Flip', windowPtr , nextFlip);
 	  nextFlip = lastFLIP + def(WHATBLOCK).zeitPrepause ;
