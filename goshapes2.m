@@ -223,10 +223,12 @@
   startImg = ['.' filesep folder.in 'startup' filesep 'startscreen.png']
   endImg   = ['.' filesep folder.in 'startup' filesep 'endscreen.png'  ]
   
+## spezifikation der boxen 
   boxcolor = [192 192 192]
   boxpen   = 3
 
-  
+## intuktionen und pausen
+  instruPauseTime= GetSecs+3600; # eine stunde
   
 
 ################################################################################
@@ -401,6 +403,9 @@
 #     cueType
 #     instructionFile
 #     instructionFolder
+#     pauseAfterTrails
+#     pauseFile
+#     pauseFolder
 #     ratingCovering
 #     ratingFile
 #     ratingFolder
@@ -409,14 +414,12 @@
 #     stimType
 #     zeitAfterpause
 #     zeitBetweenpause
-#     zeitCue
+#     zeitCues
 #     zeitFixcross
 #     zeitFixcrossCue
 #     zeitPrepause
 #     zeitRating
 #     zeitStimuli
-
-
 
 
 ##  Settings verarbeiten und Bildmaterial einlesen
@@ -458,6 +461,7 @@
     def(BNr).ratingInfo       = getFileInfo          ([folder.in def(BNr).ratingFolder     ] , def(BNr).ratingFile     ); #  rating Infos holen
     def(BNr).instructionInfo  = getFileInfo          ([folder.in def(BNr).instructionFolder] , def(BNr).instructionFile); #  instuctions info holen
     def(BNr).crossInfo        = getFileInfo  	     ([folder.in def(BNr).crossFolder      ] , def(BNr).crossFile      ); #  cross info
+    def(BNr).pauseInfo        = getFileInfo  	     ([folder.in def(BNr).pauseFolder      ] , def(BNr).pauseFile      ); #  pause info
     
     # make the textures
     def(BNr).stimInfo          = makeTexFromInfo (windowPtr , def(BNr).stimInfo       );
@@ -465,6 +469,7 @@
     def(BNr).ratingInfo        = makeTexFromInfo (windowPtr , def(BNr).ratingInfo     );
     def(BNr).instructionInfo   = makeTexFromInfo (windowPtr , def(BNr).instructionInfo);
     def(BNr).crossInfo 	       = makeTexFromInfo (windowPtr , def(BNr).crossInfo      );
+    def(BNr).pauseInfo         = makeTexFromInfo (windowPtr , def(BNr).pauseInfo      );  
     
     # get texture sizes 
     for i=1:length(def(BNr).stimInfo)
@@ -481,6 +486,9 @@
     endfor
     for i=1:length(def(BNr).crossInfo)
       def(BNr).crossInfo(i).texturerect         = Screen('Rect' , def(BNr).crossInfo(i).texture       );
+    endfor
+    for i=1:length(def(BNr).pauseInfo)
+      def(BNr).pauseInfo(i).texturerect         = Screen('Rect' , def(BNr).pauseInfo(i).texture       );
     endfor
     
     def(BNr).ratingVanish      = length(def(BNr).stimInfo) / 100 * def(BNr).ratingCovering ; # ob das rating angezeigt werden soll ? # altlast
@@ -627,8 +635,8 @@
   for BNr=1:length(def)
     QUAcue = length(def(BNr).cueInfo); # wie viele cues gibst
     QUAstim= length(def(BNr).stimInfo); # wie viele stimuli sind in stimInfo
-    QUApos = 2
-    QUAsoa = length(def(BNr).zeitCuesArr) #stimulus onset asynchrony
+    QUApos = 2;
+    QUAsoa = length(def(BNr).zeitCuesArr); #stimulus onset asynchrony
 #     QUAcue = 5
 #     QUAstim= 2
 #     QUApos = 2
@@ -686,6 +694,7 @@
     def(i).ratingInfo.finrect       = putRectInRect (rect.rating         , def(i).ratingInfo.texturerect);
     def(i).instructionInfo.finrect  = putRectInRect (rect.instructions   , def(i).instructionInfo.texturerect);
     def(i).crossInfo.finrect        = putRectInRect (def(i).FINcrossRect , def(i).crossInfo.texturerect);
+    def(i).pauseInfo.finrect        = putRectInRect (rect.instructions   , def(i).pauseInfo.texturerect)
   endfor
   
   #skalierung für alles multible
@@ -709,6 +718,33 @@
     endfor
     
   endfor
+  
+  
+################################################################################
+## Pause
+
+  for i=1:length(def)
+     
+     pausefit = floor(length(def(i).EXstimInfo)/def(i).pauseAfterTrails) 
+     # wie oft passt pauseAfterTrails in die gesammtzahl der Tails
+     # if < 1 hat wer quatsch angegeben - > keine pause 
+     # if = 1 ok zwar funktionier aber da es exakt so viele trails gibt dass die pause passieren würde und dann der block zu Ende ist 
+     # if > 1 anscheinenen soll mindestens 1 mal ne pause passsieren  
+ 
+     # pauseflag an EXstimInfo ranklatschen   
+     
+     for j=1:length(def(i).EXstimInfo)
+     
+       if ~~mod(j,def(i).pauseAfterTrails)
+        # mod gibt die reste zurück - ne verneinung mit ~ mach alles was 0 ist zu 1 und alle anderen zahlen zu 0 also immer wenn 1 ist bekommt das ding ne pauseflag
+	def(i).EXstimInfo(j).pauseFlag = false
+       else
+        def(i).EXstimInfo(j).pauseFlag = true
+       endif
+     
+     endfor #j=1:length(def(i).EXstimInfo)
+     
+  endfor #i=1:length(def)
 
 ################################################################################
 ## render testscreens
@@ -762,7 +798,7 @@
         KbPressWait;
       Screen('Flip', windowPtr)
 
-  endswitch
+  endswitch # debugEnabled
   
 ################################################################################
 ## MAINPART: THE MIGHTY EXPERIMENT #############################################
@@ -773,11 +809,6 @@
   
   for WHATBLOCK=1:BLOCKS  # für alle definierten Blöcke
 ## Instructions ################################################################
-    instruTime= GetSecs+3600; # eine stunde
-      Screen('DrawTexture' , windowPtr , def(WHATBLOCK).instructionInfo.texture , [] , def(WHATBLOCK).instructionInfo.finrect);
-      Screen('DrawTexture' , windowPtr , def(WHATBLOCK).ratingInfo.texture      , [] , def(WHATBLOCK).ratingInfo.finrect      );
-      Screen('Flip', windowPtr);
-#       WaitSecs(10)
     for i=1:2
       Screen('DrawText'    , windowPtr , int2str(i) , 50 , 50)
       Screen('DrawTexture' , windowPtr , def(WHATBLOCK).instructionInfo.texture , [] , def(WHATBLOCK).instructionInfo.finrect);
@@ -786,20 +817,21 @@
       
       switch buttonBoxON
         case false #  tastatur
-          getRatingSpace (instruTime);
+          getRatingSpace (instruPauseTime);
         case true  #  buttonbox
-          cedrusGetRating (handle , instruTime);
+          cedrusGetRating (handle , instruPauseTime);
         otherwise
           error ('critical error - this should not happen');
       endswitch
+      pause(0.5)
       
     endfor
-    m = length(def(WHATBLOCK).EXstimInfo);
+
     [empty, empty , timeBlockBegin ]=Screen('Flip', windowPtr);
 
     nextFlip = 0;
 ## alles im block ############################################################## 
-    for INBLOCK = 1:m
+    for INBLOCK = 1:length(def(WHATBLOCK).EXstimInfo);
       ++superIndex;
       
       # PAUSE BETWEEN
@@ -958,7 +990,7 @@
 #       dauer.reactionTimeStimON  = pressedButtonTime    - timeStamp.flipStim    ;
 #       dauer.reactionTimeStimOFF = pressedButtonTime    - timeStamp.flipRating  ;
 
-
+## zeuch schreiben
       #    dem outputfile werte zuweisen
       OUThead        =       { ...
         'vpNummer'           , ...
@@ -1016,9 +1048,30 @@
       OUTcellFin = [OUThead ; OUTcell];
       #  speicherndes output files
       cell2csv ( fileNameOutput , OUTcellFin, ',');
+      
+      # Pause
+      if def(WHATBLOCK).EXstimInfo(INBLOCK).pauseFlag ==true
+	for i=1:2
+	
+	  Screen('DrawTexture' , windowPtr , def(WHATBLOCK).pauseInfo.texture       , [] , def(WHATBLOCK).pauseInfo.finrect       );
+	  Screen('DrawTexture' , windowPtr , def(WHATBLOCK).ratingInfo.texture      , [] , def(WHATBLOCK).ratingInfo.finrect      );    
+	  Screen('Flip', windowPtr);
+	  
+	  switch buttonBoxON
+	    case false #  tastatur
+	      getRatingSpace (instruPauseTime);
+	    case true  #  buttonbox
+	      cedrusGetRating (handle , instruPauseTime);
+	    otherwise
+	      error ('critical error - this should not happen');
+	  endswitch # buttonBoxON
+	  pause(0.5)
+	endfor # i=1:2
+      endif # def(WHATBLOCK).EXstimInfo(INBLOCK).pauseFlag ==true
+      
 
-    endfor
-  endfor
+    endfor # INBLOCK = 1:length(def(WHATBLOCK).EXstimInfo);
+  endfor # WHATBLOCK=1:BLOCKS  # für alle definierten Blöcke
 
 ################################################################################
 # MAINPART: THE MIGHTY EXPERIMENT IS OVER HOPE YOU DID GREAT

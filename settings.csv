@@ -6,6 +6,9 @@ instructionFile,instruction_uebung.png,instruction_LR.png
 ratingFolder,rating,rating
 ratingFile,ratingLR.png,ratingLR.png
 ratingCovering,100,100
+pauseFolder,pause,pause
+pauseFile,pause.png,pause.png
+pauseAfterTrails,2,50
 crossFolder,cross,cross
 crossFile,crossUBUNTU100_100.png,crossUBUNTU100_100.png
 crossSizemm,10,10

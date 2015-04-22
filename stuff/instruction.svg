@@ -216,6 +216,34 @@
          style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
          transform="matrix(-0.4,0,0,-0.4,-4,0)" />
     </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-49"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3959-12"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Mend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Mend-74"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3965-9"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt"
+         transform="matrix(-0.4,0,0,-0.4,-4,0)" />
+    </marker>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -224,9 +252,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.175"
-     inkscape:cx="-2002.4521"
-     inkscape:cy="3795.2792"
+     inkscape:zoom="0.35"
+     inkscape:cx="-6604.1893"
+     inkscape:cy="5389.2331"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -243,7 +271,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1414,6 +1442,289 @@
            sodipodi:type="arc"
            style="fill:#000000;fill-opacity:1"
            id="path3362-5"
+           sodipodi:cx="1385.9293"
+           sodipodi:cy="-2533.6794"
+           sodipodi:rx="80.812202"
+           sodipodi:ry="50.507626"
+           d="m 1466.7415,-2533.6794 c 0,27.8945 -36.1808,50.5076 -80.8122,50.5076 -44.6313,0 -80.8122,-22.6131 -80.8122,-50.5076 0,-27.8946 36.1809,-50.5077 80.8122,-50.5077 44.6314,0 80.8122,22.6131 80.8122,50.5077 z"
+           transform="matrix(0.37499999,0,0,0.61999999,376.51296,-994.11295)" />
+      </g>
+    </g>
+    <rect
+       style="opacity:0.45416667;fill:#b3b3b3;stroke:none"
+       id="rect2991-0-0-5-7-8"
+       width="1992.5"
+       height="1130.8123"
+       x="-7384.8213"
+       y="-3987.3296"
+       inkscape:export-filename="/home/wu/git/the-shapening2/stuff/instruction_uebung.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+       x="-6504.6694"
+       y="-4189.6289"
+       id="text3145-1-8-6-9-8"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/wu/git/the-shapening2/stuff/instruction_uebung.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3147-657-2-7-7-7"
+         x="-6504.6694"
+         y="-4189.6289"
+         style="text-align:center;text-anchor:middle">Bitte <tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan3173-5-4-8-1-7">präge</tspan> dir die Skala gut ein, da sie im weiteren Experiment nicht mehr angezeigt wird!</tspan><tspan
+         sodipodi:role="line"
+         x="-6504.6694"
+         y="-4139.6289"
+         id="tspan3149-41-5-4-7-6"
+         style="text-align:center;text-anchor:middle" /><tspan
+         sodipodi:role="line"
+         x="-6504.6694"
+         y="-4089.6289"
+         style="text-align:center;text-anchor:middle"
+         id="tspan3158-7">Nach dem Übungsblock wird die nächste Instruktion angezeigt;</tspan><tspan
+         sodipodi:role="line"
+         x="-6504.6694"
+         y="-4039.6289"
+         style="text-align:center;text-anchor:middle"
+         id="tspan3160-1"> hier hast du wieder Zeit eine Pause einzulegen.</tspan><tspan
+         sodipodi:role="line"
+         x="-6504.6694"
+         y="-3989.6289"
+         style="text-align:center;text-anchor:middle"
+         id="tspan3162-7" /><tspan
+         sodipodi:role="line"
+         x="-6497.7163"
+         y="-3939.6289"
+         id="tspan3157-0-1-6-2-2"
+         style="text-align:center;text-anchor:middle">Um den Experimentblock zu starten bitte <tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan3283-3-8-5">zwei</tspan> mal<tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan3285-3-7-2"> eine Taste drücken! </tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+       x="-7047.6768"
+       y="-5120.791"
+       id="text3137-1-2-0-2-5"
+       sodipodi:linespacing="125%"
+       inkscape:export-filename="/home/wu/git/the-shapening2/stuff/instruction_uebung.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90"><tspan
+         sodipodi:role="line"
+         id="tspan3139-7-7-2-8-1"
+         x="-7047.6768"
+         y="-5120.791"
+         style="font-size:56px;font-weight:bold;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans Bold">Pause</tspan><tspan
+         id="tspan4945-3-4-7-5-6"
+         sodipodi:role="line"
+         x="-7047.6768"
+         y="-5050.791"
+         style="font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans" /><tspan
+         sodipodi:role="line"
+         x="-7047.6768"
+         y="-4996.7388"
+         style="font-size:40px;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans"
+         id="tspan3443-6-0-3">Zeit für eine kleine Pause</tspan><tspan
+         sodipodi:role="line"
+         x="-7047.6768"
+         y="-4946.7388"
+         style="font-size:40px;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans"
+         id="tspan3422" /><tspan
+         sodipodi:role="line"
+         x="-7047.6768"
+         y="-4896.7388"
+         style="font-size:40px;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans"
+         id="tspan3424" /><tspan
+         sodipodi:role="line"
+         x="-7041.3096"
+         y="-4846.7388"
+         style="font-size:40px;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans"
+         id="tspan3426">bitte zwei mal eine Taste drücken! bitte zwei mal eine Taste drücken! </tspan></text>
+    <g
+       transform="translate(-9097.1429,-697.30396)"
+       id="g3378-9-9"
+       inkscape:export-filename="/home/wu/git/the-shapening2/stuff/instruction_uebung.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <text
+         xml:space="preserve"
+         style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+         x="2334.019"
+         y="-2967.8086"
+         id="text3114-8-6-0-8-8-3-3"
+         sodipodi:linespacing="125%"
+         inkscape:export-filename="/home/wu/git/the-shapening/stuff/INSübungeckig_rund.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90"><tspan
+           sodipodi:role="line"
+           id="tspan3116-2-8-7-6-4-93-5"
+           x="2334.019"
+           y="-2967.8086">1. Ein <tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan3159-66-5-9-3-0-5-3">Kreuz</tspan> wird in der Mitte des Bildschirms angezeigt.</tspan><tspan
+           sodipodi:role="line"
+           x="2334.019"
+           y="-2917.8086"
+           id="tspan3118-0-7-1-9-0-8-6">    Bitte dieses Kreuz <tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan3161-3-6-0-5-8-0-1">fixieren</tspan>.</tspan><tspan
+           sodipodi:role="line"
+           x="2334.019"
+           y="-2867.8086"
+           id="tspan3120-80-1-1-8-2-25-5" /><tspan
+           sodipodi:role="line"
+           x="2334.019"
+           y="-2817.8086"
+           id="tspan3122-1-8-1-3-8-95-0">2. Eine Form wird angezeigt</tspan><tspan
+           id="tspan3666-0-3-1"
+           sodipodi:role="line"
+           x="2334.019"
+           y="-2767.8086" /><tspan
+           id="tspan3668-02-2-6"
+           sodipodi:role="line"
+           x="2334.019"
+           y="-2717.8086">3. Ein Buchstabe wird angezeigt </tspan><tspan
+           sodipodi:role="line"
+           x="2334.019"
+           y="-2667.8086"
+           id="tspan3124-25-9-7-4-3-2-4" /><tspan
+           sodipodi:role="line"
+           x="2334.019"
+           y="-2617.8086"
+           id="tspan3126-0-2-7-0-6-2-0">4. deine Aufgabe ist es möglichst schnell zu <tspan
+   id="tspan3672-8-25-3"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">erkennen</tspan>, </tspan><tspan
+           id="tspan4937-4-9-7-8-3-48-3"
+           sodipodi:role="line"
+           x="2334.019"
+           y="-2567.8086"><tspan
+   id="tspan3670-5-4-0"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">    wo</tspan> der <tspan
+   id="tspan3674-8-2-1"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">Buchstabe angezeigt</tspan> wurde. </tspan><tspan
+           id="tspan3687-8-2-2"
+           sodipodi:role="line"
+           x="2334.019"
+           y="-2517.8086">    Benutze dafür  <tspan
+   id="tspan3682-8-1-9"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">Taste 1 (links)</tspan> oder <tspan
+   id="tspan3676-3-0-9"
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold">Taste 7 (rechts).</tspan></tspan></text>
+      <g
+         id="g4875-2-2-0-1-3-73-2"
+         transform="translate(3543.4762,-1943.47)"
+         inkscape:export-filename="/home/wu/git/the-shapening/stuff/INSübungeckig_rund.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90">
+        <path
+           inkscape:connector-curvature="0"
+           id="path3182-0-3-3-5-8-5-0"
+           d="m -1581.7901,-992.39506 3.0864,381.17284"
+           style="fill:none;stroke:#000000;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-end:url(#Arrow1Lend)" />
+        <path
+           sodipodi:nodetypes="cc"
+           inkscape:connector-curvature="0"
+           id="path4396-1-3-7-2-73-5-6"
+           d="m -1578.7037,-591.16049 c -54.0774,148.05988 -47.2455,-723.95731 -1.5432,-413.58021"
+           style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;marker-start:none;marker-end:url(#Arrow1Mend)" />
+      </g>
+      <g
+         transform="translate(1270.7719,-282.84271)"
+         id="g3364-6-4">
+        <text
+           xml:space="preserve"
+           style="font-size:9.04310608px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+           x="834.11267"
+           y="-2735.4517"
+           id="text2985-5-4-5"
+           sodipodi:linespacing="125%"
+           transform="scale(1.0364535,0.96482862)"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90"><tspan
+             sodipodi:role="line"
+             id="tspan2987-3-4-9"
+             x="834.11267"
+             y="-2735.4517"
+             style="font-size:108.51727295px">+</tspan></text>
+        <text
+           xml:space="preserve"
+           style="font-size:10.65916443px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+           x="828.58002"
+           y="-2472.584"
+           id="text2985-6-15-7-1"
+           sodipodi:linespacing="125%"
+           transform="scale(1.0364535,0.96482862)"
+           inkscape:export-xdpi="90"
+           inkscape:export-ydpi="90"><tspan
+             sodipodi:role="line"
+             id="tspan2987-4-6-0-6"
+             x="828.58002"
+             y="-2472.584"
+             style="font-size:127.90997314px">T</tspan></text>
+        <g
+           id="g3784-2-5-5"
+           transform="translate(-1579.6476,-867.53561)">
+          <rect
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="/home/wu/git/the-shapening2/stuff/ratingLR.png"
+             y="-1455.3938"
+             x="2519.7373"
+             height="62.166405"
+             width="110.94312"
+             id="rect3399-0-7-3-7-40-3-7"
+             style="fill:#cccccc;fill-opacity:1;stroke:#4d4d4d;stroke-width:1.18349218;stroke-miterlimit:4;stroke-dasharray:none" />
+          <text
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="/home/wu/git/the-shapening2/stuff/ratingLR.png"
+             sodipodi:linespacing="125%"
+             id="text3419-3-3-2-5-9"
+             y="-1411.2903"
+             x="2526.3005"
+             style="font-size:2.84038138px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+             xml:space="preserve"><tspan
+               id="tspan3462-5-4-5-1"
+               style="font-size:34.08457565px"
+               y="-1411.2903"
+               x="2526.3005"
+               sodipodi:role="line">rechts</tspan></text>
+          <rect
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="/home/wu/git/the-shapening2/stuff/ratingLR.png"
+             y="-1455.3938"
+             x="2321.0876"
+             height="62.166405"
+             width="110.94312"
+             id="rect3399-0-7-7-1-5-8"
+             style="fill:#cccccc;fill-opacity:1;stroke:#4d4d4d;stroke-width:1.18349218;stroke-miterlimit:4;stroke-dasharray:none" />
+          <text
+             inkscape:export-ydpi="90"
+             inkscape:export-xdpi="90"
+             inkscape:export-filename="/home/wu/git/the-shapening2/stuff/ratingLR.png"
+             sodipodi:linespacing="125%"
+             id="text3419-1-6-9-5"
+             y="-1411.2903"
+             x="2340.6331"
+             style="font-size:2.84038138px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Ubuntu;-inkscape-font-specification:Ubuntu"
+             xml:space="preserve"><tspan
+               style="font-size:34.08457565px"
+               y="-1411.2903"
+               x="2340.6331"
+               id="tspan3421-3-4-0-6"
+               sodipodi:role="line">links</tspan></text>
+        </g>
+        <path
+           sodipodi:type="arc"
+           style="fill:#000000;fill-opacity:1"
+           id="path3362-5-3"
            sodipodi:cx="1385.9293"
            sodipodi:cy="-2533.6794"
            sodipodi:rx="80.812202"
