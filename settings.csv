@@ -15,7 +15,7 @@ crossSizemm,10,10
 cueFolder,cueP,cue
 cueType,png,png
 cueSizemm,30,30
-stimFolder,stimulus,stimulus
+stimFolder,stimulusP,stimulus
 stimType,png,png
 stimSizemm,30,30
 zeitBetweenpause,1000,1000
