@@ -661,7 +661,9 @@
     P= 1:QUApos; # zwei possitionen l u R
     A= 1:QUAsoa;
     
-   
+    rand('state' , nextSeed); % octave
+    nextSeed = nextSeed + 42; % the answer to everyting
+    
     CSPA  =  allcomb(C,S,P,A);
     
     [CSPAr , nextSeed ] = randomizeCol( CSPA , nextSeed , 1 );

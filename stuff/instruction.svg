@@ -252,15 +252,15 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35"
-     inkscape:cx="-6604.1893"
-     inkscape:cy="5389.2331"
+     inkscape:zoom="0.12374369"
+     inkscape:cx="-4760.8936"
+     inkscape:cy="6587.3644"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1276"
+     inkscape:window-width="422"
      inkscape:window-height="761"
-     inkscape:window-x="0"
+     inkscape:window-x="854"
      inkscape:window-y="18"
      inkscape:window-maximized="0" />
   <metadata
@@ -271,7 +271,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -1455,9 +1455,9 @@
        id="rect2991-0-0-5-7-8"
        width="1992.5"
        height="1130.8123"
-       x="-7384.8213"
-       y="-3987.3296"
-       inkscape:export-filename="/home/wu/git/the-shapening2/stuff/instruction_uebung.png"
+       x="-5579.1069"
+       y="-6695.9009"
+       inkscape:export-filename="/home/wu/git/the-shapening2/stuff/pause.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
     <text
@@ -1509,43 +1509,60 @@
     <text
        xml:space="preserve"
        style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
-       x="-7047.6768"
-       y="-5120.791"
+       x="-4584.5952"
+       y="-6322.3921"
        id="text3137-1-2-0-2-5"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="/home/wu/git/the-shapening2/stuff/instruction_uebung.png"
+       inkscape:export-filename="/home/wu/git/the-shapening2/stuff/pause.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90"><tspan
          sodipodi:role="line"
          id="tspan3139-7-7-2-8-1"
-         x="-7047.6768"
-         y="-5120.791"
+         x="-4584.5952"
+         y="-6322.3921"
          style="font-size:56px;font-weight:bold;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans Bold">Pause</tspan><tspan
          id="tspan4945-3-4-7-5-6"
          sodipodi:role="line"
-         x="-7047.6768"
-         y="-5050.791"
+         x="-4584.5952"
+         y="-6252.3921"
          style="font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans" /><tspan
          sodipodi:role="line"
-         x="-7047.6768"
-         y="-4996.7388"
+         x="-4584.5952"
+         y="-6198.3398"
          style="font-size:40px;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans"
          id="tspan3443-6-0-3">Zeit für eine kleine Pause</tspan><tspan
          sodipodi:role="line"
-         x="-7047.6768"
-         y="-4946.7388"
+         x="-4584.5952"
+         y="-6148.3398"
+         style="font-size:40px;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans"
+         id="tspan3290" /><tspan
+         sodipodi:role="line"
+         x="-4584.5952"
+         y="-6098.3398"
+         style="font-size:40px;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans"
+         id="tspan3294" /><tspan
+         sodipodi:role="line"
+         x="-4584.5952"
+         y="-6048.3398"
+         style="font-size:40px;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans"
+         id="tspan3292">Wichtig Skala nicht vergessen!</tspan><tspan
+         sodipodi:role="line"
+         x="-4584.5952"
+         y="-5998.3398"
          style="font-size:40px;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans"
          id="tspan3422" /><tspan
          sodipodi:role="line"
-         x="-7047.6768"
-         y="-4896.7388"
+         x="-4584.5952"
+         y="-5948.3398"
          style="font-size:40px;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans"
          id="tspan3424" /><tspan
          sodipodi:role="line"
-         x="-7041.3096"
-         y="-4846.7388"
+         x="-4577.6421"
+         y="-5898.3398"
          style="font-size:40px;font-weight:normal;text-align:center;text-anchor:middle;-inkscape-font-specification:Sans"
-         id="tspan3426">bitte zwei mal eine Taste drücken! bitte zwei mal eine Taste drücken! </tspan></text>
+         id="tspan3426">Um weiter zu machen bitte <tspan
+   style="font-weight:bold;-inkscape-font-specification:Sans Bold"
+   id="tspan3288">zwei mal eine Taste drücken! </tspan></tspan></text>
     <g
        transform="translate(-9097.1429,-697.30396)"
        id="g3378-9-9"
