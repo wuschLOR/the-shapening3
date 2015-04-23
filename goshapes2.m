@@ -503,6 +503,15 @@
     
     def(BNr).ratingVanish      = length(def(BNr).stimInfo) / 100 * def(BNr).ratingCovering ; # ob das rating angezeigt werden soll ? # altlast
   endfor
+  
+   startImgInfo = getFileInfo ( [folder.in 'startup'] , 'startscreen.png' );
+   endImgInfo   = getFileInfo ( [folder.in 'startup'] , 'endscreen.png'   );
+   
+   startImgInfo = makeTexFromInfo (windowPtr , startImgInfo ); 
+   endImgInfo   = makeTexFromInfo (windowPtr , endImgInfo   );
+   
+   startImgInfo.texturerect  = Screen('Rect' , startImgInfo.texture);
+   endImgInfo.texturerect    = Screen('Rect' , endImgInfo.texture  );
 
     
 ################################################################################
@@ -631,7 +640,7 @@
 #   positonArray(3) = {rect.L3};
 #   positonArray(4) = {rect.R1};
 #   positonArray(5) = {rect.R3};
-
+  rect.startup      =  [ x.imgLeftStart  y.imgTopStart  x.imgRightEnd y.imgBotEnd ]
   rect.instructions =  [ x.imgLeftStart  y.imgTopStart  x.imgRightEnd y.imgMidEnd ];
   rect.rating       =  [ x.imgLeftStart  y.imgBotStart  x.imgRightEnd y.imgBotEnd ];
   rect.cross        =  [ x.imgMidStart   y.imgMidStart  x.imgMidEnd   y.imgMidEnd ];
@@ -731,6 +740,8 @@
     
   endfor
   
+   startImgInfo.finrect  = putRectInRect (rect.startup   , startImgInfo.texturerect);
+   endImgInfo.finrect    = putRectInRect (rect.startup   , endImgInfo.texturerect);
   
 ################################################################################
 ## Pause
@@ -757,6 +768,22 @@
      endfor #j=1:length(def(i).EXstimInfo)
      
   endfor #i=1:length(def)
+  
+################################################################################  
+## Startup
+
+      Screen('DrawTexture' , windowPtr , startImgInfo.texture      , [] , startImgInfo.finrect      );
+      Screen('Flip', windowPtr);
+      
+      switch buttonBoxON
+        case false #  tastatur
+          getRatingSpace (instruPauseTime);
+        case true  #  buttonbox
+          cedrusGetRating (handle , instruPauseTime);
+        otherwise
+          error ('critical error - this should not happen');
+      endswitch
+      pause(0.5)
 
 ################################################################################
 ## render testscreens
@@ -1112,7 +1139,24 @@
 
 
   diary off
-  infotainment(windowPtr , 'saving your data')
+  
+################################################################################  
+## Startup
+
+      Screen('DrawTexture' , windowPtr , endImgInfo.texture      , [] , endImgInfo.finrect      );
+      Screen('Flip', windowPtr);
+      
+      switch buttonBoxON
+        case false #  tastatur
+          getRatingSpace (instruPauseTime);
+        case true  #  buttonbox
+          cedrusGetRating (handle , instruPauseTime);
+        otherwise
+          error ('critical error - this should not happen');
+      endswitch
+      pause(0.5)
+  
+#   infotainment(windowPtr , 'saving your data')
 ################################################################################
 ##  end all processes
   infotainment(windowPtr , 'target aquired for termination')
