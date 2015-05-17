@@ -1,6 +1,6 @@
-# the-shapening 2
+# the-shapening 3
 
-Code to the second experiment of my diploma thesis.
+Code to the third experiment of my diploma thesis.
 
 ----------------------------------------------------------------------------
 ## WHAT DOES THIS THING DO ?
@@ -18,6 +18,8 @@ This is a valid cue
 This is a invalid cue
  
 ![Invalid Cue](./readme/invalid.png)
+ 
+ ----------------------------------------------------------------------------
  
 Screenshot of the cue and stimulus
  
@@ -40,7 +42,7 @@ assuming you have your Linux with Octave and Psychtoolbox up and running:
 2. clone awesomestuff and the-shapening2
 
 ```
-  git clone https://github.com/wuschLOR/the-shapening2.git
+  git clone https://github.com/wuschLOR/the-shapening3.git
   git clone https://github.com/wuschLOR/awesomeStuff.git
 ```
 
@@ -88,7 +90,7 @@ assuming you have your Linux with Octave and Psychtoolbox up and running:
 
 ```
 @software{groh_shapening_2015,
-        title = {the shapening 2},
+        title = {the shapening 3},
         rights = {{GPL}3},
         url = {https://github.com/wuschLOR/the-shapening2},
         author = {Groh, Michael},
