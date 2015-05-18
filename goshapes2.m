@@ -526,10 +526,10 @@
   point.mid.x   = rect.root(3)/2;
   point.mid.y   = rect.root(4)/2;
 
-  point.left.x  = point.mid.x + deg1s.px*7;
+  point.left.x  = point.mid.x - deg1s.px*7;
   point.left.y  = point.mid.y # + deg1s.px*7;
 
-  point.right.x = point.mid.x - deg1s.px*7;
+  point.right.x = point.mid.x + deg1s.px*7;
   point.right.y = point.mid.y # - deg1s.px*7;
 
   rect.deg1diameter = [0 0 deg1diameter.px deg1diameter.px]

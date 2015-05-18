@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.24748737"
-     inkscape:cx="-83.853166"
-     inkscape:cy="1972.3243"
+     inkscape:zoom="0.12374369"
+     inkscape:cx="-1566.2438"
+     inkscape:cy="3067.1475"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -139,5 +139,124 @@
          x="-793.34656"
          y="-1048.2954"
          style="font-size:144px">links</tspan></text>
+    <g
+       id="g3839"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/wu/git/the-shapening2/stuff/ratingLR.png"
+         y="-2496.1006"
+         x="172.05409"
+         height="262.63968"
+         width="468.71078"
+         id="rect3399-0-7-3-8"
+         style="fill:#5a62ff;fill-opacity:1;stroke:#4d4d4d;stroke-width:5;stroke-miterlimit:4;stroke-dasharray:none" />
+      <rect
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/wu/git/the-shapening2/stuff/ratingLR.png"
+         y="-2496.1006"
+         x="-1532.1935"
+         height="262.63968"
+         width="468.71078"
+         id="rect3399-0-7-9"
+         style="fill:#ffff00;fill-opacity:1;stroke:#4d4d4d;stroke-width:5;stroke-miterlimit:4;stroke-dasharray:none" />
+      <g
+         id="g3025"
+         transform="matrix(0.05199757,0,0,0.05199757,80.840119,-2010.6513)">
+        <path
+           style="fill:#000000;fill-opacity:1"
+           d="m -26514.281,-8821.6875 c -1108.517,0 -2007.157,900.4389 -2007.157,2011.1875 10e-4,1110.7486 898.64,2011.1875 2007.157,2011.1875 1108.517,0 2007.156,-900.4389 2007.156,-2011.1875 0,-1110.7486 -898.639,-2011.1875 -2007.156,-2011.1875 z m 0,201.125 c 997.665,0 1806.437,810.3888 1806.437,1810.0625 0,999.6737 -808.772,1810.0625 -1806.437,1810.0625 -997.666,0 -1806.438,-810.3888 -1806.438,-1810.0625 0,-999.6737 808.772,-1810.0625 1806.438,-1810.0625 z"
+           id="path3000-6-6-5"
+           inkscape:export-filename="/home/wu/Downloads/sadface.png"
+           inkscape:export-xdpi="11.21"
+           inkscape:export-ydpi="11.21"
+           inkscape:connector-curvature="0" />
+        <g
+           id="g3374-0"
+           transform="translate(-6936.5444,-3337.143)"
+           inkscape:export-filename="/home/wu/Downloads/sadface.png"
+           inkscape:export-xdpi="11.21"
+           inkscape:export-ydpi="11.21">
+          <rect
+             y="-4570.3364"
+             x="-20425.248"
+             height="926.41266"
+             width="340.62421"
+             id="rect3056-7-7-1"
+             style="fill:#000000;fill-opacity:1" />
+          <rect
+             y="-4570.3364"
+             x="-19070.859"
+             height="926.41266"
+             width="340.62421"
+             id="rect3056-9-5-7-5"
+             style="fill:#000000;fill-opacity:1" />
+        </g>
+        <g
+           id="g3269-2-9"
+           mask="none"
+           transform="matrix(0.52845677,0,0,0.52845677,-18496.837,-2986.8664)"
+           inkscape:export-filename="/home/wu/Downloads/sadface.png"
+           inkscape:export-xdpi="11.21"
+           inkscape:export-ydpi="11.21">
+          <path
+             style="fill:#000000;fill-opacity:1"
+             d="m -15091.438,-6719.0625 c -926.56,0 -1716.486,584.9597 -2020.656,1405.7187 l 468.282,0 c 265.215,-583.1304 852.878,-988.5937 1535.25,-988.5937 682.371,0 1270.034,405.4633 1535.25,988.5937 l 502.531,0 c -304.17,-820.759 -1094.095,-1405.7187 -2020.657,-1405.7187 z"
+             transform="translate(-80,-11.428571)"
+             id="path3308-4-6"
+             inkscape:connector-curvature="0" />
+        </g>
+      </g>
+      <g
+         id="g3017"
+         transform="matrix(0.05199757,0,0,0.05199757,1528.3684,-2010.6513)">
+        <path
+           style="fill:#000000;fill-opacity:1"
+           d="m -21577.156,-8821.6875 c -1108.517,0 -2007.125,900.4389 -2007.125,2011.1875 0,1110.7486 898.608,2011.1875 2007.125,2011.1875 1108.517,0 2007.156,-900.4389 2007.156,-2011.1875 0,-1110.7486 -898.639,-2011.1875 -2007.156,-2011.1875 z m 0,201.125 c 997.665,0 1806.437,810.3888 1806.437,1810.0625 0,999.6737 -808.772,1810.0625 -1806.437,1810.0625 -997.666,0 -1806.406,-810.3888 -1806.406,-1810.0625 0,-999.6737 808.74,-1810.0625 1806.406,-1810.0625 z"
+           id="path3000-6-0"
+           inkscape:export-filename="/home/wu/Downloads/happyface.png"
+           inkscape:export-xdpi="11.21"
+           inkscape:export-ydpi="11.21"
+           inkscape:connector-curvature="0" />
+        <g
+           id="g3269-2-5-5"
+           mask="none"
+           transform="matrix(-0.52845677,0,0,-0.52845677,-29594.591,-9106.1235)"
+           inkscape:export-filename="/home/wu/Downloads/happyface.png"
+           inkscape:export-xdpi="11.21"
+           inkscape:export-ydpi="11.21">
+          <path
+             style="fill:#000000;fill-opacity:1"
+             d="m -15091.438,-6719.0625 c -926.56,0 -1716.486,584.9597 -2020.656,1405.7187 l 468.282,0 c 265.215,-583.1304 852.878,-988.5937 1535.25,-988.5937 682.371,0 1270.034,405.4633 1535.25,988.5937 l 502.531,0 c -304.17,-820.759 -1094.095,-1405.7187 -2020.657,-1405.7187 z"
+             transform="translate(-80,-11.428571)"
+             id="path3308-4-3-8"
+             inkscape:connector-curvature="0" />
+        </g>
+        <g
+           id="g3374-1-4"
+           transform="translate(-1999.4014,-3229.0792)"
+           inkscape:export-filename="/home/wu/Downloads/happyface.png"
+           inkscape:export-xdpi="11.21"
+           inkscape:export-ydpi="11.21">
+          <rect
+             y="-4570.3364"
+             x="-20425.248"
+             height="926.41266"
+             width="340.62421"
+             id="rect3056-7-7-4-1"
+             style="fill:#000000;fill-opacity:1" />
+          <rect
+             y="-4570.3364"
+             x="-19070.859"
+             height="926.41266"
+             width="340.62421"
+             id="rect3056-9-5-7-6-6"
+             style="fill:#000000;fill-opacity:1" />
+        </g>
+      </g>
+    </g>
   </g>
 </svg>

@@ -4,7 +4,7 @@ blockName,übung,localization
 instructionFolder,instructions,instructions
 instructionFile,instruction_uebung.png,instruction_LR.png
 ratingFolder,rating,rating
-ratingFile,ratingLR.png,ratingLR.png
+ratingFile,ratingSM.png,ratingSM.png
 ratingCovering,100,100
 pauseFolder,pause,pause
 pauseFile,pause.png,pause.png
