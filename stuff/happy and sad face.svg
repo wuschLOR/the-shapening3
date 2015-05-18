@@ -14,7 +14,7 @@
    id="svg2992"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="smily_lame.svg">
+   sodipodi:docname="happy and sad face.svg">
   <defs
      id="defs2994" />
   <sodipodi:namedview
@@ -24,9 +24,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.04375"
-     inkscape:cx="-17856.562"
-     inkscape:cy="7652.5907"
+     inkscape:zoom="0.015467961"
+     inkscape:cx="-48901.401"
+     inkscape:cy="-5451.8727"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -319,6 +319,96 @@
          width="340.62421"
          id="rect3056-9-5-7-6-6"
          style="fill:#000000;fill-opacity:1" />
+    </g>
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#ffbf00;fill-opacity:1"
+       d="m -49445.197,6475.8974 c -1108.517,0 -2007.125,900.4389 -2007.125,2011.1875 0,1110.7486 898.608,2011.1871 2007.125,2011.1871 1108.517,0 2007.156,-900.4385 2007.156,-2011.1871 0,-1110.7486 -898.639,-2011.1875 -2007.156,-2011.1875 z m 0,201.125 c 997.665,0 1806.437,810.3888 1806.437,1810.0625 0,999.6737 -808.772,1810.0621 -1806.437,1810.0621 -997.666,0 -1806.406,-810.3884 -1806.406,-1810.0621 0,-999.6737 808.74,-1810.0625 1806.406,-1810.0625 z"
+       id="path3000-6-0-1"
+       inkscape:export-filename="/home/wu/Downloads/happyface.png"
+       inkscape:export-xdpi="11.21"
+       inkscape:export-ydpi="11.21" />
+    <path
+       inkscape:connector-curvature="0"
+       style="fill:#ffbf00;fill-opacity:1"
+       d="m -54382.322,6475.8974 c -1108.517,0 -2007.157,900.4389 -2007.157,2011.1875 10e-4,1110.7486 898.64,2011.1871 2007.157,2011.1871 1108.517,0 2007.156,-900.4385 2007.156,-2011.1871 0,-1110.7486 -898.639,-2011.1875 -2007.156,-2011.1875 z m 0,201.125 c 997.665,0 1806.437,810.3888 1806.437,1810.0625 0,999.6737 -808.772,1810.0621 -1806.437,1810.0621 -997.666,0 -1806.438,-810.3884 -1806.438,-1810.0621 0,-999.6737 808.772,-1810.0625 1806.438,-1810.0625 z"
+       id="path3000-6-6-5-8"
+       inkscape:export-filename="/home/wu/Downloads/sadface.png"
+       inkscape:export-xdpi="11.21"
+       inkscape:export-ydpi="11.21" />
+    <g
+       id="g3374-0-1"
+       transform="translate(-34804.585,11960.442)"
+       inkscape:export-filename="/home/wu/Downloads/sadface.png"
+       inkscape:export-xdpi="11.21"
+       inkscape:export-ydpi="11.21"
+       style="fill:#ffbf00;fill-opacity:1">
+      <rect
+         y="-4570.3364"
+         x="-20425.248"
+         height="926.41266"
+         width="340.62421"
+         id="rect3056-7-7-1-8"
+         style="fill:#ffbf00;fill-opacity:1" />
+      <rect
+         y="-4570.3364"
+         x="-19070.859"
+         height="926.41266"
+         width="340.62421"
+         id="rect3056-9-5-7-5-5"
+         style="fill:#ffbf00;fill-opacity:1" />
+    </g>
+    <g
+       id="g3269-2-9-5"
+       mask="none"
+       transform="matrix(0.52845677,0,0,0.52845677,-46364.878,12310.719)"
+       inkscape:export-filename="/home/wu/Downloads/sadface.png"
+       inkscape:export-xdpi="11.21"
+       inkscape:export-ydpi="11.21"
+       style="fill:#ffbf00;fill-opacity:1">
+      <path
+         style="fill:#ffbf00;fill-opacity:1"
+         d="m -15091.438,-6719.0625 c -926.56,0 -1716.486,584.9597 -2020.656,1405.7187 l 468.282,0 c 265.215,-583.1304 852.878,-988.5937 1535.25,-988.5937 682.371,0 1270.034,405.4633 1535.25,988.5937 l 502.531,0 c -304.17,-820.759 -1094.095,-1405.7187 -2020.657,-1405.7187 z"
+         transform="translate(-80,-11.428571)"
+         id="path3308-4-6-9"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       id="g3269-2-5-5-7"
+       mask="none"
+       transform="matrix(-0.52845677,0,0,-0.52845677,-57462.632,6191.4614)"
+       inkscape:export-filename="/home/wu/Downloads/happyface.png"
+       inkscape:export-xdpi="11.21"
+       inkscape:export-ydpi="11.21"
+       style="fill:#ffbf00;fill-opacity:1">
+      <path
+         style="fill:#ffbf00;fill-opacity:1"
+         d="m -15091.438,-6719.0625 c -926.56,0 -1716.486,584.9597 -2020.656,1405.7187 l 468.282,0 c 265.215,-583.1304 852.878,-988.5937 1535.25,-988.5937 682.371,0 1270.034,405.4633 1535.25,988.5937 l 502.531,0 c -304.17,-820.759 -1094.095,-1405.7187 -2020.657,-1405.7187 z"
+         transform="translate(-80,-11.428571)"
+         id="path3308-4-3-8-7"
+         inkscape:connector-curvature="0" />
+    </g>
+    <g
+       id="g3374-1-4-4"
+       transform="translate(-29867.442,12068.506)"
+       inkscape:export-filename="/home/wu/Downloads/happyface.png"
+       inkscape:export-xdpi="11.21"
+       inkscape:export-ydpi="11.21"
+       style="fill:#ffbf00;fill-opacity:1">
+      <rect
+         y="-4570.3364"
+         x="-20425.248"
+         height="926.41266"
+         width="340.62421"
+         id="rect3056-7-7-4-1-0"
+         style="fill:#ffbf00;fill-opacity:1" />
+      <rect
+         y="-4570.3364"
+         x="-19070.859"
+         height="926.41266"
+         width="340.62421"
+         id="rect3056-9-5-7-6-6-4"
+         style="fill:#ffbf00;fill-opacity:1" />
     </g>
   </g>
 </svg>

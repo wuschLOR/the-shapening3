@@ -1,6 +1,6 @@
 blockPosFix,fix,rand
 blockNumber,0,1
-blockName,übung,localization
+blockName,übung,identification
 instructionFolder,instructions,instructions
 instructionFile,instruction_uebung.png,instruction_LR.png
 ratingFolder,rating,rating
@@ -10,7 +10,7 @@ pauseFolder,pause,pause
 pauseFile,pause.png,pause.png
 pauseAfterTrails,0,50
 crossFolder,cross,cross
-crossFile,crossUBUNTU100_100.png,crossUBUNTU100_100.png
+crossFile,cross_amber.png,cross_amber.png
 crossSizemm,10,10
 cueFolder,cueP,cue
 cueType,png,png
