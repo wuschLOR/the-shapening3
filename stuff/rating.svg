@@ -24,15 +24,15 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.12374369"
-     inkscape:cx="-1566.2438"
-     inkscape:cy="3067.1475"
+     inkscape:zoom="0.043750001"
+     inkscape:cx="-1458.1162"
+     inkscape:cy="4062.5535"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="g3839"
      showgrid="false"
-     inkscape:window-width="1276"
+     inkscape:window-width="636"
      inkscape:window-height="761"
-     inkscape:window-x="0"
+     inkscape:window-x="640"
      inkscape:window-y="18"
      inkscape:window-maximized="0" />
   <metadata
@@ -146,7 +146,7 @@
       <rect
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/wu/git/the-shapening2/stuff/ratingLR.png"
+         inkscape:export-filename="/home/wu/git/the-shapening3/stuff/ratingLR.png"
          y="-2496.1006"
          x="172.05409"
          height="262.63968"
@@ -156,16 +156,19 @@
       <rect
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
-         inkscape:export-filename="/home/wu/git/the-shapening2/stuff/ratingLR.png"
+         inkscape:export-filename="/home/wu/git/the-shapening3/stuff/ratingLR.png"
          y="-2496.1006"
          x="-1532.1935"
          height="262.63968"
          width="468.71078"
          id="rect3399-0-7-9"
-         style="fill:#ffff00;fill-opacity:1;stroke:#4d4d4d;stroke-width:5;stroke-miterlimit:4;stroke-dasharray:none" />
+         style="fill:#00ff00;fill-opacity:1;stroke:#4d4d4d;stroke-width:5;stroke-miterlimit:4;stroke-dasharray:none" />
       <g
          id="g3025"
-         transform="matrix(0.05199757,0,0,0.05199757,80.840119,-2010.6513)">
+         transform="matrix(0.05199757,0,0,0.05199757,80.840119,-2010.6513)"
+         inkscape:export-filename="/home/wu/git/the-shapening3/stuff/ratingLR.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90">
         <path
            style="fill:#000000;fill-opacity:1"
            d="m -26514.281,-8821.6875 c -1108.517,0 -2007.157,900.4389 -2007.157,2011.1875 10e-4,1110.7486 898.64,2011.1875 2007.157,2011.1875 1108.517,0 2007.156,-900.4389 2007.156,-2011.1875 0,-1110.7486 -898.639,-2011.1875 -2007.156,-2011.1875 z m 0,201.125 c 997.665,0 1806.437,810.3888 1806.437,1810.0625 0,999.6737 -808.772,1810.0625 -1806.437,1810.0625 -997.666,0 -1806.438,-810.3888 -1806.438,-1810.0625 0,-999.6737 808.772,-1810.0625 1806.438,-1810.0625 z"
@@ -212,7 +215,10 @@
       </g>
       <g
          id="g3017"
-         transform="matrix(0.05199757,0,0,0.05199757,1528.3684,-2010.6513)">
+         transform="matrix(0.05199757,0,0,0.05199757,1528.3684,-2010.6513)"
+         inkscape:export-filename="/home/wu/git/the-shapening3/stuff/ratingLR.png"
+         inkscape:export-xdpi="90"
+         inkscape:export-ydpi="90">
         <path
            style="fill:#000000;fill-opacity:1"
            d="m -21577.156,-8821.6875 c -1108.517,0 -2007.125,900.4389 -2007.125,2011.1875 0,1110.7486 898.608,2011.1875 2007.125,2011.1875 1108.517,0 2007.156,-900.4389 2007.156,-2011.1875 0,-1110.7486 -898.639,-2011.1875 -2007.156,-2011.1875 z m 0,201.125 c 997.665,0 1806.437,810.3888 1806.437,1810.0625 0,999.6737 -808.772,1810.0625 -1806.437,1810.0625 -997.666,0 -1806.406,-810.3888 -1806.406,-1810.0625 0,-999.6737 808.74,-1810.0625 1806.406,-1810.0625 z"
