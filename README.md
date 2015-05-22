@@ -64,14 +64,14 @@ assuming you have your Linux with Octave and Psychtoolbox up and running:
 
 ```
   cd ..
-  cd /the-shapening2
+  cd /the-shapening3
   octave
 ```
 
 6. run the experiment
 
 ```
-  goshapes2
+  goshapes3
 ```
 
 7. PROFIT !!!
