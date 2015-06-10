@@ -92,7 +92,7 @@ assuming you have your Linux with Octave and Psychtoolbox up and running:
 @software{groh_shapening_2015,
         title = {the shapening 3},
         rights = {{GPL}3},
-        url = {https://github.com/wuschLOR/the-shapening2},
+        url = {https://github.com/wuschLOR/the-shapening3},
         author = {Groh, Michael},
         date = {2015}
 }
